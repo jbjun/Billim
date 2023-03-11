@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://firstclass.c8rkj0sdknw8.ap-southeast-2.rds.amazonaws.com:3306/billim
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: first1234
+  jpa:
+    databaseplatform: org.hibernate.dialect.MariaDB103Dialect
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+
+# 로그 레벨 설정
+logging:
+  level:
+    # hibernate 가 남기는 모든 로그가 debug모드로 설정
+    # jpa hibernate가 생성하는 sql이 로거를 통해서 찍히도록 하는 설정
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace # 실제 들어가는 파라미터값 찍어주는 설정
