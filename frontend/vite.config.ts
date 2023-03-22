@@ -30,7 +30,7 @@ export default defineConfig({
         ],
       },
       devOptions: {
-        enabled: true, // dev 환경에서 서비스 사용 유무
+        enabled: false, // dev 환경에서 서비스 사용 유무
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
