@@ -9,36 +9,38 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "tb_social_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
+    private String type;
+
+    @Column(nullable = false, length = 20)
     private String name;
 
     @Column(nullable = false)
     private String email;
-
-    @Column
-    private  String picture;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     @Builder
-    public User(String name, String email, String picture, Role role) {
+    public User(String type, String name, String email, Role role) {
+        this.type = type;
         this.name = name;
         this.email = email;
-        this.picture = picture;
         this.role = role;
     }
 
-    public  User update(String name, String picture) {
+    public  User update(String type, String name, String email) {
+        this.type = type;
         this.name = name;
-        this.picture = picture;
+        this.email = email;
 
         return  this;
     }

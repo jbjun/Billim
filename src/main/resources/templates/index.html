@@ -9,7 +9,12 @@
 <body>
 <div sec:authorize="isAuthenticated()">
     Logged in as: <span id="user" th:text="${username}">None</span>
+    <ul>
+        <li>[[${userName}]]</li>
+        <li>[[${userEmail}]]</li>
+    </ul>
     <a href="/logout" class="btn btn-info active" role="button">Logout</a>
 </div>
 <a sec:authorize="isAnonymous()" href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+<a sec:authorize="isAnonymous()" href="/oauth2/authorization/kakao" class="btn btn-secondary active" role="button">Kakao Login</a>
 </body>
