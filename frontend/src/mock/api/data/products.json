@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "name": "전기공구",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 12000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "2",
+    "name": "빠루망치/대/TH3/툴스타/장도리/망치/공구",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 5000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "3",
+    "name": "정장 상의",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 10000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "4",
+    "name": "십자드라이버",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 2000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "5",
+    "name": "일자드라이버",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 1000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "6",
+    "name": "킥보드",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 32000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "7",
+    "name": "줄수있는게",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 12000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "8",
+    "name": "이노래밖에없다.",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 7000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "9",
+    "name": "가진거라곤",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 200000
+    },
+    "thumbnail": ""
+  },
+  {
+    "id": "10",
+    "name": "이목소리밖에 없다.",
+    "location": "광진구 자양동",
+    "pricing": {
+      "type": "day",
+      "price": 4000
+    },
+    "thumbnail": ""
+  }
+]
