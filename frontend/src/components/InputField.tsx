@@ -14,8 +14,8 @@ interface InputFieldProps {
   required?: boolean
   placeholder: string
   /* 에러 발생 시 에러 메시지 표시*/
-  error: boolean
-  helperText: string
+  error?: boolean
+  helperText?: string
 
   // 인증받기, 중복확인 등 / 이름 미정
   adornment?: React.ReactElement

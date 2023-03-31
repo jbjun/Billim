@@ -1,6 +1,6 @@
 import { Chip } from "@mui/material"
 import React, { useState } from "react"
-import InputField from "../components/InputField"
+import InputField from "../../components/InputField"
 
 function PhoneNumberInputFieldContainer() {
   const [error, setError] = useState(false)
