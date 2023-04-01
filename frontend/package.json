@@ -7,6 +7,7 @@
     "dev": "vite --port 7777",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "server": "json-server --watch db.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -36,12 +37,9 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
     "babel-loader": "^8.3.0",
-    "msw": "^1.2.1",
+    "json-server": "^0.17.3",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vite-plugin-pwa": "^0.14.5"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }

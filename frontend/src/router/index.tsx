@@ -5,12 +5,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 import Header from "../components/layout/Header";
 import Home from "../container/main/Home";
 import App from "../App";
-
-const loader = async () => {
-  // 로더에서 msw를 사용할 수 없음..
-  // const a = await axios.get("/products");
-  return { res: [1] };
-};
+import { loader as homeLoader } from "../container/main/Home";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +19,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/home",
-        loader,
+        loader: homeLoader,
         element: <Home />,
       },
       {
