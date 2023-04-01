@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import InputField from "../InputField"
+import { createValidator } from "../../utils/validator"
+// function validateName(value: string): boolean {
+//   const pattern = /^([가-힣]+\s)*[가-힣]*$/
+//   const validate = pattern.test(value)
 
-function validateName(value: string): boolean {
-  const pattern = /^([가-힣]+\s)*[가-힣]*$/
-  const validate = pattern.test(value)
-
-  // 이름 검증
-  return validate
-}
-
+//   // 이름 검증
+//   return validate
+// }
+const validateName = createValidator(/^([가-힣]+\s)*[가-힣]*$/)
 function NameInputField({}) {
   const [error, setError] = useState(false)
   const [name, setName] = useState("")
