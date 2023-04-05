@@ -1,14 +1,14 @@
-import { Chip } from "@mui/material"
-import React, { useState } from "react"
-import InputField from "../../components/InputField"
-import SearchIcon from "@mui/icons-material/Search"
-import IconButton from "@mui/material/IconButton"
+import { Chip } from "@mui/material";
+import React, { useState } from "react";
+import InputField from "../../components/InputField";
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
 
 function AddressInputFieldContainer() {
-  const [error, setError] = useState(false)
-  const [address, setAddress] = useState("")
+  const [error, setError] = useState(false);
+  const [address, setAddress] = useState("");
 
-  const onChange = () => {}
+  const onChange = () => {};
   return (
     <InputField
       label="주소"
@@ -24,7 +24,7 @@ function AddressInputFieldContainer() {
         </IconButton>
       }
     />
-  )
+  );
 }
 
-export default AddressInputFieldContainer
+export default AddressInputFieldContainer;
