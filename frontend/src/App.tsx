@@ -1,8 +1,8 @@
-import "./index.css"
-import LoginPage from "./page/LoginPage"
+import "./index.css";
+import LoginPage from "./page/LoginPage";
 
 function App() {
-  return <LoginPage />
+  return <LoginPage />;
 }
 
-export default App
+export default App;
