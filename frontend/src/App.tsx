@@ -1,8 +1,14 @@
-import "./index.css";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import LoginPage from "./page/LoginPage";
+import { theme } from "./styles/theme";
 
 function App() {
-  return <LoginPage />;
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <LoginPage />
+    </ThemeProvider>
+  );
 }
 
 export default App;
