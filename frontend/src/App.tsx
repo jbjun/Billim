@@ -1,6 +1,6 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import LoginPage from "./page/LoginPage";
 import { theme } from "./styles/theme";
+import LoginPage from "@pages/LoginPage";
 
 function App() {
   return (

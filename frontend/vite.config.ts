@@ -1,6 +1,8 @@
 // 외부모듈
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
+import tsconfigPaths from "vite-tsconfig-paths";
+
 import react from "@vitejs/plugin-react";
 
 // TODO 이미지 임시로 사용중 추후 교체해야 함.
@@ -36,5 +38,6 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
       },
     }),
+    tsconfigPaths(),
   ],
 });
