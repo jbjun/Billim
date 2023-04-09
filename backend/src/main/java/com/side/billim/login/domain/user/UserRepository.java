@@ -10,30 +10,27 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserRepository {
 
-    private final EntityManager em;
+  private final EntityManager em;
 
-    public Optional<User> findOneByEmail(String email){
-        return em.createQuery("select u from User u where u.email = :email", User.class)
-                .setParameter("email", email)
-                .getResultList()
-                .stream().findAny();
+  public Optional<User> findOneByEmail(String email){
+    return em.createQuery("select u from User u where u.email = :email", User.class)
+             .setParameter("email", email)
+             .getResultList()
+             .stream().findAny();
+  }
+
+  public String checkEmail(String email){
+    return em.createQuery("select u.juso from User u where u.email = :email", String.class)
+             .setParameter("email", email)
+             .getSingleResult();
+ }
+
+  public User save(User user) {
+    if(user.getId() == null) {
+      em.persist(user);
+    } else {
+      em.merge(user);
     }
-
-    public User save(User user) {
-        if(user.getId() == null) {
-            em.persist(user);
-        } else {
-            em.merge(user);
-        }
-        return user;
-    }
-
-    private int updateUserType(User user, String email){
-        return em.createQuery("update User as u "+
-                "set u.type = :type  where u.email = :email")
-                .setParameter("email", email)
-                .setParameter("type", user.getType())
-                .executeUpdate();
-    }
-
+    return user;
+  }
 }

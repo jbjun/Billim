@@ -12,40 +12,55 @@ import javax.persistence.*;
 @Table(name = "tb_social_user")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    @Column(nullable = false, length = 10)
-    private String type;
+  @Column(nullable = false, length = 10)
+  private String type;
 
-    @Column(nullable = false, length = 20)
-    private String name;
+  @Column(nullable = false, length = 20)
+  private String name;
 
-    @Column(nullable = false)
-    private String email;
+  @Column(nullable = false)
+  private String email;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private Role role;
 
-    @Builder
-    public User(String type, String name, String email, Role role) {
-        this.type = type;
-        this.name = name;
-        this.email = email;
-        this.role = role;
-    }
+  @Column(length = 20)
+  private String number;
 
-    public  User update(String type, String name, String email) {
-        this.type = type;
-        this.name = name;
-        this.email = email;
+  @Column(length = 20)
+  private String nickName;
 
-        return  this;
-    }
+  @Column(length = 50)
+  private String juso;
 
-    public  String getRoleKey() {
-        return this.role.getKey();
-    }
+  @Builder
+  public User(String type, String name, String email, Role role) {
+    this.type = type;
+    this.name = name;
+    this.email = email;
+    this.role = role;
+  }
+
+  public  User update(String type, String name, String email) {
+    this.type = type;
+    this.name = name;
+    this.email = email;
+
+    return  this;
+  }
+
+  public void updateUser(String number, String nickName, String juso) {
+    this.type = number;
+    this.name = nickName;
+    this.email = juso;
+  }
+
+  public  String getRoleKey() {
+    return this.role.getKey();
+  }
 }
