@@ -34,6 +34,10 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+
+    /* swagger setting */
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 }
 
 
