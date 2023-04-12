@@ -51,117 +51,117 @@ const customTypography: CustomTypographyOptions = {
   h1: {
     fontSize: "40px",
     fontWeight: 700,
-    lineHeight: "47px",
+    // lineHeight: "47px",
   },
   h2: {
     fontSize: "36px",
     fontWeight: 700,
-    lineHeight: "42px",
+    // lineHeight: "42px",
   },
   h3: {
     fontSize: "32px",
     fontWeight: 700,
-    lineHeight: "38px",
+    // lineHeight: "38px",
   },
   h4: {
     fontSize: "24px",
     fontWeight: 700,
-    lineHeight: "28px",
+    // lineHeight: "28px",
   },
   h5: {
     fontSize: "20px",
     fontWeight: 700,
-    lineHeight: "23px",
+    // lineHeight: "23px",
   },
   h6: {
     fontSize: "16px",
     fontWeight: 700,
-    lineHeight: "19px",
+    // lineHeight: "19px",
   },
   h7: {
     fontSize: "14px",
     fontWeight: 700,
-    lineHeight: "16px",
+    // lineHeight: "16px",
   },
   h8: {
     fontSize: "12px",
     fontWeight: 700,
-    lineHeight: "14px",
+    // lineHeight: "14px",
   },
   t1: {
     fontSize: "24px",
     fontWeight: 600,
-    lineHeight: "38px",
+    // lineHeight: "38px",
   },
   t2: {
     fontSize: "20px",
     fontWeight: 600,
-    lineHeight: "32px",
+    // lineHeight: "32px",
   },
   t3: {
     fontSize: "18px",
     fontWeight: 600,
-    lineHeight: "28px",
+    // lineHeight: "28px",
   },
   t4: {
     fontSize: "15px",
     fontWeight: 600,
-    lineHeight: "22px",
+    // lineHeight: "22px",
   },
   t5: {
     fontSize: "14px",
     fontWeight: 600,
-    lineHeight: "22px",
+    // lineHeight: "22px",
   },
   t6: {
     fontSize: "13px",
     fontWeight: 600,
-    lineHeight: "20px",
+    // lineHeight: "20px",
   },
   t7: {
     fontSize: "12px",
     fontWeight: 600,
-    lineHeight: "19px",
+    // lineHeight: "19px",
   },
   b1: {
     fontSize: "24px",
     fontWeight: 400,
-    lineHeight: "40px",
+    // lineHeight: "40px",
   },
   b2: {
     fontSize: "20px",
     fontWeight: 400,
-    lineHeight: "34px",
+    // lineHeight: "34px",
   },
   b3: {
     fontSize: "18px",
     fontWeight: 400,
-    lineHeight: "31px",
+    // lineHeight: "31px",
   },
   b4: {
     fontSize: "16px",
     fontWeight: 400,
-    lineHeight: "27px",
+    // lineHeight: "27px",
   },
   b5: {
     fontSize: "14px",
     fontWeight: 400,
-    lineHeight: "24px",
+    // lineHeight: "24px",
   },
   b6: {
     fontSize: "13px",
     fontWeight: 400,
-    lineHeight: "22px",
+    // lineHeight: "22px",
   },
   b7: {
     fontSize: "12px",
     fontWeight: 400,
-    lineHeight: "20px",
+    // lineHeight: "20px",
   },
   b8: {
     fontSize: "10px",
     fontWeight: 400,
-    lineHeight: "11px",
+    // lineHeight: "11px",
   },
 };
 
@@ -180,6 +180,16 @@ export const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        html: {
+          overflow: "hidden",
+        },
+        body: {
+          overflow: "auto !important",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          height: "100vh",
+        },
         "@global": {},
       },
     },
@@ -196,10 +206,35 @@ export const theme = createTheme({
         },
       },
     },
+    MuiBottomNavigation: {
+      styleOverrides: {
+        root: {
+          width: "100vw",
+          "& .MuiSvgIcon-root": {
+            marginBottom: 4,
+          },
+          "& .MuiBottomNavigationAction-label": {
+            fontSize: 10,
+            lineHeight: "12px",
+          },
+          "& .Mui-selected": {
+            fontSize: "10px !important",
+            lineHeight: "12px",
+          },
+        },
+      },
+    },
     MuiDialog: {
       styleOverrides: {
         paper: {
           backgroundColor: "##A7A7A7",
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          height: "48px",
         },
       },
     },

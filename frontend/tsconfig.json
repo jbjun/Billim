@@ -21,9 +21,10 @@
       "@components/*": ["components/*"],
       "@container/*": ["container/*"],
       "@store/*": ["store/*"],
-      "@type/*": ["type/*"],
+      "@type/*": ["types/*"],
       "@lib/*": ["lib/*"],
-      "@constants/*": ["constants/*"]
+      "@constants/*": ["constants/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "include": ["src"],

@@ -7,6 +7,7 @@ import {
   CustomTypography,
   CustomTypographyOptions,
   CustomTypographyVariant,
+  SimplePaletteColorOptions,
 } from "./theme";
 
 declare module "@mui/material/styles" {
@@ -31,9 +32,9 @@ declare module "@mui/material/styles" {
   interface Theme {
     palette: {
       primary: CustomPrimaryPalette;
-      red: PaletteColorOptions;
-      green: PaletteColorOptions;
-      blue: PaletteColorOptions;
+      red: SimplePaletteColorOptions;
+      green: SimplePaletteColorOptions;
+      blue: SimplePaletteColorOptions;
       text: CustomTextpalette;
     };
     typography: CustomTypography;
