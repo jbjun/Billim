@@ -1,5 +1,4 @@
 // 내부모듈
-import LabelBottomNavigation from "@components/layout/BottomNavigation";
 import Header from "@components/layout/Header";
 import FloatingActionButton from "@components/FloatingActionButton";
 import HomePageContainer from "@container/home/HomePageContainer";
@@ -11,7 +10,6 @@ const HomePage = () => {
       <Header title="광진구 자양동" />
       <HomePageContainer />
       <FloatingActionButton text="상품등록" position="bottom-left" />
-      <LabelBottomNavigation />
     </>
   );
 };

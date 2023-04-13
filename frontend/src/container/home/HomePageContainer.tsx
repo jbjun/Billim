@@ -10,15 +10,16 @@ import {
 } from "@mui/material";
 import BillimCharacter from "@assets/images/Billim_main.png";
 import ProductCard from "@components/ProductCard";
+import { ProductsType } from "@type/product";
 
-const products = [
+const products: ProductsType = [
   {
     id: 1,
     address: "광진구자양동",
-    title: "가정용해머드릴키트",
+    title: "안녕하세요",
     price: "12000",
     per: "day",
-    status: "rentable",
+    status: "renting",
   },
   {
     id: 2,
@@ -125,13 +126,7 @@ const HomePageContainer = () => {
           </Grid>
           {products.map((product) => (
             <Grid item xs={6} maxWidth="166px" key={product.id}>
-              <ProductCard
-                address="광진구자양동"
-                title="가정용해머드릴키트"
-                price="12000"
-                per="day"
-                status="rentable"
-              />
+              <ProductCard {...product} />
             </Grid>
           ))}
         </Grid>
