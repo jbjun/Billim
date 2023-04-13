@@ -5,14 +5,7 @@ import HomePage from "@pages/HomePage";
 import ProductDetailPage from "@pages/ProductDetailPage";
 
 function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {/* <LoginPage /> */}
-      <HomePage />
-      {/* <ProductDetailPage /> */}
-    </ThemeProvider>
-  );
+  return <div>App!</div>;
 }
 
 export default App;

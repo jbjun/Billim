@@ -1,17 +1,12 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 // 외부모듈
 import { Box, Typography, CardMedia, CardContent, Card } from "@mui/material";
 
 // 내부모듈
 import RentalStatusTag from "@components/RentStatusTag";
-import { PerType, RentStatusType } from "@type/product/";
+import { PerType, ProductType } from "@type/product/";
 
-interface IProductCardProps {
-  address: string;
-  title: string;
-  price: string;
-  status: RentStatusType;
-  per: PerType;
-}
+interface IProductCardProps extends ProductType {}
 
 export default function ProductCard({
   address,

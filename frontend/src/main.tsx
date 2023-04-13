@@ -1,9 +1,18 @@
+// 외부모듈
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import { RouterProvider } from "react-router";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "./styles/theme";
+
+// 내부모듈
+import { router } from "./routes";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
