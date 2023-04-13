@@ -1,24 +1,30 @@
-import { Box, Container } from "@mui/material";
-import Header from "../components/layout/Header";
-import Carousel from "../components/Carousel";
+// 외부모듈
+import { Box } from "@mui/material";
+import { useNavigate } from "react-router";
+
+// 내부모듈
+import Header from "@components/layout/Header";
+import Carousel from "@components/productDetail/Carousel";
+import ProductDetailContainer from "@container/productDetail/ProductDetailContainer";
 
 const LIST = ["a", "b", "c"];
 
 const ProductDetailPage = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <Header title="상품정보" />
+      <Header title="상품정보" onBackHistory={() => navigate(-1)} />
       <Box sx={{ width: "100vw", height: "375px", overflow: "hidden" }}>
         <Carousel>
-          {LIST.map((item, i) => (
+          {LIST.map((_, i) => (
             <Box
               sx={{
                 width: "100%",
                 height: "100%",
                 backgroundImage:
-                  "url('https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg')",
+                  "url('https://images.unsplash.com/photo-1502920917128-1aa500764cbd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
+                backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
               key={i}
@@ -26,7 +32,7 @@ const ProductDetailPage = () => {
           ))}
         </Carousel>
       </Box>
-      <Container></Container>
+      <ProductDetailContainer />
     </>
   );
 };

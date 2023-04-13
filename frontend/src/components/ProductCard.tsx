@@ -14,6 +14,7 @@ export default function ProductCard({
   price,
   per,
   status,
+  id,
 }: IProductCardProps) {
   return (
     <Card

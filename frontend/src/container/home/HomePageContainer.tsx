@@ -1,3 +1,4 @@
+// 외부모듈
 import {
   Box,
   Container,
@@ -8,6 +9,10 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { MouseEvent } from "react";
+import { useNavigate } from "react-router";
+
+// 내부모듈
 import BillimCharacter from "@assets/images/Billim_main.png";
 import ProductCard from "@components/ProductCard";
 import { ProductsType } from "@type/product";
@@ -65,6 +70,12 @@ const products: ProductsType = [
 
 const HomePageContainer = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const handleClick = (e: MouseEvent<HTMLDivElement>, id: number) => {
+    e.stopPropagation();
+    navigate(`/product/${id}`);
+  };
   return (
     <>
       <Box
@@ -126,7 +137,9 @@ const HomePageContainer = () => {
           </Grid>
           {products.map((product) => (
             <Grid item xs={6} maxWidth="166px" key={product.id}>
-              <ProductCard {...product} />
+              <div onClick={(e) => handleClick(e, product.id)}>
+                <ProductCard {...product} />
+              </div>
             </Grid>
           ))}
         </Grid>

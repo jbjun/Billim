@@ -22,6 +22,7 @@ const WrapperStyle = styled("div")(() => ({
   },
   "& div.swiper-pagination-progressbar": {
     bottom: "0 !important",
+    top: "calc(100% - 4px)",
   },
 }));
 
@@ -32,7 +33,7 @@ const Carousel = ({ children }: CarouselProps) => {
       <Swiper
         style={{
           //@ts-ignore
-          "--swiper-theme-color": theme.palette.primary.main,
+          "--swiper-theme-color": theme.palette.primary[200],
         }}
         modules={[Pagination]}
         pagination={{

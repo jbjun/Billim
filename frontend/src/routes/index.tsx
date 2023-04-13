@@ -10,6 +10,7 @@ import ChattingPage from "@pages/ChattingPage";
 import MyPage from "@pages/MyPage";
 import { Outlet } from "react-router";
 import LabelBottomNavigation from "@container/MainBottomNavigationContainer";
+import ProductDetailPage from "@pages/ProductDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
         element: <MyPage />,
       },
     ],
+  },
+  {
+    path: "product/:productId",
+    element: <ProductDetailPage />,
   },
   {
     path: "login",
