@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 // 내부모듈
 import Header from "@components/layout/Header";
 import Carousel from "@components/productDetail/Carousel";
-import ProductDetailContainer from "@container/productDetail/ProductDetailContainer";
+import ProductDetailContainer from "@container/home/ProductDetailContainer";
 
 const LIST = ["a", "b", "c"];
 

@@ -136,7 +136,7 @@ const HomePageContainer = () => {
             </FormControl>
           </Grid>
           {products.map((product) => (
-            <Grid item xs={6} maxWidth="166px" key={product.id}>
+            <Grid item xs={6} maxWidth="44vw" key={product.id}>
               <div onClick={(e) => handleClick(e, product.id)}>
                 <ProductCard {...product} />
               </div>

@@ -172,6 +172,7 @@ export const theme = createTheme({
     green: greenPalette,
     blue: bluePalette,
     text: textPalette,
+    divider: "#E5E5E5",
   },
   typography: {
     fontFamily: ["Roboto", "Arial"].join(" "), // 추후 폰트 추가
@@ -206,6 +207,44 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          input: {
+            fontSize: "14px",
+            "&::placeholder": {
+              color: "#666666",
+              fontSize: "14px",
+            },
+          },
+          "& .MuiInputBase-root": {
+            paddingBottom: "11px",
+            "&:before": {
+              borderBottom: "1px solid #E5E5E5",
+            },
+          },
+          textarea: {
+            fontSize: "14px",
+            "&::placeholder": {
+              color: "#666666",
+              fontSize: "14px",
+            },
+          },
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          marginRight: 0,
+        },
+        label: {
+          width: "49px",
+          fontSize: "14px",
+          color: "#666666",
+        },
+      },
+    },
     MuiBottomNavigation: {
       styleOverrides: {
         root: {
@@ -235,6 +274,15 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           height: "48px",
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        sizeSmall: {
+          width: "20px",
+          height: "20px",
+          minHeight: 0,
         },
       },
     },

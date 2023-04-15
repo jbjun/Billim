@@ -13,6 +13,7 @@ type PositionType =
 type FloatingActionButtonProps = {
   text?: string;
   position?: PositionType;
+  onClick?: () => void;
 };
 
 const getPosition = (position: PositionType) => {
@@ -27,6 +28,7 @@ const getPosition = (position: PositionType) => {
 const FloatingActionButton = ({
   text,
   position = "bottom-right",
+  onClick,
 }: FloatingActionButtonProps) => {
   const theme = useTheme();
 
@@ -38,6 +40,7 @@ const FloatingActionButton = ({
           color: "white",
           backgroundColor: theme.palette.primary[1000],
         }}
+        onClick={onClick}
       >
         <AddIcon fontSize="small" />
         {text && (

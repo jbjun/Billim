@@ -24,7 +24,7 @@ export default function Header({
         backgroundColor: "rgba(0,0,0,0)",
         boxShadow: "none",
         p: 1,
-        borderBottom: "1px solid grey",
+        borderBottom: "1px solid #E5E5E5",
       }}
     >
       <Grid
@@ -32,6 +32,7 @@ export default function Header({
         justifyContent="center"
         alignItems="center"
         sx={{ textAlign: "center" }}
+        height="100%"
       >
         <Grid item xs={2}>
           {onBackHistory && (
@@ -41,7 +42,7 @@ export default function Header({
               sx={{ p: 0, color: "black" }}
               onClick={onBackHistory}
             >
-              <ArrowBackIos />
+              <ArrowBackIos fontSize="small" />
             </IconButton>
           )}
         </Grid>
