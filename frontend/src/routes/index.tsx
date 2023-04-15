@@ -1,19 +1,17 @@
 /* eslint-disable prettier/prettier */
 // 외부모듈
 import { createBrowserRouter } from "react-router-dom";
+import { Outlet } from "react-router";
 
-// 외부모듈
+// 내부모듈
 import App from "../App";
 import HomePage from "@pages/HomePage";
-import RegisterPage from "@pages/login/RegisterPage";
 import RentalListPage from "@pages/RentalListPage";
 import ChattingPage from "@pages/ChattingPage";
 import MyPage from "@pages/MyPage";
-import { Outlet } from "react-router";
 import LabelBottomNavigation from "@container/MainBottomNavigationContainer";
 import ProductDetailPage from "@pages/ProductDetailPage";
 import ProductRegisterPage from "@pages/ProductRegisterPage";
-
 import login_rotuer_info from "./login";
 
 export const router = createBrowserRouter([
