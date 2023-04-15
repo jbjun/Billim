@@ -1,10 +1,11 @@
+/* eslint-disable prettier/prettier */
 // 외부모듈
 import { createBrowserRouter } from "react-router-dom";
 
 // 외부모듈
 import App from "../App";
 import HomePage from "@pages/HomePage";
-import LoginPage from "@pages/LoginPage";
+import RegisterPage from "@pages/login/RegisterPage";
 import RentalListPage from "@pages/RentalListPage";
 import ChattingPage from "@pages/ChattingPage";
 import MyPage from "@pages/MyPage";
@@ -12,6 +13,8 @@ import { Outlet } from "react-router";
 import LabelBottomNavigation from "@container/MainBottomNavigationContainer";
 import ProductDetailPage from "@pages/ProductDetailPage";
 import ProductRegisterPage from "@pages/ProductRegisterPage";
+
+import login_rotuer_info from "./login";
 
 export const router = createBrowserRouter([
   {
@@ -52,8 +55,8 @@ export const router = createBrowserRouter([
     path: "product/:productId",
     element: <ProductDetailPage />,
   },
-  {
-    path: "login",
-    element: <LoginPage />,
-  },
+  /*
+    login
+  */
+  ...login_rotuer_info,
 ]);

@@ -1,6 +1,6 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "./styles/theme";
-import LoginPage from "@pages/LoginPage";
+import RegisterPage from "@pages/login/RegisterPage";
 import HomePage from "@pages/HomePage";
 import ProductDetailPage from "@pages/ProductDetailPage";
 
