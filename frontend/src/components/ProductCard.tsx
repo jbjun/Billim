@@ -19,14 +19,14 @@ export default function ProductCard({
   return (
     <Card
       sx={{
-        maxWidth: 166,
+        width: "44vw",
         border: "none",
         borderRadius: "10px",
       }}
       variant="outlined"
     >
       <CardMedia
-        sx={{ width: 166, height: 166 }}
+        sx={{ width: "44vw", height: 166 }}
         image="https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg"
         title="test image"
       />
@@ -36,7 +36,7 @@ export default function ProductCard({
         </Typography>
         <Box
           sx={{
-            width: 166,
+            width: "44vw",
             height: 34,
             overflow: "hidden",
           }}

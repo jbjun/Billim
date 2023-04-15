@@ -12,6 +12,7 @@ import MyPage from "@pages/MyPage";
 import { Outlet } from "react-router";
 import LabelBottomNavigation from "@container/MainBottomNavigationContainer";
 import ProductDetailPage from "@pages/ProductDetailPage";
+import ProductRegisterPage from "@pages/ProductRegisterPage";
 
 import login_rotuer_info from "./login";
 
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
         element: <MyPage />,
       },
     ],
+  },
+  {
+    path: "product/register",
+    element: <ProductRegisterPage />,
   },
   {
     path: "product/:productId",

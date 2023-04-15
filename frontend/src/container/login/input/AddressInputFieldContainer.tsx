@@ -43,6 +43,7 @@ function AddressInputFieldContainer() {
         title="주소 찾기"
         open={openAdressDialog}
         onClose={onClosenAdressDialog}
+        fullScreen
       >
         <AddressFinderContainer onSelectAddress={onSelectAddress} />
       </Dialog>
