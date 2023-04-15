@@ -53,7 +53,7 @@ function SpeechBubble() {
     </Box>
   );
 }
-function LoginContainer() {
+function RegisterContainer() {
   return (
     <Grid
       container
@@ -98,4 +98,4 @@ function LoginContainer() {
   );
 }
 
-export default LoginContainer;
+export default RegisterContainer;
