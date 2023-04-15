@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
    /* @Autowired

@@ -38,12 +38,20 @@ public class User {
   @Column(length = 50)
   private String juso;
 
+  @Column(nullable = false)
+  private String originFileName;
+
+  @Column(nullable = false)
+  private String fullPath;
+
   @Builder
-  public User(String type, String name, String email, Role role) {
+  public User(String type, String name, String email, Role role, String originFileName, String fullPath) {
     this.type = type;
     this.name = name;
     this.email = email;
     this.role = role;
+    this.originFileName = originFileName;
+    this.fullPath = fullPath;
   }
 
   public  User update(String type, String name, String email) {
@@ -58,6 +66,11 @@ public class User {
     this.type = number;
     this.name = nickName;
     this.email = juso;
+  }
+
+  public void updateFile(String originFileName, String fullPath) {
+    this.originFileName = originFileName;
+    this.fullPath = fullPath;
   }
 
   public  String getRoleKey() {
