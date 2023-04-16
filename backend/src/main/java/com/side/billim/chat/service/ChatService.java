@@ -18,8 +18,8 @@ public class ChatService {
 
 
 	@Transactional(readOnly = true)
-	public List<ChatRoomDto> findAllDesc(){
-		return chatRepository.findAllDesc().stream().map(ChatRoomDto::new).collect(Collectors.toList());
+	public List<ChatRoomDto> findChatRoomList(){
+		return chatRepository.findChatRoomList().stream().map(ChatRoomDto::new).collect(Collectors.toList());
 	}
 
 

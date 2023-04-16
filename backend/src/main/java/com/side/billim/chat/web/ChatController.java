@@ -10,12 +10,13 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.List;
 
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/chat")
+@RequestMapping
 public class ChatController {
 
 	private final ChatService chatService;
@@ -25,9 +26,9 @@ public class ChatController {
 			@ApiResponse(responseCode = "200", description = "통과"),
 			@ApiResponse(responseCode = "400", description = "실패")
 	})
-	@GetMapping("/api/chatRoomList")
-	public List<ChatRoomDto> findByChatRooms() throws Exception{
-		return chatService.findAllDesc();
+	@GetMapping("/api/v1/chatRoomList")
+	public List<ChatRoomDto> findByChatRooms(Principal principal) throws Exception{
+		return chatService.findChatRoomList();
 	}
 
 	//채팅방 개설
