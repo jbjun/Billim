@@ -21,7 +21,7 @@ public class SwaggerConfig {
 //				.apis(RequestHandlerSelectors.basePackage("com.study.hellospring.controller"))
 				.apis(RequestHandlerSelectors.any())
 //				.paths(PathSelectors.any())
-				.paths(PathSelectors.regex("/api/.*"))
+				.paths(PathSelectors.regex(".*/api/.*"))
 				.build()
 				.apiInfo(mySwaggerInfo());
 	}
