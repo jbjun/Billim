@@ -7,10 +7,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.Principal;
 import java.util.List;
 
 @Log4j2
@@ -27,7 +28,10 @@ public class ChatController {
 			@ApiResponse(responseCode = "400", description = "실패")
 	})
 	@GetMapping("/api/v1/chatRoomList")
-	public List<ChatRoomDto> findByChatRooms(Principal principal) throws Exception{
+	public List<ChatRoomDto> findByChatRooms(Authentication authentication) throws Exception{
+
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
 		return chatService.findChatRoomList();
 	}
 

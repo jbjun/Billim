@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.context.request.RequestContextListener;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -20,6 +21,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
   @Bean
   public BCryptPasswordEncoder encoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  public RequestContextListener requestContextListener(){
+    return new RequestContextListener();
   }
 
   @Override

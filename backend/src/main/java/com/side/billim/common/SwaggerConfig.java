@@ -17,11 +17,12 @@ public class SwaggerConfig {
 	@Bean
 	public Docket swaggerApi() {
 		return new Docket(DocumentationType.OAS_30)
+				.useDefaultResponseMessages(false)
 				.select()
-//				.apis(RequestHandlerSelectors.basePackage("com.study.hellospring.controller"))
+//				.apis(RequestHandlerSelectors.basePackage("com.side.billim"))
 				.apis(RequestHandlerSelectors.any())
 //				.paths(PathSelectors.any())
-				.paths(PathSelectors.regex(".*/api/.*"))
+				.paths(PathSelectors.regex("/api/.*"))
 				.build()
 				.apiInfo(mySwaggerInfo());
 	}
@@ -30,6 +31,7 @@ public class SwaggerConfig {
 		return new ApiInfoBuilder()
 				.title("SwaggerTest API")
 				.description("SwaggerTest API Docs")
+				.version("3.0")
 				.build();
 	}
 }
