@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class ChatRoomsDto {
+public class ChatRoomDto {
 
 	private Long id;
 	private String productName;
@@ -14,7 +14,7 @@ public class ChatRoomsDto {
 	private LocalDateTime lastMessageDate;
 	private String buyerName;
 
-	public ChatRoomsDto(ChatRoom entity){
+	public ChatRoomDto(ChatRoom entity){
 		this.id = entity.getId();
 		this.lastMessage = entity.getLastMessage();
 //		this.lastMessageDate = entity.getLastMessage();

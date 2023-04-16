@@ -9,6 +9,4 @@ public class ChatMessageDto {
 	private String name;
 	private String message;
 
-
-
 }

@@ -1,7 +1,7 @@
 package com.side.billim.chat.service;
 
 import com.side.billim.chat.domain.ChatRepository;
-import com.side.billim.chat.web.dto.ChatRoomsDto;
+import com.side.billim.chat.web.dto.ChatRoomDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +18,8 @@ public class ChatService {
 
 
 	@Transactional(readOnly = true)
-	public List<ChatRoomsDto> findAllDesc(){
-		return chatRepository.findAllDesc().stream().map(ChatRoomsDto::new).collect(Collectors.toList());
+	public List<ChatRoomDto> findAllDesc(){
+		return chatRepository.findAllDesc().stream().map(ChatRoomDto::new).collect(Collectors.toList());
 	}
 
 

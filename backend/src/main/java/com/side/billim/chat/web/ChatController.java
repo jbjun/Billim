@@ -1,7 +1,7 @@
 package com.side.billim.chat.web;
 
 import com.side.billim.chat.service.ChatService;
-import com.side.billim.chat.web.dto.ChatRoomsDto;
+import com.side.billim.chat.web.dto.ChatRoomDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -26,7 +26,7 @@ public class ChatController {
 			@ApiResponse(responseCode = "400", description = "실패")
 	})
 	@GetMapping("/api/chatRoomList")
-	public List<ChatRoomsDto> findByChatRooms() throws Exception{
+	public List<ChatRoomDto> findByChatRooms() throws Exception{
 		return chatService.findAllDesc();
 	}
 
