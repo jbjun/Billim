@@ -38,10 +38,10 @@ public class User {
   @Column(length = 50)
   private String juso;
 
-  @Column(nullable = false)
+  @Column
   private String originFileName;
 
-  @Column(nullable = false)
+  @Column
   private String fullPath;
 
   @Builder

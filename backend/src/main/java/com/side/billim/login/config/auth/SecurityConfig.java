@@ -1,6 +1,5 @@
 package com.side.billim.login.config.auth;
 
-import com.side.billim.login.domain.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     http.csrf().disable().headers().frameOptions().disable()
       .and()
       .authorizeRequests()
-      .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
-      .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+      .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/v3/api-docs/**","/swagger-ui/**","/swagger-resources/**","/api/v1/**").permitAll()
+//      .antMatchers("/api/v1/**").hasRole(Role.USER.name())
       .anyRequest().authenticated()
       .and()
       .logout() //로그아웃 시 할 일들의 진입점
