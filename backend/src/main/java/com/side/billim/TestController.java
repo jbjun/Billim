@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-	@Operation(summary = "String test", description = "문구 테스트")
+	@Operation(summary = "String test", description = "문구 테스트@")
 	@ApiResponses({
 			@ApiResponse(responseCode = "200", description = "통과"),
 			@ApiResponse(responseCode = "400", description = "실패")
