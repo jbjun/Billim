@@ -1,6 +1,7 @@
 package com.side.billim.chat.domain;
 
 import com.side.billim.common.domain.BaseTimeEntity;
+import com.side.billim.login.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,14 +20,21 @@ public class ChatRoom extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "room_id")
-	private Long roomId;
+	private Long id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "buyer_id")
+	private User user;
 
 	@OneToMany(mappedBy = "room")
 	private List<ChatMessage> chatMessages = new ArrayList<>();
 
 	@Column(name = "lastMessage")
 	private String lastMessage;
+
+
+
+	// 추후 Product id 추가
 
 
 //	@Builder
