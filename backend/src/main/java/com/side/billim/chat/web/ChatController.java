@@ -28,7 +28,9 @@ public class ChatController {
 	@GetMapping("/api/v1/chatRoomList")
 	public List<ChatRoomDto> findByChatRooms() throws Exception{
 
-		return chatService.findChatRoomList();
+		Long id = 2L;
+
+		return chatService.findChatRoomList(id);
 	}
 
 	//채팅방 개설
