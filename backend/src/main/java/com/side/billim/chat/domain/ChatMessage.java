@@ -3,16 +3,15 @@ package com.side.billim.chat.domain;
 import com.side.billim.common.domain.BaseTimeEntity;
 import com.side.billim.login.domain.user.User;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_chat_message")
-public class ChatMessage extends BaseTimeEntity implements Serializable{
+public class ChatMessage extends BaseTimeEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +19,7 @@ public class ChatMessage extends BaseTimeEntity implements Serializable{
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "chat_room_id")
-	private ChatRoom room;
+	private ChatRoom chatRoom;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sender_id")

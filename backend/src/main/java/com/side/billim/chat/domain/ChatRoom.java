@@ -28,7 +28,7 @@ public class ChatRoom extends BaseTimeEntity {
 	@JoinColumn(name = "buyer_id")
 	private User user;
 
-	@OneToMany(mappedBy = "room")
+	@OneToMany(mappedBy = "chatRoom")
 	private List<ChatMessage> chatMessages = new ArrayList<>();
 
 //	@Column(name = "lastMessage")

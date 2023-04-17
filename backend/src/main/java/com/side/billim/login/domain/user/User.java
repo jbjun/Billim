@@ -45,7 +45,8 @@ public class User {
   private String fullPath;
 
   @Builder
-  public User(String type, String name, String email, Role role, String originFileName, String fullPath) {
+  public User(Long id, String type, String name, String email, Role role, String originFileName, String fullPath) {
+    this.id = id;
     this.type = type;
     this.name = name;
     this.email = email;
