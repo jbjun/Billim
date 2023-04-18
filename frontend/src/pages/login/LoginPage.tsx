@@ -31,7 +31,7 @@ function LoginPage() {
             네이버 로그인
           </Button>
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Button
             sx={{ backgroundColor: "#FEE500", color: "black" }}
             fullWidth
@@ -39,7 +39,7 @@ function LoginPage() {
           >
             카카오 로그인
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );

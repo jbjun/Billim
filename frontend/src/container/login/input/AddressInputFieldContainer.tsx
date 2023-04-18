@@ -4,8 +4,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import Dialog from "@components/layout/Dialog";
 import AddressFinderContainer from "./AddressFinderContainer";
+import { IVerifiableInputProps } from "../RegisterContainer";
 
-function AddressInputFieldContainer() {
+interface IAddressInputFieldContainer {
+  id: IVerifiableInputProps["id"];
+  onVerify: IVerifiableInputProps["onVerify"];
+}
+function AddressInputFieldContainer({
+  id,
+  onVerify,
+}: IAddressInputFieldContainer) {
   const [error, setError] = useState(false);
   const [address, setAddress] = useState("");
   const [openAdressDialog, setOpenAdressDialog] = useState(false);
@@ -20,6 +28,7 @@ function AddressInputFieldContainer() {
 
   const onSelectAddress = (address: string) => {
     setAddress(address);
+    onVerify({ id, verified: true, value: address });
     onClosenAdressDialog();
   };
   const onChange = () => {};

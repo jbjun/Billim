@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../InputField";
 import { createValidator } from "@lib/utils/validator";
+import { IVerifiableInputProps } from "@container/login/RegisterContainer";
 // function validateName(value: string): boolean {
 //   const pattern = /^([가-힣]+\s)*[가-힣]*$/
 //   const validate = pattern.test(value)
@@ -9,15 +10,19 @@ import { createValidator } from "@lib/utils/validator";
 //   return validate
 // }
 const validateName = createValidator(/^([가-힣]+\s)*[가-힣]*$/);
-function NameInputField({}) {
+
+interface INameInputField extends IVerifiableInputProps {}
+function NameInputField({ id, value, onVerify }: INameInputField) {
   const [error, setError] = useState(false);
   const [name, setName] = useState("");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (validateName(value)) {
+      onVerify({ id, value, verified: true });
       setError(false);
     } else {
+      onVerify({ id, value, verified: false });
       setError(true);
     }
     setName(value);

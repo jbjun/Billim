@@ -4,18 +4,47 @@ import InputField from "@components/InputField";
 import VerificationCodeInputFieldContainer from "./VerificationCodeInputFieldContainer";
 import { flushSync } from "react-dom";
 import { createValidator } from "@lib/utils/validator";
+import { IVerifiableInputProps } from "../RegisterContainer";
 
 const validateWholePhoneNumber = createValidator(/^010[0-9]{8}$/);
 const validatePhoneNumber = createValidator(/^\d{0,11}$/);
 
+// 인증 진행 중 / 잘못된 핸드폰 번호
+type AnnouncementType = "VERIFICATION" | "PHONE_NUMBER_ERROR" | "NONE";
+
+function getAnnouncement(
+  announcementType: AnnouncementType
+): React.ReactElement | string | undefined {
+  if (announcementType === "VERIFICATION") {
+    return (
+      <>
+        인증번호를 발송했습니다. (유효기간 2분)
+        <br />
+        인증번호가 오지 않으면 입력하신 정보가 정확한지 확인해 주세요.
+      </>
+    );
+  } else if (announcementType === "PHONE_NUMBER_ERROR") {
+    return "핸드폰 번호가 유효하지 않습니다.";
+  } else {
+    ("");
+  }
+}
+interface IPhoneNumberInputFieldContainerProps {
+  id: IVerifiableInputProps["id"];
+  onVerify: IVerifiableInputProps["onVerify"];
+}
 // 인증 받기, 재요청, 인증완료
-function PhoneNumberInputFieldContainer() {
-  const [error, setError] = useState(false);
+function PhoneNumberInputFieldContainer({
+  id,
+  onVerify,
+}: IPhoneNumberInputFieldContainerProps) {
+  const [announcementStatus, setAnnouncement] =
+    useState<AnnouncementType>("NONE");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [verificationStatus, setVerificationStatus] =
-    useState<
-      "verification" | "reVerification" | "completedVerification" | "none"
-    >("verification");
+  const [verificationStatus, setVerificationStatus] = useState<
+    "VERIFICATION" | "RE_VERIFICATION" | "COMPLETED_VERIFICATION" | "NONE"
+  >("VERIFICATION");
+  const [verificationCode, setVerificationCode] = useState("123456");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -25,37 +54,41 @@ function PhoneNumberInputFieldContainer() {
   };
   const onVerifyPhoneNumber = async () => {
     const validated = validateWholePhoneNumber(phoneNumber);
-    if (!validated) return;
-    await requestPhoneNumberVerificationCode();
-    setVerificationStatus("reVerification");
+    if (!validated) {
+      setAnnouncement("PHONE_NUMBER_ERROR");
+      return;
+    }
+    const code = await requestPhoneNumberVerificationCode();
+    setVerificationCode(code);
+    setVerificationStatus("RE_VERIFICATION");
+    setAnnouncement("VERIFICATION");
   };
 
   const onReverifyPhoneNumber = async () => {
     const validated = validateWholePhoneNumber(phoneNumber);
     if (!validated) return;
     // server에 재요청 후 완료 되었을 때 UI 처리
-    await requestPhoneNumberVerificationCode();
+    const code = await requestPhoneNumberVerificationCode();
+    setVerificationCode(code);
     // VerificationCodeInputFieldContainer unmount 후 mount 하기
     flushSync(() => {
-      setVerificationStatus("none");
+      setVerificationStatus("NONE");
     });
 
-    setVerificationStatus("reVerification");
+    setVerificationStatus("RE_VERIFICATION");
   };
 
-  const onVerify = async (code: number) => {
-    /* 서버 요청 및 인증번호 검증
-        검증 성공 시 
-        VerificationCodeInputFieldContainer 사라지고 인증 완료  
-        
-        실패 시
-        시간 리셋
-      */
-    const result = await requestPhoneNumberVerify(code);
+  const onLocalVerify = async (code: number) => {
+    // 성공 시 호출됌
+    setVerificationStatus("COMPLETED_VERIFICATION");
+    setAnnouncement("NONE");
 
+    onVerify({ id, verified: true });
+    // const result = await requestPhoneNumberVerify(code);
+    // setVerificationCode(result)
     // if (result) {
     //   // 성공
-    //   setVerificationStatus("completedVerification");
+    //   setVerificationStatus("COMPLETED_VERIFICATION");
     // } else {
     //   // 실패 처리
     // }
@@ -63,11 +96,9 @@ function PhoneNumberInputFieldContainer() {
 
   const requestPhoneNumberVerificationCode = async () => {
     // server에 인증번호 요청
+    return "123456";
   };
 
-  const requestPhoneNumberVerify = async (code: number) => {
-    // server에 인증번호 확인
-  };
   return (
     <>
       <Grid container spacing={4}>
@@ -77,13 +108,13 @@ function PhoneNumberInputFieldContainer() {
             value={phoneNumber}
             onChange={onChange}
             placeholder="'-'없이 숫자만 입력해 주세요."
-            error={error}
-            helperText="휴대폰번호를 입력해 주세요."
+            error={announcementStatus !== "NONE"}
+            helperText={getAnnouncement(announcementStatus)}
             required
             endAdornment={
-              verificationStatus === "verification" ? (
+              verificationStatus === "VERIFICATION" ? (
                 <VerificationChip onVerifyPhoneNumber={onVerifyPhoneNumber} />
-              ) : verificationStatus === "reVerification" ? (
+              ) : verificationStatus === "RE_VERIFICATION" ? (
                 <ReVerificationChip
                   onReVerifyPhoneNumber={onReverifyPhoneNumber}
                 />
@@ -93,10 +124,13 @@ function PhoneNumberInputFieldContainer() {
             }
           />
         </Grid>
-        {verificationStatus === "verification" ||
-          (verificationStatus === "reVerification" && (
+        {verificationStatus === "VERIFICATION" ||
+          (verificationStatus === "RE_VERIFICATION" && (
             <Grid item xs={12}>
-              <VerificationCodeInputFieldContainer onVerify={onVerify} />
+              <VerificationCodeInputFieldContainer
+                onVerify={onLocalVerify}
+                code={verificationCode}
+              />
             </Grid>
           ))}
       </Grid>

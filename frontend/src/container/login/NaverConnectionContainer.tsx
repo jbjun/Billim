@@ -13,16 +13,22 @@ import CheckIcon from "@mui/icons-material/Check";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import _ from "lodash";
 
-function isAllRequiredChecked(checkedList) {
+interface ICheckedInfo {
+  label: string;
+  id: string;
+  checked: boolean;
+  required: boolean;
+}
+function isAllRequiredChecked(checkedList: ICheckedInfo[]) {
   return checkedList
     .filter((checkedInfo) => checkedInfo.required)
     .every((checkedInfo) => checkedInfo.checked);
 }
 
-function isAllChecked(checkedList) {
+function isAllChecked(checkedList: ICheckedInfo[]) {
   return checkedList.every((checkedInfo) => checkedInfo.checked);
 }
-const initialCheckedList = [
+const initialCheckedList: ICheckedInfo[] = [
   {
     label: "서비스 이용 약관 (필수)",
     id: "service",
@@ -56,7 +62,8 @@ const initialCheckedList = [
 ];
 function NaverConnectionContainer() {
   const [email, setEmail] = useState("");
-  const [checkedList, setCheckedList] = useState(initialCheckedList);
+  const [checkedList, setCheckedList] =
+    useState<ICheckedInfo[]>(initialCheckedList);
   const [allChecked, setAllChecked] = useState(isAllChecked(checkedList));
   const isRegistable = useMemo(
     () => isAllRequiredChecked(checkedList),
@@ -121,6 +128,7 @@ function NaverConnectionContainer() {
         {checkedList.map(({ id, label, checked }) => {
           return (
             <DescriptionCheckbox
+              key={id}
               id={id}
               label={label}
               checked={checked}
@@ -151,8 +159,8 @@ interface IDescriptionCheckboxProps {
   id: string;
   label: string;
   checked: boolean;
-  onChange: Function;
-  onNavigateToDescription: Function;
+  onChange: any;
+  onNavigateToDescription: any;
 }
 function DescriptionCheckbox({
   id,
@@ -180,11 +188,7 @@ function DescriptionCheckbox({
         />
       </Grid>
       <Grid item>
-        <IconButton
-          aria-label="delete"
-          size="large"
-          onClick={onNavigateToDescription}
-        >
+        <IconButton size="large" onClick={onNavigateToDescription}>
           <KeyboardArrowRightIcon />
         </IconButton>
       </Grid>
@@ -198,7 +202,6 @@ function Banner() {
     width: "5px",
     height: "5px",
     borderRadius: "50%",
-    backgroundColor: "black",
     verticalAlign: "middle",
     backgroundColor: "grey",
     ml: 1,
@@ -211,7 +214,7 @@ function Banner() {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={12} spacing={2}>
+        <Grid item xs={12}>
           <Typography
             sx={{
               fontSize: "2rem",
@@ -263,7 +266,6 @@ function Banner() {
               fontWeight: 400,
               mt: 2,
             }}
-            h
           >
             이메일 주소 입력과 약관동의를 하시면{<br />} 빌림 회원으로 가입
             됩니다.

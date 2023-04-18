@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import produce from "immer";
 import PhoneNumberInputFieldContainer from "./input/PhoneNumberInputFieldContainer";
 import AddressInputFieldContainer from "./input/AddressInputFieldContainer";
 import NickNameInputFieldContainer from "./input/NickNameInputFieldContainer";
@@ -53,7 +54,41 @@ function SpeechBubble() {
     </Box>
   );
 }
+
+interface IVerfiyInfo {
+  id: "username" | "email" | "phoneNumber" | "address" | "nickname";
+  verified: boolean;
+  value?: string;
+}
+export interface IVerifiableInputProps {
+  value: IVerfiyInfo["value"];
+  onVerify: (info: IVerfiyInfo) => void;
+  id: IVerfiyInfo["id"];
+}
 function RegisterContainer() {
+  const [registerForm, setRegisterForm] = useState({
+    username: { verified: false, value: "" },
+    email: { verified: true, value: "abc@naver.com" },
+    phoneNumber: { verified: false },
+    address: { verified: false, value: "" },
+    nickname: { verified: false, value: "" },
+  });
+  const isRegistable = useMemo(() => {
+    return Object.values(registerForm).every((info) => info.verified);
+  }, [registerForm]);
+
+  const onRegister = () => {
+    // server에 registerForm 정보 전송
+  };
+  const onVerify = ({ id, verified, value }: IVerfiyInfo) => {
+    const newRegisterForm = produce(registerForm, (draft) => {
+      draft[id].verified = verified;
+      if (id !== "phoneNumber" && value) {
+        draft[id].value = value;
+      }
+    });
+    setRegisterForm(newRegisterForm);
+  };
   return (
     <Grid
       container
@@ -66,22 +101,26 @@ function RegisterContainer() {
         <SpeechBubble />
       </Grid>
       <Grid item xs={12}>
-        <NameInputField />
+        <NameInputField
+          id="username"
+          onVerify={onVerify}
+          value={registerForm.username.value}
+        />
       </Grid>
       <Grid item xs={12}>
-        <EmailAdressInputField />
+        <EmailAdressInputField value={registerForm.email.value} />
       </Grid>
       <Grid item xs={12}>
-        <PhoneNumberInputFieldContainer />
+        <PhoneNumberInputFieldContainer id="phoneNumber" onVerify={onVerify} />
       </Grid>
       {/* <Grid item xs={12}>
         <VerificationCodeInputFieldContainer />
       </Grid> */}
       <Grid item xs={12}>
-        <AddressInputFieldContainer />
+        <AddressInputFieldContainer id="address" onVerify={onVerify} />
       </Grid>
       <Grid item xs={12}>
-        <NickNameInputFieldContainer />
+        <NickNameInputFieldContainer id="nickname" onVerify={onVerify} />
       </Grid>
       <Grid item xs={12}>
         <Button
@@ -89,7 +128,8 @@ function RegisterContainer() {
           sx={{
             width: "100%",
           }}
-          disabled
+          disabled={!isRegistable}
+          onClick={onRegister}
         >
           회원가입 하기
         </Button>

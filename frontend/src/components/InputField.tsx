@@ -21,7 +21,7 @@ interface InputFieldProps {
   placeholder?: string;
   /* 에러 발생 시 에러 메시지 표시*/
   error?: boolean;
-  helperText?: string;
+  helperText?: string | React.ReactElement;
 
   success?: boolean;
   successHelperText?: string;
