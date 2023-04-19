@@ -239,7 +239,6 @@ export const theme = createTheme({
           marginRight: 0,
         },
         label: {
-          width: "49px",
           fontSize: "14px",
           color: "#666666",
         },

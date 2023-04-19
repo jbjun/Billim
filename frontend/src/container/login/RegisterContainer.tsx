@@ -11,7 +11,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import produce from "immer";
+import { produce } from "immer";
 import PhoneNumberInputFieldContainer from "./input/PhoneNumberInputFieldContainer";
 import AddressInputFieldContainer from "./input/AddressInputFieldContainer";
 import NickNameInputFieldContainer from "./input/NickNameInputFieldContainer";
