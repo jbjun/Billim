@@ -3,6 +3,8 @@ package com.side.billim.login.web;
 import com.side.billim.login.domain.user.UserRepository;
 import com.side.billim.login.service.UserService;
 import com.side.billim.login.web.dto.UserUpdateDto;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,7 @@ public class UserController {
 
   // 로그인 처리 후에 호출되는 콜백 URL
   @GetMapping("/oauth_login")
+  @ApiOperation(value = "소셜 로그인", notes = "소셜 로그인 API")
   public String oauth2Callback(OAuth2AuthenticationToken authentication, Model model, @RequestParam("oauthId") String oauthId) {
 
     String name = (String) authentication.getPrincipal().getAttributes().get("name");
@@ -48,12 +51,15 @@ public class UserController {
   }
 
   @RequestMapping(value = "/logout", method = RequestMethod.POST)
+  @ApiOperation(value = "로그아웃", notes = "로그아웃 API")
   public void logout(HttpServletRequest request) throws ServletException {
     // 로그아웃 처리
     request.logout();
   }
 
   @PutMapping("/updateUser")
+  @ApiOperation(value = "회원가입 추가 정보", notes = "회원가입 추가 정보 API")
+  @ApiImplicitParam(name = "email", value = "이메일")
   public void update(@PathVariable String email, @RequestBody UserUpdateDto dto){
 
     userService.update(email,dto);

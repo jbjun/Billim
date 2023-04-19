@@ -22,7 +22,8 @@ public class SwaggerConfig {
 //				.apis(RequestHandlerSelectors.basePackage("com.side.billim"))
 				.apis(RequestHandlerSelectors.any())
 //				.paths(PathSelectors.any())
-				.paths(PathSelectors.regex("/api/.*"))
+//				.paths(PathSelectors.regex("/api/.*"))
+				.paths(PathSelectors.any())
 				.build()
 				.apiInfo(mySwaggerInfo());
 	}
