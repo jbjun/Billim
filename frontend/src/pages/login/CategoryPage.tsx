@@ -2,67 +2,92 @@ import Header from "@components/layout/Header";
 import React from "react";
 import { IconButton, Grid, SvgIcon, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { ReactComponent as DegitalDeviceIcon } from "../../assets/icons/category/digital_device.svg";
+import { ReactComponent as DegitalDeviceIcon } from "@assets/icons/category/Digital_device.svg";
+import { ReactComponent as HouseHoldIcon } from "@assets/icons/category/Household_icon.svg";
+import { ReactComponent as FurnitureInteriorIcon } from "@assets/icons/category/Furniture_interior.svg";
+import { ReactComponent as LivingKitchenIcon } from "@assets/icons/category/Living_kitchen.svg";
+import { ReactComponent as BabyGoodsIcon } from "@assets/icons/category/Baby_goods.svg";
+import { ReactComponent as ClothingGoodsIcon } from "@assets/icons/category/Clothing_goods.svg";
+import { ReactComponent as BeautyIcon } from "@assets/icons/category/Beauty_icon.svg";
+import { ReactComponent as SportsLeisureIcon } from "@assets/icons/category/Sports_leisure.svg";
+import { ReactComponent as GameIcon } from "@assets/icons/category/Game_icon.svg";
+import { ReactComponent as BookIcon } from "@assets/icons/category/Book_icon.svg";
+import { ReactComponent as PetGoodsIcon } from "@assets/icons/category/Pet_goods.svg";
+import { ReactComponent as ETCIcon } from "@assets/icons/category/ETC.svg";
 const categories = [
   {
     id: "digital_device",
     label: "디지털기기",
-    icon: <SvgIcon component={DegitalDeviceIcon} />,
+    icon: (
+      <SvgIcon component={DegitalDeviceIcon} inheritViewBox fontSize="large" />
+    ),
   },
   {
     id: "household",
     label: "생활가전",
-    icon: <CloseIcon fontSize="small" />,
+    icon: <SvgIcon component={HouseHoldIcon} inheritViewBox fontSize="large" />,
   },
   {
     id: "furniture_interior",
     label: "가구/인테리어",
-    icon: <CloseIcon fontSize="small" />,
+    icon: (
+      <SvgIcon
+        component={FurnitureInteriorIcon}
+        inheritViewBox
+        fontSize="large"
+      />
+    ),
   },
   {
     id: "living_kitchen",
     label: "생활/주방",
-    icon: <CloseIcon fontSize="small" />,
+    icon: (
+      <SvgIcon component={LivingKitchenIcon} inheritViewBox fontSize="large" />
+    ),
   },
   {
-    id: "child",
+    id: "Baby_goods",
     label: "유아동",
-    icon: <CloseIcon fontSize="small" />,
+    icon: <SvgIcon component={BabyGoodsIcon} inheritViewBox fontSize="large" />,
   },
   {
     id: "clothing_goods",
     label: "의류/잡화",
-    icon: <CloseIcon fontSize="small" />,
+    icon: (
+      <SvgIcon component={ClothingGoodsIcon} inheritViewBox fontSize="large" />
+    ),
   },
   {
-    id: "beauty",
+    id: "Beauty",
     label: "뷰티/미용",
-    icon: <CloseIcon fontSize="small" />,
+    icon: <SvgIcon component={BeautyIcon} inheritViewBox fontSize="large" />,
   },
   {
     id: "sports_leisure",
     label: "스포츠/레저",
-    icon: <CloseIcon fontSize="small" />,
+    icon: (
+      <SvgIcon component={SportsLeisureIcon} inheritViewBox fontSize="large" />
+    ),
   },
   {
     id: "game",
     label: "취미/게임/음반",
-    icon: <CloseIcon fontSize="small" />,
+    icon: <SvgIcon component={GameIcon} viewBox="0 0 12 12" />,
   },
   {
     id: "book",
     label: "도서",
-    icon: <CloseIcon fontSize="small" />,
+    icon: <SvgIcon component={BookIcon} inheritViewBox fontSize="large" />,
   },
   {
     id: "pet_goods",
     label: "반려동물용품",
-    icon: <CloseIcon fontSize="small" />,
+    icon: <SvgIcon component={PetGoodsIcon} inheritViewBox fontSize="large" />,
   },
   {
     id: "etc",
     label: "기타물품",
-    icon: <CloseIcon fontSize="small" />,
+    icon: <SvgIcon component={ETCIcon} inheritViewBox fontSize="large" />,
   },
 ];
 function CategoryPage() {
@@ -86,7 +111,6 @@ function CategoryPage() {
             </Stack>
           </Grid>
         ))}
-        <Grid item xs={4}></Grid>
       </Grid>
     </>
   );

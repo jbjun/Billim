@@ -2,31 +2,30 @@ import Header from "@components/layout/Header";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import NaverLogo from "@assets/images/naver_btn.png";
+import LoginBillimCharacter from "@assets/images/Login_billim_character.png";
 function LoginPage() {
   return (
     <>
-      <Header title="" onBackHistory={() => {}} />
+      <Header title="상품등록" onBackHistory={() => {}} />
       <Grid container spacing={2} sx={{ mt: 2, p: 1.5 }}>
         <Grid item xs={12}>
-          <Typography variant="h5">로그인</Typography>
+          <Typography variant="h4">로그인</Typography>
           <Typography variant="subtitle1">
             소셜로그인으로 3초만에 간단하게 가입해 보세요!
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{ width: "300px" }}>
-            <img
-              style={{ width: "300px", height: "300px" }}
-              src="https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg"
-            />
-          </Box>
+          <img
+            style={{ width: "300px", height: "300px" }}
+            src={LoginBillimCharacter}
+          />
         </Grid>
         <Grid item xs={12}>
           <Button
             sx={{ backgroundColor: "#03C75A", color: "white" }}
             fullWidth
-            startIcon={<DeleteIcon />}
+            startIcon={<img src={NaverLogo} alt="naver_logo" />}
           >
             네이버 로그인
           </Button>

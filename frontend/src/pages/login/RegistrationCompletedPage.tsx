@@ -1,7 +1,7 @@
 import Header from "@components/layout/Header";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
-
+import CompletedRegisterBillimCharacter from "@assets/images/Completed_register_billim_character.png";
 function RegistrationCompletedPage() {
   return (
     <>
@@ -14,12 +14,10 @@ function RegistrationCompletedPage() {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{ width: "300px" }}>
-            <img
-              style={{ width: "300px", height: "300px" }}
-              src="https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg"
-            />
-          </Box>
+          <img
+            style={{ width: "300px", height: "300px" }}
+            src={CompletedRegisterBillimCharacter}
+          />
         </Grid>
         <Grid item xs={12}>
           <Button

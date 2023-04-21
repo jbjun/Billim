@@ -8,7 +8,8 @@ import ServiceDescriptionPage from "@pages/login/ServiceDescriptionPage";
 const LOGIN_PATH = "login";
 const REGISTER_PATH = "register";
 const NAVER_CONNECTION_PATH = "naver-connection";
-const SERVICE_DESCRIPTION_PATH = "service-description";
+export const SERVICE_DESCRIPTION_PATH = "service-description";
+const SERVICE_DESCRIPTION_DYNAMIC_PATH = "/:descriptionType";
 const REGISTRATION_COMPLETED_PATH = "registration-completed";
 const CATEGORY_PATH = "category";
 
@@ -26,7 +27,7 @@ const login_rotuer_info = [
     element: <NaverConnectionPage />,
   },
   {
-    path: SERVICE_DESCRIPTION_PATH,
+    path: SERVICE_DESCRIPTION_PATH + SERVICE_DESCRIPTION_DYNAMIC_PATH,
     element: <ServiceDescriptionPage />,
   },
   {

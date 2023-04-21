@@ -6,14 +6,15 @@ import { useNavigate } from "react-router";
 import Header from "@components/layout/Header";
 import Carousel from "@components/productDetail/Carousel";
 import ProductDetailContainer from "@container/home/ProductDetailContainer";
+import useGoBack from "@lib/hooks/useGoBack";
 
 const LIST = ["a", "b", "c"];
 
 const ProductDetailPage = () => {
-  const navigate = useNavigate();
+  const handleGoBack = useGoBack();
   return (
     <>
-      <Header title="상품정보" onBackHistory={() => navigate(-1)} />
+      <Header title="상품정보" onBackHistory={handleGoBack} />
       <Box sx={{ width: "100vw", height: "375px", overflow: "hidden" }}>
         <Carousel>
           {LIST.map((_, i) => (

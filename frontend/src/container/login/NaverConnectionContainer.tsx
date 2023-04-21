@@ -12,10 +12,19 @@ import React, { useMemo, useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import _ from "lodash";
+import { Link } from "react-router-dom";
+import { SERVICE_DESCRIPTION_PATH } from "routes/login";
+import { createValidator } from "@lib/utils/validator";
 
+export type ServiceDescriptionType =
+  | "service"
+  | "personal"
+  | "location"
+  | "age"
+  | "marketing";
 interface ICheckedInfo {
   label: string;
-  id: string;
+  id: ServiceDescriptionType;
   checked: boolean;
   required: boolean;
 }
@@ -27,6 +36,16 @@ function isAllRequiredChecked(checkedList: ICheckedInfo[]) {
 
 function isAllChecked(checkedList: ICheckedInfo[]) {
   return checkedList.every((checkedInfo) => checkedInfo.checked);
+}
+
+function isNaverEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const naverDomainRegex = /naver\.com$/;
+  if (emailRegex.test(email) && naverDomainRegex.test(email)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 const initialCheckedList: ICheckedInfo[] = [
   {
@@ -66,8 +85,8 @@ function NaverConnectionContainer() {
     useState<ICheckedInfo[]>(initialCheckedList);
   const [allChecked, setAllChecked] = useState(isAllChecked(checkedList));
   const isRegistable = useMemo(
-    () => isAllRequiredChecked(checkedList),
-    [checkedList]
+    () => isAllRequiredChecked(checkedList) && isNaverEmail(email),
+    [checkedList, email]
   );
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -189,7 +208,12 @@ function DescriptionCheckbox({
       </Grid>
       <Grid item>
         <IconButton size="large" onClick={onNavigateToDescription}>
-          <KeyboardArrowRightIcon />
+          <Link
+            to={`/${SERVICE_DESCRIPTION_PATH}/${id}`}
+            style={{ color: "grey" }}
+          >
+            <KeyboardArrowRightIcon />
+          </Link>
         </IconButton>
       </Grid>
     </Grid>
