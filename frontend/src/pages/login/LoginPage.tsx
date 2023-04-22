@@ -2,8 +2,8 @@ import Header from "@components/layout/Header";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import NaverLogo from "@assets/images/naver_btn.png";
-import LoginBillimCharacter from "@assets/images/Login_billim_character.png";
+import NaverLogo from "@assets/images/login/naver_btn.png";
+import LoginBillimCharacter from "@assets/images/login/Login_billim_character.png";
 function LoginPage() {
   return (
     <>

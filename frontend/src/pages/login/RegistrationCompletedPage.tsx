@@ -1,7 +1,7 @@
 import Header from "@components/layout/Header";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
-import CompletedRegisterBillimCharacter from "@assets/images/Completed_register_billim_character.png";
+import CompletedRegisterBillimCharacter from "@assets/images/login/Completed_register_billim_character.png";
 function RegistrationCompletedPage() {
   return (
     <>
