@@ -15,6 +15,10 @@ import _ from "lodash";
 import { Link } from "react-router-dom";
 import { SERVICE_DESCRIPTION_PATH } from "routes/login";
 import { createValidator } from "@lib/utils/validator";
+import Dialog from "@components/layout/Dialog";
+import BillimServiceDescription, {
+  serviceDescriptionTitleProvider,
+} from "@components/login/serviceDescription/serviceDescription";
 
 export type ServiceDescriptionType =
   | "service"
@@ -89,6 +93,18 @@ function NaverConnectionContainer() {
     [checkedList, email]
   );
 
+  const [openDialog, setOpenDialog] = useState(false);
+  const [activateDescriptionType, setActivateDescriptionType] =
+    useState<ServiceDescriptionType>("service");
+
+  const onOpenDialog = (id: ServiceDescriptionType) => {
+    setOpenDialog(true);
+    setActivateDescriptionType(id);
+  };
+
+  const onCloseDialog = () => {
+    setOpenDialog(false);
+  };
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
@@ -152,7 +168,7 @@ function NaverConnectionContainer() {
               label={label}
               checked={checked}
               onChange={onChangeChecked}
-              onNavigateToDescription={() => {}}
+              onOpenDialog={onOpenDialog}
             />
           );
         })}
@@ -168,6 +184,13 @@ function NaverConnectionContainer() {
           가입하기
         </Button>
       </Grid>
+      <Dialog
+        title={serviceDescriptionTitleProvider[activateDescriptionType]}
+        open={openDialog}
+        onClose={onCloseDialog}
+      >
+        <BillimServiceDescription descriptionType={activateDescriptionType} />
+      </Dialog>
     </Grid>
   );
 }
@@ -179,15 +202,18 @@ interface IDescriptionCheckboxProps {
   label: string;
   checked: boolean;
   onChange: any;
-  onNavigateToDescription: any;
+  onOpenDialog: any;
 }
 function DescriptionCheckbox({
   id,
   label,
   checked,
   onChange,
-  onNavigateToDescription,
+  onOpenDialog,
 }: IDescriptionCheckboxProps) {
+  const onLocalOpenDialog = () => {
+    onOpenDialog(id);
+  };
   return (
     <Grid container justifyContent="space-between" alignItems="center">
       <Grid item>
@@ -207,13 +233,8 @@ function DescriptionCheckbox({
         />
       </Grid>
       <Grid item>
-        <IconButton size="large" onClick={onNavigateToDescription}>
-          <Link
-            to={`/${SERVICE_DESCRIPTION_PATH}/${id}`}
-            style={{ color: "grey" }}
-          >
-            <KeyboardArrowRightIcon />
-          </Link>
+        <IconButton size="large" onClick={onLocalOpenDialog}>
+          <KeyboardArrowRightIcon />
         </IconButton>
       </Grid>
     </Grid>

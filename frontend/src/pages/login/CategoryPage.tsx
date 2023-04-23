@@ -72,7 +72,7 @@ const categories = [
   {
     id: "game",
     label: "취미/게임/음반",
-    icon: <SvgIcon component={GameIcon} viewBox="0 0 12 12" />,
+    icon: <SvgIcon component={GameIcon} inheritViewBox fontSize="large" />,
   },
   {
     id: "book",

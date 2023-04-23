@@ -3,7 +3,6 @@ import LoginPage from "@pages/login/LoginPage";
 import NaverConnectionPage from "@pages/login/NaverConnectionPage";
 import RegisterPage from "@pages/login/RegisterPage";
 import RegistrationCompletedPage from "@pages/login/RegistrationCompletedPage";
-import ServiceDescriptionPage from "@pages/login/ServiceDescriptionPage";
 
 const LOGIN_PATH = "login";
 const REGISTER_PATH = "register";
@@ -25,10 +24,6 @@ const login_rotuer_info = [
   {
     path: NAVER_CONNECTION_PATH,
     element: <NaverConnectionPage />,
-  },
-  {
-    path: SERVICE_DESCRIPTION_PATH + SERVICE_DESCRIPTION_DYNAMIC_PATH,
-    element: <ServiceDescriptionPage />,
   },
   {
     path: REGISTRATION_COMPLETED_PATH,

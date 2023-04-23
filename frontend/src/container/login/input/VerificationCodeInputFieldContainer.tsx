@@ -57,6 +57,11 @@ function VerificationCodeInputFieldContainer({
   };
 
   const onLocalVerify = () => {
+    // 시간 초과인경우 인증할 수 없음
+    if (time <= 0) {
+      return;
+    }
+
     if (verificationCode === code) {
       // 통과
       onVerify();
