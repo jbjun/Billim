@@ -24,7 +24,7 @@ function getAnnouncement(
       </>
     );
   } else if (announcementType === "PHONE_NUMBER_ERROR") {
-    return "핸드폰 번호가 유효하지 않습니다.";
+    return "휴대폰번호가 유효하지 않습니다. 입력하신 정보가 정확한 지 확인해 주세요.";
   } else {
     ("");
   }
