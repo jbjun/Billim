@@ -13,6 +13,7 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 
 // 내부모듈
 import { ReactComponent as HomeIcon } from "../assets/icons/Home_outlined.svg";
+import { CHAT_LIST_PATH } from "routes";
 
 // import { ReactComponent as ListIcon } from "../../assets/icons/List_outlined.svg";
 // import { ReactComponent as ChatIcon } from "../../assets/icons/Chat_outlined.svg";
@@ -46,7 +47,7 @@ const LabelBottomNavigation = () => {
         />
         <BottomNavigationAction
           label="채팅"
-          value="/chatting"
+          value={`/${CHAT_LIST_PATH}`}
           icon={<SvgIcon component={QuestionAnswerIcon} />}
         />
         <BottomNavigationAction
