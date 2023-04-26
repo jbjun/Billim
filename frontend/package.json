@@ -12,7 +12,7 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://52.64.106.59:8080",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

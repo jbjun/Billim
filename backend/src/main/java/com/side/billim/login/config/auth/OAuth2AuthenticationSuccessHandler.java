@@ -24,7 +24,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     String oauthId = authentication.getName();
     String oauthEmail = authentication.getName();
 
-    String uri = UriComponentsBuilder.fromUriString( "http://localhost:8080/user/oauth_login")
+    String uri = UriComponentsBuilder.fromUriString( "http://52.64.106.59:8080/user/oauth_login")
         .queryParam("provider", "NAVER")
         .queryParam("oauthId", oauthId)
         .build().toUriString();
