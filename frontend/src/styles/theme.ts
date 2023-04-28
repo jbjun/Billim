@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material";
 import { CustomTypographyOptions } from "../types/mui/theme";
+import { koKR } from "@mui/x-date-pickers/locales";
 
 export const primaryPalette = {
   main: "#7360FF",
@@ -104,7 +105,7 @@ const customTypography: CustomTypographyOptions = {
     // lineHeight: "28px",
   },
   t4: {
-    fontSize: "15px",
+    fontSize: "16px",
     fontWeight: 600,
     // lineHeight: "22px",
   },
@@ -165,125 +166,124 @@ const customTypography: CustomTypographyOptions = {
   },
 };
 
-export const theme = createTheme({
-  palette: {
-    primary: primaryPalette,
-    red: redPalette,
-    green: greenPalette,
-    blue: bluePalette,
-    text: textPalette,
-    divider: "#E5E5E5",
-  },
-  typography: {
-    fontFamily: ["Roboto", "Arial"].join(" "), // 추후 폰트 추가
-    ...customTypography,
-  },
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        html: {
-          overflow: "hidden",
-        },
-        body: {
-          overflow: "auto !important",
-          "&::-webkit-scrollbar": {
-            display: "none",
+export const theme = createTheme(
+  {
+    palette: {
+      primary: primaryPalette,
+      red: redPalette,
+      green: greenPalette,
+      blue: bluePalette,
+      text: textPalette,
+      divider: "#E5E5E5",
+    },
+    typography: {
+      fontFamily: ["Roboto", "Arial"].join(" "), // 추후 폰트 추가
+      ...customTypography,
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            overflow: "hidden",
           },
-          height: "100vh",
-        },
-        "@global": {},
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        sizeSmall: {
-          height: "32px",
-        },
-        sizeMedium: {
-          height: "40px",
-        },
-        sizeLarge: {
-          height: "48px",
+          body: {
+            overflow: "auto !important",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+            height: "100vh",
+          },
+          "@global": {},
         },
       },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          input: {
-            fontSize: "14px",
-            "&::placeholder": {
-              color: "#666666",
+      MuiButton: {
+        styleOverrides: {
+          sizeSmall: {
+            height: "32px",
+          },
+          sizeMedium: {
+            height: "40px",
+          },
+          sizeLarge: {
+            height: "48px",
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            input: {
               fontSize: "14px",
+              "&::placeholder": {
+                color: "#666666",
+                fontSize: "14px",
+              },
             },
-          },
-          "& .MuiInputBase-root": {
-            paddingBottom: "11px",
-            "&:before": {
-              borderBottom: "1px solid #E5E5E5",
+            "& .MuiInputBase-root": {
+              paddingBottom: "11px",
+              "&:before": {
+                borderBottom: "1px solid #E5E5E5",
+              },
             },
-          },
-          textarea: {
-            fontSize: "14px",
-            "&::placeholder": {
-              color: "#666666",
+            textarea: {
               fontSize: "14px",
+              "&::placeholder": {
+                color: "#666666",
+                fontSize: "14px",
+              },
             },
           },
         },
       },
-    },
-    MuiFormControlLabel: {
-      styleOverrides: {
-        root: {
-          marginRight: 0,
-        },
-        label: {
-          fontSize: "14px",
-          color: "#666666",
-        },
-      },
-    },
-    MuiBottomNavigation: {
-      styleOverrides: {
-        root: {
-          width: "100vw",
-          "& .MuiSvgIcon-root": {
-            marginBottom: 4,
-          },
-          "& .MuiBottomNavigationAction-label": {
-            fontSize: 10,
-            lineHeight: "12px",
-          },
-          "& .Mui-selected": {
-            fontSize: "10px !important",
-            lineHeight: "12px",
+      MuiFormControlLabel: {
+        styleOverrides: {
+          root: {
+            marginRight: 0,
           },
         },
       },
-    },
-    MuiDialog: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: "##A7A7A7",
+      MuiBottomNavigation: {
+        styleOverrides: {
+          root: {
+            width: "100vw",
+            "& .MuiSvgIcon-root": {
+              marginBottom: 4,
+            },
+            "& .MuiBottomNavigationAction-label": {
+              fontSize: 10,
+              lineHeight: "12px",
+            },
+            "& .Mui-selected": {
+              fontSize: "10px !important",
+              lineHeight: "12px",
+            },
+          },
         },
       },
-    },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          height: "48px",
+      MuiDialog: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: "##A7A7A7",
+          },
         },
       },
-    },
-    MuiFab: {
-      styleOverrides: {
-        sizeSmall: {
-          width: "20px",
-          height: "20px",
-          minHeight: 0,
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            height: "48px",
+          },
+        },
+      },
+      MuiFab: {
+        styleOverrides: {
+          sizeSmall: {
+            width: "20px",
+            height: "20px",
+            minHeight: 0,
+          },
         },
       },
     },
   },
-});
+  koKR
+);
