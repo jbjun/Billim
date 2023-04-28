@@ -18,9 +18,17 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.12",
+    "@mui/x-date-pickers": "^6.2.0",
+    "@react-spring/web": "^9.7.2",
     "@reduxjs/toolkit": "^1.9.3",
+<<<<<<< HEAD
     "immer": "^10.0.1",
+=======
+    "date-fns": "^2.29.3",
+    "dayjs": "^1.11.7",
+>>>>>>> 8e005d4 (<feat>예약 다이얼로그 로직 구현)
     "react": "^18.2.0",
+    "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router": "^6.10.0",
@@ -38,6 +46,7 @@
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "@types/react": "^18.0.27",
+    "@types/react-date-range": "^1.4.4",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",

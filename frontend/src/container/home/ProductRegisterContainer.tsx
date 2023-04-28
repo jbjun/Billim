@@ -86,7 +86,12 @@ const ProductRegisterContainer = () => {
 
   return (
     <>
-      <Dialog title="상품등록" open={openCategory} onClose={handleClose}>
+      <Dialog
+        title="상품등록"
+        fullScreen
+        open={openCategory}
+        onClose={handleClose}
+      >
         <Container>
           <Stack spacing={2.5} mt="16px">
             {CATEGORYS.map((category) => (

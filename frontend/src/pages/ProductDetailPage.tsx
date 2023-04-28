@@ -1,20 +1,31 @@
 // 외부모듈
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 // 내부모듈
 import Header from "@components/layout/Header";
-import Carousel from "@components/productDetail/Carousel";
-import ProductDetailContainer from "@container/home/ProductDetailContainer";
-import useGoBack from "@lib/hooks/useGoBack";
+import Carousel from "@components/home/productDetail/Carousel";
+import ProductDetailContainer from "@container/home/productDetail/ProductDetailContainer";
+import ReservationDialogContainer from "@container/home/productDetail/ReservationDialogContainer"; 
 
 const LIST = ["a", "b", "c"];
 
 const ProductDetailPage = () => {
-  const handleGoBack = useGoBack();
+  const navigate = useNavigate();
+  const [isOpenReservation, setIsOpenReservation] = useState(false);
+  const handleOpen = () => setIsOpenReservation(true);
+  const handleClose = () => setIsOpenReservation(false);
+
   return (
     <>
-      <Header title="상품정보" onBackHistory={handleGoBack} />
+      <Header title="상품정보" onBackHistory={() => navigate(-1)} />
+      {isOpenReservation && (
+        <ReservationDialogContainer
+          open={isOpenReservation}
+          onClose={handleClose}
+        />
+      )}
       <Box sx={{ width: "100vw", height: "375px", overflow: "hidden" }}>
         <Carousel>
           {LIST.map((_, i) => (
@@ -33,7 +44,7 @@ const ProductDetailPage = () => {
           ))}
         </Carousel>
       </Box>
-      <ProductDetailContainer />
+      <ProductDetailContainer onClick={handleOpen} />
     </>
   );
 };
