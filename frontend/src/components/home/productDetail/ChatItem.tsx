@@ -2,7 +2,6 @@
 import { Avatar, Box, Divider, Typography } from "@mui/material";
 
 // 내부모듈
-import { ICustomer } from "@container/home/productDetail/ReservationDialogContainer";
 
 interface IChatItemProps {
   name: string;

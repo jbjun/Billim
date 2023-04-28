@@ -11,6 +11,7 @@ function App() {
     <div>
       App!
       <button onClick={() => navigator("/login")}>로그인페이지</button>
+      <button onClick={() => navigator("/register")}>회원가입페이지</button>
       <button onClick={() => navigator("/home")}>홈페이지</button>
     </div>
   );

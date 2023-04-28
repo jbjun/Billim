@@ -189,13 +189,21 @@ const ProductRegisterContainer = () => {
               InputProps={{
                 endAdornment: (
                   <FormControlLabel
-                    label="무료대여"
                     control={
                       <Checkbox
                         color="primary"
                         sx={{ "& .MuiSvgIcon-root": { fontSize: "18px" } }}
                       />
                     }
+                    label="무료대여"
+                    sx={{
+                      "& .MuiFormControlLabel-root": { marginRight: 0 },
+                      "& .MuiTypography-root": {
+                        width: "49px",
+                        fontSize: "14px",
+                        color: "#666666",
+                      },
+                    }}
                   />
                 ),
               }}
