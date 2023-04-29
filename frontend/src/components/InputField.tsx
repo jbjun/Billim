@@ -59,6 +59,7 @@ function InputField({
       value={value}
       placeholder={placeholder}
       error={error}
+      //@ts-ignore
       helperText={getHelperText(error, helperText, success, successHelperText)}
       onChange={onChange}
       InputProps={{
