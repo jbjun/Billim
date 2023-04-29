@@ -6,6 +6,7 @@ import com.side.billim.login.web.dto.UserUpdateDto;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,6 +64,12 @@ public class UserController {
   public void update(@PathVariable String email, @RequestBody UserUpdateDto dto){
 
     userService.update(email,dto);
+  }
+
+  @GetMapping("/chkUser")
+  @ApiOperation(value = "닉네임 중복체크", notes = "닉네임 중복체크 API")
+  public ResponseEntity<Boolean> checkNicknameDuplicate(@PathVariable String nickname){
+    return ResponseEntity.ok(userService.checkNicknameDuplicate(nickname));
   }
 
 }
