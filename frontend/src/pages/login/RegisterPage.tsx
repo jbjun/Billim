@@ -4,7 +4,7 @@ import RegisterContainer from "@container/login/RegisterContainer";
 function RegisterPage() {
   return (
     <>
-      <Header title="회원가입" onBackHistory={() => {}} />
+      <Header title="회원가입" needBackHistory />
       <RegisterContainer />
     </>
   );

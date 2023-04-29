@@ -7,7 +7,7 @@ import { useState } from "react";
 import Header from "@components/layout/Header";
 import Carousel from "@components/home/productDetail/Carousel";
 import ProductDetailContainer from "@container/home/productDetail/ProductDetailContainer";
-import ReservationDialogContainer from "@container/home/productDetail/ReservationDialogContainer"; 
+import ReservationDialogContainer from "@container/home/productDetail/ReservationDialogContainer";
 
 const LIST = ["a", "b", "c"];
 
@@ -19,6 +19,7 @@ const ProductDetailPage = () => {
 
   return (
     <>
+      <Header title="상품정보" needBackHistory />
       <Header title="상품정보" onBackHistory={() => navigate(-1)} />
       {isOpenReservation && (
         <ReservationDialogContainer

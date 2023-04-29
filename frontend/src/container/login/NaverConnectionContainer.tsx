@@ -18,19 +18,20 @@ import { createValidator } from "@lib/utils/validator";
 import Dialog from "@components/layout/Dialog";
 import BillimServiceDescription, {
   serviceDescriptionTitleProvider,
-} from "@components/login/serviceDescription/serviceDescription";
+} from "@components/common/BillimServiceDescription";
 
 export type ServiceDescriptionType =
   | "service"
-  | "personal"
+  | "use_personal_information"
   | "location"
-  | "age"
+  | "personal_information_processing_policy"
   | "marketing";
 interface ICheckedInfo {
   label: string;
-  id: ServiceDescriptionType;
+  id: ServiceDescriptionType | "age";
   checked: boolean;
   required: boolean;
+  hasDescription: boolean;
 }
 function isAllRequiredChecked(checkedList: ICheckedInfo[]) {
   return checkedList
@@ -57,30 +58,35 @@ const initialCheckedList: ICheckedInfo[] = [
     id: "service",
     checked: false,
     required: true,
+    hasDescription: true,
   },
   {
     label: "개인정보 수집 및 이용 동의 (필수)",
-    id: "personal",
+    id: "use_personal_information",
     checked: false,
     required: true,
+    hasDescription: true,
   },
   {
     label: "위치정보 이용약관 (필수)",
     id: "location",
     checked: false,
     required: true,
+    hasDescription: true,
   },
   {
     label: "만 14세 이상 동의 (필수)",
     id: "age",
     checked: false,
     required: true,
+    hasDescription: false,
   },
   {
     label: "마케팅 정보 수신 동의 (선택)",
     id: "marketing",
     checked: false,
     required: false,
+    hasDescription: true,
   },
 ];
 function NaverConnectionContainer() {
@@ -160,13 +166,14 @@ function NaverConnectionContainer() {
           label="빌림 약관 모두 동의"
           labelPlacement="end"
         />
-        {checkedList.map(({ id, label, checked }) => {
+        {checkedList.map(({ id, label, checked, hasDescription }) => {
           return (
             <DescriptionCheckbox
               key={id}
               id={id}
               label={label}
               checked={checked}
+              hasDescription={hasDescription}
               onChange={onChangeChecked}
               onOpenDialog={onOpenDialog}
             />
@@ -201,6 +208,7 @@ interface IDescriptionCheckboxProps {
   id: string;
   label: string;
   checked: boolean;
+  hasDescription: boolean;
   onChange: any;
   onOpenDialog: any;
 }
@@ -208,6 +216,7 @@ function DescriptionCheckbox({
   id,
   label,
   checked,
+  hasDescription,
   onChange,
   onOpenDialog,
 }: IDescriptionCheckboxProps) {
@@ -233,9 +242,11 @@ function DescriptionCheckbox({
         />
       </Grid>
       <Grid item>
-        <IconButton size="large" onClick={onLocalOpenDialog}>
-          <KeyboardArrowRightIcon />
-        </IconButton>
+        {hasDescription && (
+          <IconButton size="large" onClick={onLocalOpenDialog}>
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        )}
       </Grid>
     </Grid>
   );

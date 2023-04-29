@@ -4,6 +4,7 @@ import { Dialog as MUIDialog, Grid, Typography, Button } from "@mui/material";
 import ChattingEmptyBillimCharacter from "@assets/images/chatting/Chatting_empty_billim_character.png";
 import { useNavigate } from "react-router";
 import { CHAT_PATH } from "routes";
+import BillimImage from "@components/common/BillimImage";
 function ChattingListContainer() {
   const navigate = useNavigate();
   const [chattingLists, setChattingLists] = useState<IChatInfo[]>([
@@ -45,10 +46,7 @@ export default ChattingListContainer;
 function EmptyChatting() {
   return (
     <>
-      <img
-        style={{ width: "300px", height: "300px" }}
-        src={ChattingEmptyBillimCharacter}
-      />
+      <BillimImage src={ChattingEmptyBillimCharacter} />
       <Typography textAlign={"center"} color={"grey"}>
         아직 채팅이 없어요. <br /> 빌림 회원들과 채팅을 진행해보세요.
       </Typography>

@@ -7,16 +7,21 @@ import IconButton from "@mui/material/IconButton";
 import { Grid } from "@mui/material";
 import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import { ThemeProvider } from "@mui/material/styles";
+import useGoBack from "@lib/hooks/useGoBack";
 interface IHeaderProps {
-  title: string;
+  title?: string;
+  needBackHistory?: boolean;
   onBackHistory?: any;
   adornment?: React.ReactElement;
 }
 export default function Header({
   title,
   onBackHistory,
+  needBackHistory,
   adornment,
 }: IHeaderProps) {
+  const onGoBack = useGoBack();
+
   return (
     <AppBar
       position="static"
@@ -35,12 +40,12 @@ export default function Header({
         height="100%"
       >
         <Grid item xs={2}>
-          {onBackHistory && (
+          {needBackHistory && (
             <IconButton
               size="large"
               edge="start"
               sx={{ p: 0, color: "black" }}
-              onClick={onBackHistory}
+              onClick={onBackHistory ? onBackHistory : onGoBack}
             >
               <ArrowBackIos fontSize="small" />
             </IconButton>

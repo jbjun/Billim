@@ -5,11 +5,10 @@ import useGoBack from "@lib/hooks/useGoBack";
 import { useParams } from "react-router";
 import ChatRoomContainer from "@container/chat/ChatRoomContainer";
 const ChatPage = () => {
-  const onBackHistory = useGoBack();
   const params = useParams();
   return (
     <>
-      <Header title="김빌리" onBackHistory={onBackHistory} />
+      <Header title="김빌리" needBackHistory />
       <ChatRoomContainer />
     </>
   );

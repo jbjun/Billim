@@ -4,10 +4,11 @@ import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NaverLogo from "@assets/images/login/Naver_btn.png";
 import LoginBillimCharacter from "@assets/images/login/Login_billim_character.png";
+import BillimImage from "@components/common/BillimImage";
 function LoginPage() {
   return (
     <>
-      <Header title="상품등록" onBackHistory={() => {}} />
+      <Header needBackHistory />
       <Grid container spacing={2} sx={{ mt: 2, p: 1.5 }}>
         <Grid item xs={12}>
           <Typography variant="h4">로그인</Typography>
@@ -16,10 +17,7 @@ function LoginPage() {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <img
-            style={{ width: "300px", height: "300px" }}
-            src={LoginBillimCharacter}
-          />
+          <BillimImage src={LoginBillimCharacter} />
         </Grid>
         <Grid item xs={12}>
           <Button

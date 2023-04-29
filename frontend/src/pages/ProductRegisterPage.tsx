@@ -4,10 +4,9 @@ import ProductRegisterContainer from "@container/home/ProductRegisterContainer";
 import useGoBack from "@lib/hooks/useGoBack";
 
 const ProductRegisterPage = () => {
-  const handleGoBack = useGoBack();
   return (
     <>
-      <Header title="상품등록" onBackHistory={handleGoBack}></Header>
+      <Header title="상품등록" needBackHistory></Header>
       <ProductRegisterContainer />
     </>
   );
