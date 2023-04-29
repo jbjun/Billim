@@ -18,11 +18,11 @@ public class UserService {
   private FileRepository fileRepository;
 
   @Transactional
-  public void update(String email, UserUpdateDto dto){
+  public void update(String email, String number, String nickName, String juso){
     User user = userRepository.findOneByEmail(email).orElseThrow(()->
           new IllegalArgumentException("해당 이메일이 없습니다 "+email));
 
-    user.updateUser(dto.getNumber(),dto.getNickName(),dto.getJuso());
+    user.updateUser(number,nickName,juso);
   }
 
   @Transactional
@@ -31,7 +31,7 @@ public class UserService {
   }
 
   @Transactional
-  public boolean checkNicknameDuplicate(String nickname) {
-    return userChkRepository.existsByNickname(nickname);
+  public boolean checkNicknameDuplicate(String nickName) {
+    return userChkRepository.existsByNickName(nickName);
   }
 }

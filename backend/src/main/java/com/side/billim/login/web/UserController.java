@@ -58,18 +58,18 @@ public class UserController {
     request.logout();
   }
 
-  @PutMapping("/updateUser")
+  @PutMapping("/updateUser/{email}/{number}/{nickName}/{juso}")
   @ApiOperation(value = "회원가입 추가 정보", notes = "회원가입 추가 정보 API")
   @ApiImplicitParam(name = "email", value = "이메일")
-  public void update(@PathVariable String email, @RequestBody UserUpdateDto dto){
+  public void update(@PathVariable("email") String email, @PathVariable("number") String number, @PathVariable("nickName") String nickName, @PathVariable("juso") String juso){
 
-    userService.update(email,dto);
+    userService.update(email,number,nickName,juso);
   }
 
-  @GetMapping("/chkUser")
+  @GetMapping("/chkUser/{nickName}")
   @ApiOperation(value = "닉네임 중복체크", notes = "닉네임 중복체크 API")
-  public ResponseEntity<Boolean> checkNicknameDuplicate(@PathVariable String nickname){
-    return ResponseEntity.ok(userService.checkNicknameDuplicate(nickname));
+  public ResponseEntity<Boolean> checkNicknameDuplicate(@PathVariable("nickName") String nickName){
+    return ResponseEntity.ok(userService.checkNicknameDuplicate(nickName));
   }
 
 }

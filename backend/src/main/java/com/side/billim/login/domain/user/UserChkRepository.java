@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserChkRepository extends JpaRepository<User, Long> {
-   boolean existsByNickname(String nickname);
+   boolean existsByNickName(String nickName);
 }
