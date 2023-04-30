@@ -39,7 +39,7 @@ public class User {
   @ApiModelProperty(example = "회원 번호")
   private String number;
 
-  @Column(length = 20)
+  @Column(name = "nick_name",length = 20)
   @ApiModelProperty(example = "회원 닉네임")
   private String nickName;
 
