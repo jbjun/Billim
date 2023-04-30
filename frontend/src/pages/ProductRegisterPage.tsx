@@ -1,7 +1,6 @@
 // 내부모듈
 import Header from "@components/layout/Header";
-import ProductRegisterContainer from "@container/home/ProductRegisterContainer";
-import useGoBack from "@lib/hooks/useGoBack";
+import ProductRegisterContainer from "@container/home/register";
 
 const ProductRegisterPage = () => {
   return (
