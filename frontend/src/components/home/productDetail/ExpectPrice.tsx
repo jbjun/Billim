@@ -1,5 +1,5 @@
 // 외부모듈
-import Odometer from "@components/Odometer";
+import Odometer from "@components/common/Odometer";
 import { Box, Typography } from "@mui/material";
 
 interface IExpectPriceProps {

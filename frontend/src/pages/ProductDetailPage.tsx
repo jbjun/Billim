@@ -12,7 +12,6 @@ import ReservationDialogContainer from "@container/home/productDetail/Reservatio
 const LIST = ["a", "b", "c"];
 
 const ProductDetailPage = () => {
-  const navigate = useNavigate();
   const [isOpenReservation, setIsOpenReservation] = useState(false);
   const handleOpen = () => setIsOpenReservation(true);
   const handleClose = () => setIsOpenReservation(false);
@@ -20,7 +19,6 @@ const ProductDetailPage = () => {
   return (
     <>
       <Header title="상품정보" needBackHistory />
-      <Header title="상품정보" onBackHistory={() => navigate(-1)} />
       {isOpenReservation && (
         <ReservationDialogContainer
           open={isOpenReservation}

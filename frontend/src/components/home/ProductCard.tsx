@@ -3,7 +3,7 @@
 import { Box, Typography, CardMedia, CardContent, Card } from "@mui/material";
 
 // 내부모듈
-import RentalStatusTag from "@components/RentStatusTag";
+import RentalStatusTag from "@components/common/RentStatusTag";
 import { PerType, ProductType } from "@type/product/";
 
 interface IProductCardProps extends ProductType {}
