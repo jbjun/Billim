@@ -1,13 +1,5 @@
 // 외부모듈
-import {
-  Container,
-  FormControl,
-  Grid,
-  MenuItem,
-  Select,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Container, Grid, useTheme } from "@mui/material";
 import { MouseEvent } from "react";
 import { useNavigate } from "react-router";
 
@@ -16,12 +8,16 @@ import ProductCard from "@components/home/ProductCard";
 import { ProductsType } from "@type/product";
 import Banner from "@components/home/Banner";
 import ProductFilterContainer from "@container/home/ProductFilterContainer";
+import Header from "@components/layout/Header";
+import HeaderLocationTitle from "@components/home/HeaderLocationTitle";
+import HeaderHomeMenu from "@components/home/HeaderHomeMenu";
+import React from "react";
 
 const products: ProductsType = [
   {
     id: 1,
     address: "광진구자양동",
-    title: "안녕하세요",
+    title: "안녕하세요안녕하세요안녕하세요",
     price: "12000",
     per: "day",
     status: "renting",
@@ -70,6 +66,7 @@ const products: ProductsType = [
 
 const HomePageContainer = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleClick = (e: MouseEvent<HTMLDivElement>, id: number) => {
     e.stopPropagation();
@@ -78,11 +75,20 @@ const HomePageContainer = () => {
 
   return (
     <>
+      {/* <Box position="sticky" top="0" zIndex={2}> */}
+      <Box>
+        <Header
+          color={theme.palette.primary.main}
+          title={<HeaderLocationTitle />}
+          adornment={<HeaderHomeMenu />}
+        />
+      </Box>
       <Banner />
       <Container
         sx={{
+          zIndex: 1,
           pb: "56px",
-          overflow: "hidden",
+          // overflow: "hidden",
           msOverflowStyle: "none",
           scrollbarWidth: "none",
           transform: "translateY(-25px)",
@@ -91,7 +97,16 @@ const HomePageContainer = () => {
         }}
       >
         <Grid container justifyContent="space-between">
-          <Grid item xs={12} display="flex" justifyContent="flex-end">
+          <Grid
+            // position="sticky"
+            // top="65px"
+            item
+            xs={12}
+            display="flex"
+            justifyContent="flex-end"
+            bgcolor="#fff"
+            mt="1px"
+          >
             <ProductFilterContainer />
           </Grid>
           {products.map((product) => (

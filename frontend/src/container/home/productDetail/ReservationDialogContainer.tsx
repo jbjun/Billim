@@ -133,6 +133,7 @@ const ReservationDialogContainer = ({
         title="대여예약"
         open={open}
         onClose={onClose}
+        disableAdornment
         PaperProps={{
           style: {
             bottom: 0,

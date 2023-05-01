@@ -31,6 +31,7 @@ interface IDialogProps {
   fullScreen?: boolean;
   onClose: () => void;
   children: React.ReactElement | React.ReactElement[];
+  disableAdornment?: boolean;
 }
 function Dialog({
   title,
@@ -39,6 +40,7 @@ function Dialog({
   children,
   fullScreen,
   PaperProps,
+  disableAdornment = false,
 }: IDialogProps) {
   return (
     <MUIDialog
@@ -52,9 +54,11 @@ function Dialog({
         <Header
           title={title}
           adornment={
-            <IconButton edge="end" onClick={onClose}>
-              <CloseIcon />
-            </IconButton>
+            disableAdornment ? null : (
+              <IconButton edge="end" onClick={onClose}>
+                <CloseIcon />
+              </IconButton>
+            )
           }
         />
       )}
