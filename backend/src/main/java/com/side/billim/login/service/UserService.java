@@ -1,16 +1,14 @@
 package com.side.billim.login.service;
 
 import com.side.billim.login.domain.FileRepository;
-import com.side.billim.login.domain.user.User;
 import com.side.billim.login.domain.user.UserChkRepository;
 import com.side.billim.login.domain.user.UserRepository;
 import com.side.billim.login.web.dto.FileDto;
-import com.side.billim.login.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,11 +18,12 @@ public class UserService {
   private FileRepository fileRepository;
 
   @Transactional
-  public ResponseEntity<?> update(User user){
+  public Optional<Object> update(Long id, String number, String nickName, String juso){
 
-    user.updateUser(user.getId(), user.getName(), user.getNickName(), user.getJuso());
+    Optional<Object> user = userRepository.findOneById(id)
+        .map(entity -> entity.updateUser(number, nickName, juso));
 
-    return ResponseEntity.status(HttpStatus.OK).body(true);
+    return userRepository.updateUser(user);
   }
 
   @Transactional

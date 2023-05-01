@@ -1,14 +1,15 @@
 package com.side.billim.sms.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.side.billim.sms.web.dto.MessageDto;
 import com.side.billim.sms.web.dto.Request;
-import com.side.billim.sms.web.dto.SmsResponse;
+import com.side.billim.sms.web.dto.SmsResponseDto;
 import com.side.billim.sms.web.service.SmsService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -22,8 +23,10 @@ public class smsController {
   private final SmsService smsService;
 
   @PostMapping("/user/sms")
-  public ResponseEntity<SmsResponse> sms(@RequestBody Request request) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
-    SmsResponse data = smsService.sendSms(request.getRecipientPhoneNumber(), request.getContent());
+  @ApiOperation(value = "sms 인증번호 발송", notes = "sms 인증번호 발송 API")
+  @ApiImplicitParam(name = "to", value = "발송번호")
+  public ResponseEntity<SmsResponseDto> sms(@ModelAttribute MessageDto messageDto) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
+    SmsResponseDto data = smsService.sendSms(messageDto);
     return ResponseEntity.ok().body(data);
   }
 

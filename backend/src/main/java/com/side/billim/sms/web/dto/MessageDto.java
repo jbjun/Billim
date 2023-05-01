@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class MessagesDto {
-  private String to;
-  private String content;
+public class MessageDto {
+  String to;
+  String content;
 }

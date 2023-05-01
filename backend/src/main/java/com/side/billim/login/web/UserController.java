@@ -73,12 +73,17 @@ public class UserController {
     request.logout();
   }
 
-  @PostMapping("/updateUser")
+  @GetMapping("/updateUser")
   @ApiOperation(value = "회원가입 추가 정보", notes = "회원가입 추가 정보 API")
   @ApiImplicitParam(name = "email", value = "이메일")
-  public ResponseEntity<?> update(@RequestBody User user){
+  public ResponseEntity<?> update(@RequestParam Long id,
+                                  @RequestParam String number,
+                                  @RequestParam String nickName,
+                                  @RequestParam String juso
+                                  ){
+    userService.update(id, number, nickName, juso);
 
-    return userService.update(user);
+    return ResponseEntity.status(HttpStatus.OK).body(true);
   }
 
   @GetMapping("/chkUser/{nickName}")

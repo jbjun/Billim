@@ -74,11 +74,12 @@ public class User {
     return  this;
   }
 
-  public void updateUser(Long id, String number, String nickName, String juso) {
-    this.id = id;
+  public User updateUser(String number, String nickName, String juso) {
     this.number = number;
     this.name = nickName;
     this.email = juso;
+
+    return  this;
   }
 
   public void updateFile(String originFileName, String fullPath) {
