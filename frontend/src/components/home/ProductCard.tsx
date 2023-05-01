@@ -37,17 +37,18 @@ export default function ProductCard({
         <Box
           sx={{
             width: "44vw",
-            height: 34,
             overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
           }}
         >
           <RentalStatusTag status={status} />
-          <Typography sx={{ ml: 0.5 }} gutterBottom variant="b5">
+          <Typography sx={{ ml: 0.5 }} variant="b5">
             {title}
           </Typography>
         </Box>
-        <Typography sx={{ display: "inline-block", mt: 2 }} variant="b5">
-          <span style={{ fontWeight: "bold" }}>{price}</span>/{" "}
+        <Typography sx={{ display: "inline-block", mt: 0.8 }} variant="b5">
+          <span style={{ fontWeight: "bold" }}>{`${price} 원 `}</span>/
           {getPerTitle(per)}
         </Typography>
       </CardContent>

@@ -283,6 +283,15 @@ export const theme = createTheme(
           },
         },
       },
+      MuiButtonBase: {
+        defaultProps: {
+          TouchRippleProps: {
+            style: {
+              color: "#7360FF",
+            },
+          },
+        },
+      },
     },
   },
   koKR
