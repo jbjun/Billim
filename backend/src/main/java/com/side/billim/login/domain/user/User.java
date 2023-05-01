@@ -74,8 +74,9 @@ public class User {
     return  this;
   }
 
-  public void updateUser(String number, String nickName, String juso) {
-    this.type = number;
+  public void updateUser(Long id, String number, String nickName, String juso) {
+    this.id = id;
+    this.number = number;
     this.name = nickName;
     this.email = juso;
   }

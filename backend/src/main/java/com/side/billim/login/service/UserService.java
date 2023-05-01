@@ -7,6 +7,8 @@ import com.side.billim.login.domain.user.UserRepository;
 import com.side.billim.login.web.dto.FileDto;
 import com.side.billim.login.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +20,11 @@ public class UserService {
   private FileRepository fileRepository;
 
   @Transactional
-  public void update(String email, String number, String nickName, String juso){
-    User user = userRepository.findOneByEmail(email).orElseThrow(()->
-          new IllegalArgumentException("해당 이메일이 없습니다 "+email));
+  public ResponseEntity<?> update(User user){
 
-    user.updateUser(number,nickName,juso);
+    user.updateUser(user.getId(), user.getName(), user.getNickName(), user.getJuso());
+
+    return ResponseEntity.status(HttpStatus.OK).body(true);
   }
 
   @Transactional

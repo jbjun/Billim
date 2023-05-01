@@ -25,6 +25,12 @@ public class UserRepository {
              .getSingleResult();
  }
 
+  public String checkNickname(String nickName){
+    return em.createQuery("select u.nickName from User u where u.nickName = :nickName", String.class)
+        .setParameter("nickName", nickName)
+        .getSingleResult();
+  }
+
   public User save(User user) {
     if(user.getId() == null) {
       em.persist(user);

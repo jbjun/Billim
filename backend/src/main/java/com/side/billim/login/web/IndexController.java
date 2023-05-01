@@ -22,7 +22,7 @@ public class IndexController {
 
   private final HttpSession httpSession;
 
-  @GetMapping("/")
+  @GetMapping("/main")
   @ApiOperation(value = "메인 페이지", notes = "메인 페이지 API")
   public ResponseEntity<List> index(@RequestParam("userName") String userName, @RequestParam("userEmail") String userEmail, @RequestParam("oauthId") String oauthId) {
     List users = new ArrayList();
