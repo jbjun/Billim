@@ -18,22 +18,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:7777")
 public class UserController {
-
-   /* @Autowired
-    private OAuth2AuthorizedClientService authorizedClientService;
-
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
-    OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(oauthToken.getAuthorizedClientRegistrationId(), oauthToken.getName());*/
-
   private final UserRepository userRepository;
   private final UserService userService;
+
 
   // 로그인 처리 후에 호출되는 콜백 URL
   @GetMapping("/oauth_login")
@@ -44,10 +38,12 @@ public class UserController {
     String email = (String) authentication.getPrincipal().getAttributes().get("email");
 
     String user = userRepository.checkEmail(email);
+    Long id = userRepository.checkId(email);
 
     re.addAttribute("userName", name);
     re.addAttribute("userEmail", email);
     re.addAttribute("oauthId", oauthId);
+    re.addAttribute("id", id);
 
     if(user == null || user == ""){
       return "redirect:/user/login";
@@ -58,11 +54,14 @@ public class UserController {
   }
 
   @GetMapping("/login")
-  public ResponseEntity<List> login(@RequestParam("userName") String userName, @RequestParam("userEmail") String userEmail, @RequestParam("oauthId") String oauthId) {
+  @ApiOperation(value = "추가 회원가입", notes = "추가 회원가입 API")
+  public ResponseEntity<List> login(@RequestParam("userName") String userName, @RequestParam("userEmail") String userEmail
+                                  , @RequestParam("oauthId") String oauthId, @RequestParam("id") Long id) {
       List users = new ArrayList();
       users.add(userName);
       users.add(userEmail);
       users.add(oauthId);
+      users.add(id);
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 
@@ -73,26 +72,13 @@ public class UserController {
     request.logout();
   }
 
-  @GetMapping("/updateUser")
-  @ApiOperation(value = "회원가입 추가 정보", notes = "회원가입 추가 정보 API")
-  @ApiImplicitParam(name = "email", value = "이메일")
-  public ResponseEntity<?> update(@RequestParam Long id,
-                                  @RequestParam String number,
-                                  @RequestParam String nickName,
-                                  @RequestParam String juso
-                                  ){
-    userService.update(id, number, nickName, juso);
-
-    return ResponseEntity.status(HttpStatus.OK).body(true);
-  }
-
-  @GetMapping("/chkUser/{nickName}")
+  @GetMapping("/chkUser")
   @ApiOperation(value = "닉네임 중복체크", notes = "닉네임 중복체크 API")
-  public ResponseEntity<Boolean> checkNicknameDuplicate(@PathVariable("nickName") String nickName){
+  public ResponseEntity<Boolean> checkNicknameDuplicate(@RequestParam("nickName") String nickName){
 
-    String name = userRepository.checkNickname(nickName);
+    Optional<String> name = userRepository.checkNickname(nickName);
 
-    if(name == null || name == "") {
+    if(name.isPresent()) {
       return ResponseEntity.status(HttpStatus.OK).body(false);
     }
     return ResponseEntity.status(HttpStatus.OK).body(true);

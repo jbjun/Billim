@@ -1,14 +1,14 @@
 package com.side.billim.login.service;
 
 import com.side.billim.login.domain.FileRepository;
+import com.side.billim.login.domain.user.User;
 import com.side.billim.login.domain.user.UserChkRepository;
 import com.side.billim.login.domain.user.UserRepository;
 import com.side.billim.login.web.dto.FileDto;
+import com.side.billim.sms.web.domain.SmsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,14 +16,14 @@ public class UserService {
   private UserRepository userRepository;
   private UserChkRepository userChkRepository;
   private FileRepository fileRepository;
+  private SmsRepository smsRepository;
 
   @Transactional
-  public Optional<Object> update(Long id, String number, String nickName, String juso){
+  public void update(String email, String number, String nickName, String juso){
+    User user = userRepository.findOneByEmail(email).orElseThrow(()->
+            new IllegalArgumentException("해당 이메일이 없습니다 "+email));
 
-    Optional<Object> user = userRepository.findOneById(id)
-        .map(entity -> entity.updateUser(number, nickName, juso));
-
-    return userRepository.updateUser(user);
+    user.updateUser(number,nickName,juso);
   }
 
   @Transactional

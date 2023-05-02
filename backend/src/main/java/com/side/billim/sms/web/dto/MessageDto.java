@@ -12,4 +12,5 @@ import lombok.Setter;
 public class MessageDto {
   String to;
   String content;
+  Long id;
 }

@@ -2,10 +2,12 @@ package com.side.billim.sms.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.side.billim.sms.web.domain.SmsRepository;
 import com.side.billim.sms.web.dto.MessageDto;
 import com.side.billim.sms.web.dto.SmsRequestDto;
 import com.side.billim.sms.web.dto.SmsResponseDto;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +41,9 @@ public class SmsService {
   @Value("${sms.senderPhone}")
   private String phone;
 
+  @Autowired
+  private SmsRepository smsRepository;
+
 
   public SmsResponseDto sendSms(MessageDto messageDto) throws JsonProcessingException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, URISyntaxException {
     Long time = System.currentTimeMillis();
@@ -55,7 +60,10 @@ public class SmsService {
       String ran = Integer.toString(rand.nextInt(10));
       numStr+=ran;
     }
-    messageDto.setContent(numStr);
+    messageDto.setContent("[Billim]본인확인을 위해 인증번호 ["+numStr+"]를 입력해 주세요.");
+
+    smsRepository.updateAthntNmbr(numStr,messageDto.getId());
+
 
     List<MessageDto> messages = new ArrayList<>();
     messages.add(messageDto);
@@ -108,5 +116,13 @@ public class SmsService {
     String encodeBase64String = Base64.encodeBase64String(rawHmac);
 
     return encodeBase64String;
+  }
+
+  public String selectContent(Long id) {
+    return smsRepository.selectContent(id);
+  }
+
+  public void updateUser(Long id, String number, String nickName, String juso) {
+    smsRepository.updateUser(id,number,nickName,juso);
   }
 }
