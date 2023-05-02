@@ -77,7 +77,6 @@ const CategoryInputContainerd = ({
         </Container>
       </Dialog>
       <TextField
-        {...register}
         variant="standard"
         onClick={handleClickOpenCategory}
         value={categoryValue}
