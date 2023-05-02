@@ -12,13 +12,14 @@ import React, { useMemo, useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import _ from "lodash";
-import { Link } from "react-router-dom";
-import { SERVICE_DESCRIPTION_PATH } from "routes/login";
+import { Link, useNavigate } from "react-router-dom";
+import { REGISTER_PATH, SERVICE_DESCRIPTION_PATH } from "routes/login";
 import { createValidator } from "@lib/utils/validator";
 import Dialog from "@components/layout/Dialog";
 import BillimServiceDescription, {
   serviceDescriptionTitleProvider,
 } from "@components/common/BillimServiceDescription";
+import { fetchMarketingInformationAgreement } from "@lib/api/loginApi";
 
 export type ServiceDescriptionType =
   | "service"
@@ -43,6 +44,11 @@ function isAllChecked(checkedList: ICheckedInfo[]) {
   return checkedList.every((checkedInfo) => checkedInfo.checked);
 }
 
+function isMarketingChecked(checkedList: ICheckedInfo[]) {
+  const target = checkedList.find((checked) => checked.id === "marketing");
+  if (!target) return false;
+  return target.checked;
+}
 function isNaverEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const naverDomainRegex = /naver\.com$/;
@@ -90,13 +96,13 @@ const initialCheckedList: ICheckedInfo[] = [
   },
 ];
 function NaverConnectionContainer() {
-  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   const [checkedList, setCheckedList] =
     useState<ICheckedInfo[]>(initialCheckedList);
   const [allChecked, setAllChecked] = useState(isAllChecked(checkedList));
   const isRegistable = useMemo(
-    () => isAllRequiredChecked(checkedList) && isNaverEmail(email),
-    [checkedList, email]
+    () => isAllRequiredChecked(checkedList),
+    [checkedList]
   );
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -110,10 +116,6 @@ function NaverConnectionContainer() {
 
   const onCloseDialog = () => {
     setOpenDialog(false);
-  };
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
   };
   const onChangeChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
     const targetId = e.target.id;
@@ -137,6 +139,12 @@ function NaverConnectionContainer() {
     setCheckedList(newCheckedList);
   };
 
+  const onMoveRegister = async () => {
+    await fetchMarketingInformationAgreement(isMarketingChecked(checkedList));
+
+    navigate(`/${REGISTER_PATH}`);
+  };
+
   return (
     <Grid
       container
@@ -147,15 +155,6 @@ function NaverConnectionContainer() {
     >
       <Grid item xs={12}>
         <Banner />
-      </Grid>
-      <Grid item xs={12}>
-        <InputField
-          label="이메일(필수)"
-          required
-          value={email}
-          onChange={onChangeEmail}
-          placeholder="이메일을 입력해 주세요"
-        />
       </Grid>
       <Grid item xs={12}>
         <FormControlLabel
@@ -187,6 +186,7 @@ function NaverConnectionContainer() {
             width: "100%",
           }}
           disabled={!isRegistable}
+          onClick={onMoveRegister}
         >
           가입하기
         </Button>

@@ -5,10 +5,10 @@ import { createValidator } from "@lib/utils/validator";
 import { flushSync } from "react-dom";
 
 const validateCode = createValidator(/^[1-9]{0,6}$/);
-const initialTime = 3;
+const initialTime = 120;
 interface IVerificationCodeInputFieldContainerProps {
   onVerify: any;
-  code: string;
+  // code: string;
 }
 
 type ErrorType = "INVALID_CODE" | "TIME_OUT" | "NONE";
@@ -29,7 +29,6 @@ function getErrorMessageElement(
   }
 }
 function VerificationCodeInputFieldContainer({
-  code,
   onVerify,
 }: IVerificationCodeInputFieldContainerProps) {
   const [verificationCode, setVerificationCode] = useState("");
@@ -56,16 +55,14 @@ function VerificationCodeInputFieldContainer({
     }
   };
 
-  const onLocalVerify = () => {
+  const onLocalVerify = async () => {
     // 시간 초과인경우 인증할 수 없음
     if (time <= 0) {
       return;
     }
 
-    if (verificationCode === code) {
-      // 통과
-      onVerify();
-    } else {
+    const result = await onVerify(verificationCode);
+    if (!result) {
       setError("INVALID_CODE");
     }
   };

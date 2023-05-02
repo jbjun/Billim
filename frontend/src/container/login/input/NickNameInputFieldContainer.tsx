@@ -2,6 +2,7 @@ import { Chip } from "@mui/material";
 import React, { useState } from "react";
 import InputField from "@components/InputField";
 import { IVerifiableInputProps } from "../RegisterContainer";
+import { fetchCheckNickName } from "@lib/api/loginApi";
 
 interface INickNameInputFieldContainer {
   id: IVerifiableInputProps["id"];
@@ -20,17 +21,18 @@ function NickNameInputFieldContainer({
     setNickName(value);
   };
 
-  const onCheckNickName = () => {
+  const onCheckNickName = async () => {
+    const result = await fetchCheckNickName(nickName);
     // 서버 요청에 따라 처리
-    if (nickName === "1") {
-      // 실패
-      setSuccess(false);
-      setError(true);
-    } else {
+    if (result) {
       // 성공
       onVerify({ id, verified: true, value: nickName });
       setSuccess(true);
       setError(false);
+    } else {
+      // 실패
+      setSuccess(false);
+      setError(true);
     }
   };
 

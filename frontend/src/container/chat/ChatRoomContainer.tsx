@@ -1,7 +1,12 @@
 import ChatRoom, { IMessage } from "@components/chat/ChatRoom";
+import { useChatRoom } from "@lib/hooks/query/chatQuery";
 import React, { useState } from "react";
 
-function ChatRoomContainer() {
+interface IChatRoomContainerProps {
+  chatId: string | undefined;
+}
+function ChatRoomContainer({ chatId }: IChatRoomContainerProps) {
+  // const chatRoomMessages = useChatRoom(chatId)
   const [messages, setMessages] = useState<IMessage[]>([
     {
       owner: "another",

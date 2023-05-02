@@ -74,10 +74,12 @@ public class User {
     return  this;
   }
 
-  public void updateUser(String number, String nickName, String juso) {
-    this.type = number;
+  public User updateUser(String number, String nickName, String juso) {
+    this.number = number;
     this.name = nickName;
     this.email = juso;
+
+    return  this;
   }
 
   public void updateFile(String originFileName, String fullPath) {

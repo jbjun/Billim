@@ -19,11 +19,24 @@ public class UserRepository {
              .stream().findAny();
   }
 
+  public Optional<User> findOneById(Long id){
+    return em.createQuery("select u from User u where u.id = :id", User.class)
+        .setParameter("id", id)
+        .getResultList()
+        .stream().findAny();
+  }
+
   public String checkEmail(String email){
     return em.createQuery("select u.juso from User u where u.email = :email", String.class)
              .setParameter("email", email)
              .getSingleResult();
  }
+
+  public String checkNickname(String nickName){
+    return em.createQuery("select u.nickName from User u where u.nickName = :nickName", String.class)
+        .setParameter("nickName", nickName)
+        .getSingleResult();
+  }
 
   public User save(User user) {
     if(user.getId() == null) {
@@ -31,6 +44,13 @@ public class UserRepository {
     } else {
       em.merge(user);
     }
+    return user;
+  }
+
+  public Optional<Object> updateUser(Optional<Object> user) {
+
+    em.merge(user);
+
     return user;
   }
 }

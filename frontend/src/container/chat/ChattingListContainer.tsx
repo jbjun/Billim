@@ -5,21 +5,18 @@ import ChattingEmptyBillimCharacter from "@assets/images/chatting/Chatting_empty
 import { useNavigate } from "react-router";
 import { CHAT_PATH } from "routes";
 import BillimImage from "@components/common/BillimImage";
+import {
+  useChatList,
+  useChatListMutationByRemove,
+} from "@lib/hooks/query/chatQuery";
 function ChattingListContainer() {
   const navigate = useNavigate();
-  const [chattingLists, setChattingLists] = useState<IChatInfo[]>([
-    {
-      id: "1",
-      userName: "김빌리",
-      productName: "가정용 해머드릴 키트",
-      time: "14:21",
-      messagePreview: "안녕하세요 빌리진님 해머드릴 키트에 관심이 있는..",
-    },
-  ]);
-
+  const chattingLists = useChatList();
+  const chatListMutation = useChatListMutationByRemove();
   const onRemove = (chatId: string) => {
     const newChattingLists = chattingLists.filter((chat) => chat.id !== chatId);
-    setChattingLists(newChattingLists);
+    // mutation 처리
+    chatListMutation.mutate(chatId);
   };
 
   const onMoveChat = (chatId: string) => {

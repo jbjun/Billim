@@ -16,9 +16,13 @@ import login_rotuer_info from "./login";
 import ChatPage from "@pages/chat/ChatPage";
 import mypage_rotuer_info from "./myPage";
 
+// chat
 export const CHAT_LIST_PATH = "chat-list";
 export const CHAT_PATH = "chat";
 export const CHAT_DYNAMIC_PATH = "/:chatId";
+
+// home
+export const HOME_PATH = "home";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +38,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "home",
+        path: HOME_PATH,
         element: <HomePage />,
       },
       {

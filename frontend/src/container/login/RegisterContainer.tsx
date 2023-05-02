@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useLayoutEffect } from "react";
 import {
   Box,
   Button,
@@ -17,6 +17,10 @@ import AddressInputFieldContainer from "./input/AddressInputFieldContainer";
 import NickNameInputFieldContainer from "./input/NickNameInputFieldContainer";
 import NameInputField from "@components/login/NameInputField";
 import EmailAdressInputField from "@components/login/EmailAdressInputField";
+import { useUserInfo } from "@lib/hooks/query/loginQuery";
+import { registerUser } from "@lib/api/loginApi";
+import { useNavigate } from "react-router";
+import { HOME_PATH } from "@routes/index";
 
 function SpeechBubble() {
   const theme = useTheme();
@@ -55,6 +59,14 @@ function SpeechBubble() {
   );
 }
 
+interface IRegisterForm {
+  username: { verified: boolean; value: string };
+  email: { verified: boolean; value: string };
+  phoneNumber: { verified: boolean; value: string };
+  address: { verified: boolean; value: string };
+  nickname: { verified: boolean; value: string };
+}
+
 interface IVerfiyInfo {
   id: "username" | "email" | "phoneNumber" | "address" | "nickname";
   verified: boolean;
@@ -66,10 +78,12 @@ export interface IVerifiableInputProps {
   id: IVerfiyInfo["id"];
 }
 function RegisterContainer() {
-  const [registerForm, setRegisterForm] = useState({
+  const navigate = useNavigate();
+  const userInfo = useUserInfo();
+  const [registerForm, setRegisterForm] = useState<IRegisterForm>({
     username: { verified: false, value: "" },
-    email: { verified: true, value: "abc@naver.com" },
-    phoneNumber: { verified: false },
+    email: { verified: true, value: "" },
+    phoneNumber: { verified: false, value: "" },
     address: { verified: false, value: "" },
     nickname: { verified: false, value: "" },
   });
@@ -77,18 +91,47 @@ function RegisterContainer() {
     return Object.values(registerForm).every((info) => info.verified);
   }, [registerForm]);
 
-  const onRegister = () => {
+  const onRegister = async () => {
+    const { username, email, phoneNumber, address, nickname } = registerForm;
     // server에 registerForm 정보 전송
+    try {
+      await registerUser({
+        email: email.value,
+        phoneNumber: phoneNumber.value,
+        nickname: nickname.value,
+        address: address.value,
+      });
+
+      navigate(`/${HOME_PATH}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
   const onVerify = ({ id, verified, value }: IVerfiyInfo) => {
     const newRegisterForm = produce(registerForm, (draft) => {
       draft[id].verified = verified;
-      if (id !== "phoneNumber" && value) {
+      if (value) {
         draft[id].value = value;
       }
     });
     setRegisterForm(newRegisterForm);
   };
+
+  useLayoutEffect(() => {
+    if (userInfo) {
+      setRegisterForm({
+        username: { verified: false, value: "" },
+        email: { verified: true, value: userInfo.email },
+        phoneNumber: { verified: false, value: "" },
+        address: { verified: false, value: "" },
+        nickname: { verified: false, value: "" },
+      });
+    }
+  }, [userInfo]);
+  if (!userInfo) {
+    return null;
+  }
+
   return (
     <Grid
       container
