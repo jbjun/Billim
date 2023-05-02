@@ -29,7 +29,7 @@ const Trailer = ({ id, onOpenDialog }: any) => (
         alignItems={"center"}
         sx={{ backgroundColor: "black", color: "white", height: "100%" }}
       >
-        <Grid item>삭제</Grid>
+        <Grid item> 삭제 </Grid>
       </Grid>
     </SwipeAction>
   </TrailingActions>
@@ -37,10 +37,10 @@ const Trailer = ({ id, onOpenDialog }: any) => (
 
 export interface IChatInfo {
   id: string;
-  userName: string;
+  lastMessage: string;
+  lastMessageDate: string; //"yyyy-MM-dd HH:mm:ss";
   productName: string;
-  time: string;
-  messagePreview: string;
+  traderName: string;
 }
 
 interface IChattingListProps {
@@ -78,7 +78,7 @@ export default function ChattingList({
     <>
       <SlidableList>
         {chattingLists.map(
-          ({ id, userName, messagePreview, productName, time }) => {
+          ({ id, traderName, lastMessage, productName, lastMessageDate }) => {
             return (
               <SwipeableListItem
                 key={id}
@@ -100,7 +100,7 @@ export default function ChattingList({
                     primary={
                       <Grid container justifyContent={"space-between"}>
                         <Grid item>
-                          <Typography component="span">{userName}</Typography>
+                          <Typography component="span">{traderName}</Typography>
                           <Typography component="span"> </Typography>
                           <Typography
                             component="span"
@@ -114,7 +114,7 @@ export default function ChattingList({
                             component="span"
                             sx={{ fontSize: "0.9rem", color: "grey" }}
                           >
-                            {time}
+                            {lastMessageDate}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -123,7 +123,7 @@ export default function ChattingList({
                       <Grid container>
                         <Grid item>
                           <Typography variant="body2" color="text.primary">
-                            {messagePreview}
+                            {lastMessage}
                           </Typography>
                         </Grid>
                       </Grid>

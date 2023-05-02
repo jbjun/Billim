@@ -1,13 +1,13 @@
 import Header from "@components/layout/Header";
 import { Box, Button, Grid, Typography } from "@mui/material";
-import React from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import NaverLogo from "@assets/images/login/naver_btn.png";
+import NaverLogo from "@assets/images/login/Naver_btn.png";
 import LoginBillimCharacter from "@assets/images/login/Login_billim_character.png";
+import BillimImage from "@components/common/BillimImage";
+import { NAVER_REDIRECT_PATH } from "@routes/login";
 function LoginPage() {
   return (
     <>
-      <Header title="상품등록" onBackHistory={() => {}} />
+      <Header needBackHistory />
       <Grid container spacing={2} sx={{ mt: 2, p: 1.5 }}>
         <Grid item xs={12}>
           <Typography variant="h4">로그인</Typography>
@@ -16,29 +16,22 @@ function LoginPage() {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <img
-            style={{ width: "300px", height: "300px" }}
-            src={LoginBillimCharacter}
-          />
+          <BillimImage src={LoginBillimCharacter} />
         </Grid>
         <Grid item xs={12}>
-          <Button
-            sx={{ backgroundColor: "#03C75A", color: "white" }}
-            fullWidth
-            startIcon={<img src={NaverLogo} alt="naver_logo" />}
+          <a
+            // href="http://localhost:8080/oauth2/authorization/naver"
+            href={`http://localhost:7777/${NAVER_REDIRECT_PATH}?oauthId=123&isRegistered=true`}
           >
-            네이버 로그인
-          </Button>
+            <Button
+              sx={{ backgroundColor: "#03C75A", color: "white" }}
+              fullWidth
+              startIcon={<img src={NaverLogo} alt="naver_logo" />}
+            >
+              네이버 로그인
+            </Button>
+          </a>
         </Grid>
-        {/* <Grid item xs={12}>
-          <Button
-            sx={{ backgroundColor: "#FEE500", color: "black" }}
-            fullWidth
-            startIcon={<DeleteIcon />}
-          >
-            카카오 로그인
-          </Button>
-        </Grid> */}
       </Grid>
     </>
   );

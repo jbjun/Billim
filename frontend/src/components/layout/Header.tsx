@@ -1,30 +1,36 @@
+// 외부모듈
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { Grid } from "@mui/material";
 import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
-import { ThemeProvider } from "@mui/material/styles";
+
+// 내부모듈
+import useGoBack from "@lib/hooks/useGoBack";
 interface IHeaderProps {
-  title: string;
+  title?: string | React.ReactNode;
+  needBackHistory?: boolean;
   onBackHistory?: any;
-  adornment?: React.ReactElement;
+  adornment?: React.ReactNode;
+  color?: string;
 }
 export default function Header({
   title,
   onBackHistory,
+  needBackHistory,
   adornment,
+  color,
 }: IHeaderProps) {
+  const onGoBack = useGoBack();
+
   return (
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "rgba(0,0,0,0)",
+        backgroundColor: color || "#fff",
         boxShadow: "none",
-        p: 1,
-        borderBottom: "1px solid #E5E5E5",
+        borderBottom: `1px solid ${color || "#E5E5E5"}`,
       }}
     >
       <Grid
@@ -35,12 +41,12 @@ export default function Header({
         height="100%"
       >
         <Grid item xs={2}>
-          {onBackHistory && (
+          {needBackHistory && (
             <IconButton
               size="large"
               edge="start"
               sx={{ p: 0, color: "black" }}
-              onClick={onBackHistory}
+              onClick={onBackHistory ? onBackHistory : onGoBack}
             >
               <ArrowBackIos fontSize="small" />
             </IconButton>

@@ -8,6 +8,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.context.request.RequestContextListener;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -28,12 +33,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     return new RequestContextListener();
   }
 
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration config = new CorsConfiguration();
+
+    config.setAllowCredentials(true);
+    config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+    config.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT"));
+    config.setAllowedHeaders(Arrays.asList("*"));
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", config);
+    return source;
+  }
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable().headers().frameOptions().disable()
+    http.cors().and().csrf().disable().headers().frameOptions().disable()
+      .and()
+      .cors().configurationSource(corsConfigurationSource())
       .and()
       .authorizeRequests()
-      .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/v3/api-docs/**","/swagger-ui/**","/swagger-resources/**","/api/v1/**").permitAll()
+//      .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+      .antMatchers("/","/**", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/v3/api-docs/**","/swagger-ui/**","/swagger-resources/**","/api/v1/**").permitAll()
 //      .antMatchers("/api/v1/**").hasRole(Role.USER.name())
       .anyRequest().authenticated()
       .and()

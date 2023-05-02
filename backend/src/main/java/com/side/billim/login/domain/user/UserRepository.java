@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,11 +20,31 @@ public class UserRepository {
              .stream().findAny();
   }
 
+  public Optional<User> findOneById(Long id){
+    return em.createQuery("select u from User u where u.id = :id", User.class)
+        .setParameter("id", id)
+        .getResultList()
+        .stream().findAny();
+  }
+
   public String checkEmail(String email){
     return em.createQuery("select u.juso from User u where u.email = :email", String.class)
              .setParameter("email", email)
              .getSingleResult();
  }
+
+  public Optional<String> checkNickname(String nickName){
+      List<String> nickNames = em.createQuery("select u.nickName from User u where u.nickName = :nickName", String.class)
+              .setParameter("nickName", nickName)
+              .getResultList();
+    return nickNames.stream().findAny();
+  }
+
+    public Long checkId(String email){
+        return em.createQuery("select u.id from User u where u.email = :email", Long.class)
+                .setParameter("email", email)
+                .getSingleResult();
+    }
 
   public User save(User user) {
     if(user.getId() == null) {

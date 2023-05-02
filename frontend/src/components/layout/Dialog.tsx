@@ -5,6 +5,7 @@ import {
   Grid,
   IconButton,
   Dialog as MUIDialog,
+  PaperProps,
   Slide,
   Toolbar,
   Typography,
@@ -24,27 +25,43 @@ const Transition = React.forwardRef(function Transition(
 });
 
 interface IDialogProps {
-  title: string;
+  title?: string;
   open: boolean;
+  PaperProps?: Partial<PaperProps>;
+  fullScreen?: boolean;
   onClose: () => void;
   children: React.ReactElement | React.ReactElement[];
+  disableAdornment?: boolean;
 }
-function Dialog({ title, open, onClose, children }: IDialogProps) {
+function Dialog({
+  title,
+  open,
+  onClose,
+  children,
+  fullScreen,
+  PaperProps,
+  disableAdornment = false,
+}: IDialogProps) {
   return (
     <MUIDialog
-      fullScreen
+      fullScreen={fullScreen}
       open={open}
       onClose={onClose}
       TransitionComponent={Transition}
+      PaperProps={PaperProps}
     >
-      <Header
-        title={title}
-        adornment={
-          <IconButton edge="end" onClick={onClose}>
-            <CloseIcon />
-          </IconButton>
-        }
-      />
+      {title !== undefined && (
+        <Header
+          title={title}
+          adornment={
+            disableAdornment ? null : (
+              <IconButton edge="end" onClick={onClose}>
+                <CloseIcon />
+              </IconButton>
+            )
+          }
+        />
+      )}
       {children}
     </MUIDialog>
   );

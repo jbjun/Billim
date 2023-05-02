@@ -2,7 +2,7 @@ import Header from "@components/layout/Header";
 import React from "react";
 import { IconButton, Grid, SvgIcon, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { ReactComponent as DegitalDeviceIcon } from "@assets/icons/category/Digital_device.svg";
+import { ReactComponent as DegitalDeviceIcon } from "@assets/icons/category/digital_device.svg";
 import { ReactComponent as HouseHoldIcon } from "@assets/icons/category/Household_icon.svg";
 import { ReactComponent as FurnitureInteriorIcon } from "@assets/icons/category/Furniture_interior.svg";
 import { ReactComponent as LivingKitchenIcon } from "@assets/icons/category/Living_kitchen.svg";

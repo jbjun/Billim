@@ -5,6 +5,7 @@ import VerificationCodeInputFieldContainer from "./VerificationCodeInputFieldCon
 import { flushSync } from "react-dom";
 import { createValidator } from "@lib/utils/validator";
 import { IVerifiableInputProps } from "../RegisterContainer";
+import { fetchCheckSMS, sendVerificationCodeBySMS } from "@lib/api/loginApi";
 
 const validateWholePhoneNumber = createValidator(/^010[0-9]{8}$/);
 const validatePhoneNumber = createValidator(/^\d{0,11}$/);
@@ -44,7 +45,7 @@ function PhoneNumberInputFieldContainer({
   const [verificationStatus, setVerificationStatus] = useState<
     "VERIFICATION" | "RE_VERIFICATION" | "COMPLETED_VERIFICATION" | "NONE"
   >("VERIFICATION");
-  const [verificationCode, setVerificationCode] = useState("123456");
+  // const [verificationCode, setVerificationCode] = useState("123456");
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -58,44 +59,50 @@ function PhoneNumberInputFieldContainer({
       setAnnouncement("PHONE_NUMBER_ERROR");
       return;
     }
-    const code = await requestPhoneNumberVerificationCode();
-    setVerificationCode(code);
-    setVerificationStatus("RE_VERIFICATION");
-    setAnnouncement("VERIFICATION");
+    try {
+      await sendVerificationCodeBySMS(phoneNumber);
+      setVerificationStatus("RE_VERIFICATION");
+      setAnnouncement("VERIFICATION");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onReverifyPhoneNumber = async () => {
     const validated = validateWholePhoneNumber(phoneNumber);
     if (!validated) return;
-    // server에 재요청 후 완료 되었을 때 UI 처리
-    const code = await requestPhoneNumberVerificationCode();
-    setVerificationCode(code);
-    // VerificationCodeInputFieldContainer unmount 후 mount 하기
-    flushSync(() => {
-      setVerificationStatus("NONE");
-    });
 
-    setVerificationStatus("RE_VERIFICATION");
+    try {
+      await sendVerificationCodeBySMS(phoneNumber);
+      // server에 재요청 후 완료 되었을 때 UI 처리
+      // VerificationCodeInputFieldContainer unmount 후 mount 하기
+      flushSync(() => {
+        setVerificationStatus("NONE");
+      });
+
+      setVerificationStatus("RE_VERIFICATION");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const onLocalVerify = async (code: number) => {
+  const onLocalVerify = async (code: string) => {
     // 성공 시 호출됌
     setVerificationStatus("COMPLETED_VERIFICATION");
     setAnnouncement("NONE");
 
-    onVerify({ id, verified: true });
-    // const result = await requestPhoneNumberVerify(code);
-    // setVerificationCode(result)
-    // if (result) {
-    //   // 성공
-    //   setVerificationStatus("COMPLETED_VERIFICATION");
-    // } else {
-    //   // 실패 처리
-    // }
+    const result = await fetchCheckSMS(code, phoneNumber);
+    // 인증 성공
+    if (result) {
+      onVerify({ id, verified: true, value: phoneNumber });
+    }
+
+    return result;
   };
 
   const requestPhoneNumberVerificationCode = async () => {
     // server에 인증번호 요청
+    return await fetchCheckSMS;
     return "123456";
   };
 
@@ -129,7 +136,7 @@ function PhoneNumberInputFieldContainer({
             <Grid item xs={12}>
               <VerificationCodeInputFieldContainer
                 onVerify={onLocalVerify}
-                code={verificationCode}
+                // code={verificationCode}
               />
             </Grid>
           ))}

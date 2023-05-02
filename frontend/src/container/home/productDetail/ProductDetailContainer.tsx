@@ -11,10 +11,14 @@ import {
 } from "@mui/material";
 
 // 내부모듈
-import RentalStatusTag from "@components/RentStatusTag";
+import RentalStatusTag from "@components/common/RentStatusTag";
 import { ReactComponent as ViewIcon } from "@assets/icons/View_icon.svg";
 
-const ProductDetailContainer = () => {
+type ProductDetailContainer = {
+  onClick?: () => void;
+};
+
+const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
   const theme = useTheme();
 
   return (
@@ -71,8 +75,8 @@ const ProductDetailContainer = () => {
         </Typography>
       </Stack>
       <Box sx={{ width: "100%" }} p="16px 0">
-        <Button sx={{ width: "100%" }} variant="contained">
-          <Typography variant="h6">상품 등록하기</Typography>
+        <Button sx={{ width: "100%" }} variant="contained" onClick={onClick}>
+          <Typography variant="h6">대여예약</Typography>
         </Button>
       </Box>
     </Container>

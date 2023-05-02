@@ -49,17 +49,18 @@ type ServiceDescriptionTitleProviderType = {
 export const serviceDescriptionTitleProvider: ServiceDescriptionTitleProviderType =
   {
     service: "서비스 이용약관",
-    personal: "개인 정보 처리 방침",
+    use_personal_information: "개인 정보 수집 및 이용 동의",
     location: "위치 정보 이용 약관",
-    age: "미정",
+    personal_information_processing_policy: "개인 정보 처리 방침",
     marketing: "마케팅 정보 수신 약관",
   };
 
 const serviceDescriptionProvider: ServiceDescriptionProviderType = {
   service: ServiceDescription,
-  personal: PersonalDescription,
+  use_personal_information: UsePersonalInformationDescription,
   location: LocationDescription,
-  age: AgeDescription,
+  personal_information_processing_policy:
+    PersonalInformationProcessingPolicyDescription,
   marketing: MarketingDescription,
 };
 
@@ -235,7 +236,7 @@ function ServiceDescription() {
   );
 }
 
-function PersonalDescription() {
+function UsePersonalInformationDescription() {
   return (
     <Description>
       <DescriptionTitle>개인정보 수집 및 이용 동의</DescriptionTitle>
@@ -356,7 +357,7 @@ function LocationDescription() {
     </Description>
   );
 }
-function AgeDescription() {
+function PersonalInformationProcessingPolicyDescription() {
   return (
     <Description>
       <DescriptionSubTitle>개인정보 처리 방침</DescriptionSubTitle>

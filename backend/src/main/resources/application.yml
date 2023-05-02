@@ -49,6 +49,11 @@ spring:
     prefix: classpath:templates/
     suffix: .html
 
+sms:
+  accessKey: kBPsPEKByae5MUcDQ7AA
+  secretKey: 4haVBXMNVtT6J2XgMH3yxRLQ7lw8GhBrDBOHDJJY
+  serviceId: ncp:sms:kr:307196383742:billim
+  senderPhone: 01067567112
 
 # 로그 레벨 설정
 logging:
