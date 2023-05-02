@@ -1,12 +1,5 @@
 // 외부모듈
-import {
-  IconButton,
-  Menu,
-  MenuItem,
-  Snackbar,
-  SvgIcon,
-  Typography,
-} from "@mui/material";
+import { IconButton, Menu, MenuItem, SvgIcon, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
