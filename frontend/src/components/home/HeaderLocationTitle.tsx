@@ -2,7 +2,6 @@
 import { Box, SvgIcon, Typography } from "@mui/material";
 
 // 내부모듈
-import { ReactComponent as LocationIcon } from "@assets/icons/location.svg";
 import { ReactComponent as LocationWhiteIcon } from "@assets/icons/location_white.svg";
 
 const HeaderLocationTitle = () => (
