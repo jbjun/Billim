@@ -1,21 +1,26 @@
-import { BASE_URL } from ".";
+import { BASE_API_PATH, BASE_URL } from ".";
 import axios from "axios";
-export const fetchCheckNickName = (nickname: string) => {
-  return nickname === "1";
-  // return axios.get(`${BASE_URL}/user/chkUser/${nickname}`);
+export const fetchCheckNickName = async (
+  nickname: string
+): Promise<boolean> => {
+  const result = await axios.get(
+    `${BASE_API_PATH}/user/chkUser?nickName=${nickname}`
+  );
+  return result.data;
 };
-export const fetchCheckSMS = (code: string, phoneNUmber: string) => {
+export const fetchCheckSMS = async (code: string, phoneNUmber: string) => {
   if (code === "123456") {
     return true;
   } else {
     return false;
   }
   // return
-  // axios.post(`${BASE_URL}/user/sms`, {
+  // const result = await axios.post(`${BASE_URL}/user/sms`, {
   //   content: "",
   //   recipientPhoneNumber: "",
   //   title: "",
   // });
+  // return result.data
 };
 
 export const sendVerificationCodeBySMS = (phoneNUmber: string) => {
