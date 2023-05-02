@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@CrossOrigin(origins = "http://localhost:7777")
+@CrossOrigin(origins = "http://52.64.106.59:7777")
 public class IndexController {
 
   private final HttpSession httpSession;

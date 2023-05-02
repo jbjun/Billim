@@ -23,7 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:7777")
+@CrossOrigin(origins = "http://52.64.106.59:7777")
 public class UserController {
   private final UserRepository userRepository;
   private final UserService userService;
