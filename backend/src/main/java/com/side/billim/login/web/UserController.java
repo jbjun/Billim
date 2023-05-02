@@ -84,4 +84,10 @@ public class UserController {
     return ResponseEntity.status(HttpStatus.OK).body(true);
   }
 
+  @GetMapping("/selectUser")
+  @ApiOperation(value = "회원정보", notes = "회원정보 API")
+  public ResponseEntity<User> selectUser(@RequestParam("id") Long id) {
+    User response = userRepository.selectUser(id);
+    return ResponseEntity.ok(response);
+  }
 }
