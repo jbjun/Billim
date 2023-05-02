@@ -8,6 +8,8 @@ import Header from "@components/layout/Header";
 import Carousel from "@components/home/productDetail/Carousel";
 import ProductDetailContainer from "@container/home/productDetail/ProductDetailContainer";
 import ReservationDialogContainer from "@container/home/productDetail/ReservationDialogContainer";
+import DetailMenuContainer from "@container/home/productDetail/DetailMenuContainer";
+import ShareContainer from "@container/home/productDetail/ShareContainer";
 
 const LIST = ["a", "b", "c"];
 
@@ -18,7 +20,16 @@ const ProductDetailPage = () => {
 
   return (
     <>
-      <Header title="상품정보" needBackHistory />
+      <Header
+        title="상품정보"
+        needBackHistory
+        adornment={
+          <Box display="flex" justifyContent="space-around">
+            {/* <ShareContainer /> */}
+            <DetailMenuContainer />
+          </Box>
+        }
+      />
       {isOpenReservation && (
         <ReservationDialogContainer
           open={isOpenReservation}

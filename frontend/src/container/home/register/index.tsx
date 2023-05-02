@@ -21,7 +21,7 @@ export interface IProductRegisterState {
   title: string;
   text: string;
   category: string;
-  price: number;
+  price: number | "";
   files: File[];
 }
 
@@ -40,7 +40,7 @@ const ProductRegisterContainer = () => {
       title: "",
       text: "",
       category: "",
-      price: 0,
+      price: "",
       files: [] as File[],
     },
   });
@@ -104,6 +104,9 @@ const ProductRegisterContainer = () => {
               }}
               price={price}
               setValue={setValue}
+              setError={setError}
+              error={errors.price}
+              clearErrors={clearErrors}
             />
             <TextInput
               trigger={trigger}

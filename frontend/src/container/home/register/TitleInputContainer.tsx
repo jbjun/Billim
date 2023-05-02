@@ -12,7 +12,7 @@ import { IProductRegisterState } from "@container/home/register";
 interface ITitleInputContainer {
   trigger: UseFormTrigger<IProductRegisterState>;
   register: UseFormRegisterReturn<"title">;
-  error: FieldError | undefined;
+  error?: FieldError;
 }
 
 const TitleInputContainer = ({
