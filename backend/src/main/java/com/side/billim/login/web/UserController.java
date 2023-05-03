@@ -1,9 +1,9 @@
 package com.side.billim.login.web;
 
+import com.side.billim.login.domain.user.ImageRepository;
 import com.side.billim.login.domain.user.User;
 import com.side.billim.login.domain.user.UserRepository;
 import com.side.billim.login.service.UserService;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletException;
@@ -27,6 +28,7 @@ import java.util.Optional;
 public class UserController {
   private final UserRepository userRepository;
   private final UserService userService;
+  private final ImageRepository imageRepository;
 
 
   // 로그인 처리 후에 호출되는 콜백 URL
@@ -89,5 +91,29 @@ public class UserController {
   public ResponseEntity<User> selectUser(@RequestParam("id") Long id) {
     User response = userRepository.selectUser(id);
     return ResponseEntity.ok(response);
+  }
+
+  @PostMapping("/images")
+  public ResponseEntity<User> uploadImage(@RequestParam("id") Long id, @RequestParam("file") MultipartFile file) {
+
+    User image = imageRepository.findById(id).get();
+    image.imageSave(id, file.getOriginalFilename(), file.getContentType());
+    imageRepository.save(image);
+    return ResponseEntity.ok(image);
+  }
+
+  @GetMapping("/images/{id}")
+  public ResponseEntity<String> getImage(@PathVariable Long id) {
+    Optional<User> image = imageRepository.findById(id);
+    if (image.isPresent()) {
+      return ResponseEntity.ok(image.get().getImageName());
+    }
+    return ResponseEntity.notFound().build();
+  }
+
+  @RequestMapping("/image")
+  public String Insert() {
+
+    return "insert";
   }
 }

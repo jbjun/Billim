@@ -2,10 +2,10 @@ package com.side.billim.sms.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.side.billim.sms.web.domain.SmsRepository;
-import com.side.billim.sms.web.dto.MessageDto;
-import com.side.billim.sms.web.dto.SmsRequestDto;
-import com.side.billim.sms.web.dto.SmsResponseDto;
+import com.side.billim.sms.domain.SmsRepository;
+import com.side.billim.sms.dto.MessageDto;
+import com.side.billim.sms.dto.SmsRequestDto;
+import com.side.billim.sms.dto.SmsResponseDto;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

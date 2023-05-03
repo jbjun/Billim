@@ -1,4 +1,4 @@
-package com.side.billim.sms.web.domain;
+package com.side.billim.sms.domain;
 
 import com.side.billim.login.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

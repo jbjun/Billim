@@ -1,8 +1,8 @@
 package com.side.billim.sms.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.side.billim.sms.web.dto.MessageDto;
-import com.side.billim.sms.web.dto.SmsResponseDto;
+import com.side.billim.sms.dto.MessageDto;
+import com.side.billim.sms.dto.SmsResponseDto;
 import com.side.billim.sms.web.service.SmsService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
