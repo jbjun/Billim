@@ -20,7 +20,6 @@ public class ChatRoomDto {
 
 	private String traderName; // 거래자 아이디
 
-
 	public ChatRoomDto(ChatRoom entity){
 		this.id = entity.getId();
 		this.lastMessage = entity.getChatMessages().get(0).getMessage();
@@ -32,9 +31,6 @@ public class ChatRoomDto {
 		}else{
 			this.traderName = entity.getProduct().getUser().getName();
 		}
-
 	}
-
-
 
 }

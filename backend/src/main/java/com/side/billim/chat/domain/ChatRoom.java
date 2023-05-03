@@ -3,6 +3,7 @@ package com.side.billim.chat.domain;
 import com.side.billim.common.domain.BaseTimeEntity;
 import com.side.billim.login.domain.user.User;
 import com.side.billim.product.domain.Product;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -44,6 +45,14 @@ public class ChatRoom extends BaseTimeEntity {
 ////		this.user = user;
 ////		this.message = message;
 //	}
+
+
+	@Builder
+	public ChatRoom(Long id, User user, Product product){
+		this.id = id;
+		this.user = user;
+		this.product = product;
+	}
 
 
 
