@@ -6,7 +6,8 @@ import RegisterPage from "@pages/login/RegisterPage";
 import RegistrationCompletedPage from "@pages/login/RegistrationCompletedPage";
 
 const LOGIN_PATH = "login";
-export const NAVER_REDIRECT_PATH = "oauth_login";
+export const NAVER_REDIRECT_REGISTER_PATH = "/user/login";
+export const NAVER_REDIRECT_USER_PATH = "/user/main";
 export const REGISTER_PATH = "register";
 export const NAVER_CONNECTION_PATH = "naver-connection";
 export const SERVICE_DESCRIPTION_PATH = "service-description";
@@ -20,7 +21,11 @@ const login_rotuer_info = [
     element: <LoginPage />,
   },
   {
-    path: NAVER_REDIRECT_PATH,
+    path: NAVER_REDIRECT_REGISTER_PATH,
+    element: <NaverRedirectPage needRegister />,
+  },
+  {
+    path: NAVER_REDIRECT_USER_PATH,
     element: <NaverRedirectPage />,
   },
   {

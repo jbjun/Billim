@@ -30,12 +30,10 @@ const ProductDetailPage = () => {
           </Box>
         }
       />
-      {isOpenReservation && (
-        <ReservationDialogContainer
-          open={isOpenReservation}
-          onClose={handleClose}
-        />
-      )}
+      <ReservationDialogContainer
+        open={isOpenReservation}
+        onClose={handleClose}
+      />
       <Box sx={{ width: "100vw", height: "375px", overflow: "hidden" }}>
         <Carousel>
           {LIST.map((_, i) => (
