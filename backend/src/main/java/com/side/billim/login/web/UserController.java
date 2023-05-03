@@ -46,9 +46,9 @@ public class UserController {
     re.addAttribute("id", id);
 
     if(user == null || user == ""){
-      return "redirect:/user/login";
+      return "redirect:http://localhost:7777/user/login";
     }else {
-      return "redirect:/main";
+      return "redirect:http://localhost:7777/main";
     }
 
   }
