@@ -33,7 +33,6 @@ function NameInputField({ id, value, onVerify }: INameInputField) {
       label="이름"
       value={value || ""}
       disabled
-      inputStyle={{ backgroundColor: "rgb(157 153 153 / 40%)" }}
       // onChange={onChange}
       placeholder="이름을 입력해 주세요"
       // error={error}

@@ -75,16 +75,22 @@ interface IRegisterUserProps {
   nickname: string;
   address: string;
 }
-export const registerUser = ({
+export const registerUser = async ({
   // email,
   phoneNumber,
   nickname,
   address,
 }: IRegisterUserProps) => {
   const id = getId();
-  axios.get(
-    `${BASE_URL}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}`
+  const result = await axios.get(
+    `${BASE_API_PATH}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}`
   );
+
+  if (result) {
+    return true;
+  }
+
+  throw new Error("회원가입에 실패하였습니다.");
 };
 
 function getId() {
