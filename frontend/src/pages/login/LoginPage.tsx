@@ -19,7 +19,7 @@ function LoginPage() {
         </Grid>
         <Grid item xs={12}>
           <a
-            href="http://localhost:8080/oauth2/authorization/naver"
+            href="http://44.203.121.190:8080/oauth2/authorization/naver"
             // href={`http://localhost:7777/${NAVER_REDIRECT_PATH}?oauthId=123&isRegistered=true`}
           >
             <Button

@@ -21,13 +21,13 @@ spring:
           naver:
             client-id: sfIehYeCDySiinRyGsqr
             client-secret: BwCl6Ab6IY
-            redirect-uri: http://52.64.106.59:8080/login/oauth2/code/naver
+            redirect-uri: http://44.203.121.190:8080/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             scope: name, email
             client-name: Naver
           kakao:
             client-id: 5e0b0efc35a6826741a3a2397e9be53b
-            redirect-uri: http://52.64.106.59:8080/login/oauth2/code/kakao
+            redirect-uri: http://44.203.121.190:8080/login/oauth2/code/kakao
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope: profile_nickname, account_email

@@ -24,7 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://52.64.106.59:7777")
+@CrossOrigin(origins = "http://44.203.121.190:7777")
 public class UserController {
   private final UserRepository userRepository;
   private final UserService userService;
@@ -48,9 +48,9 @@ public class UserController {
     re.addAttribute("id", id);
 
     if(user == null || user == ""){
-      return "redirect:http://localhost:7777/user/login";
+      return "redirect:http://44.203.121.190:7777/user/login";
     }else {
-      return "redirect:http://localhost:7777/main";
+      return "redirect:http://44.203.121.190:7777/main";
     }
 
   }
