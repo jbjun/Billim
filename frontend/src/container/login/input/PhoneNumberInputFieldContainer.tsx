@@ -87,13 +87,12 @@ function PhoneNumberInputFieldContainer({
   };
 
   const onLocalVerify = async (code: string) => {
-    // 성공 시 호출됌
-    setVerificationStatus("COMPLETED_VERIFICATION");
-    setAnnouncement("NONE");
-
     const result = await fetchCheckSMS(code, phoneNumber);
     // 인증 성공
     if (result) {
+      // 성공 시 호출됌
+      setVerificationStatus("COMPLETED_VERIFICATION");
+      setAnnouncement("NONE");
       onVerify({ id, verified: true, value: phoneNumber });
     }
 

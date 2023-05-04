@@ -145,7 +145,7 @@ const ReservationDialogContainer = ({
           },
         }}
       >
-        <animated.div
+        {/* <animated.div
           style={{
             display: "flex",
             transform: x.to((val) => `translateX(${val}%)`),
@@ -156,7 +156,8 @@ const ReservationDialogContainer = ({
               <div style={{ width: "100%", flexShrink: 0 }}>{component}</div>
             </Container>
           ))}
-        </animated.div>
+        </animated.div> */}
+        <Container>{components[index]}</Container>
       </Dialog>
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}

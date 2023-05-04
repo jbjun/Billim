@@ -9,11 +9,11 @@ function EmailAdressInputField({ value = "" }: IEmailInputField) {
   return (
     <InputField
       disabled
+      inputStyle={{ backgroundColor: "rgb(157 153 153 / 40%)" }}
       required
       label={"이메일"}
       value={value}
       startAdornment={<SvgIcon component={NaverCircleIcon} inheritViewBox />}
-      inputStyle={{ backgroundColor: "rgb(157 153 153 / 40%)" }}
     />
   );
 }

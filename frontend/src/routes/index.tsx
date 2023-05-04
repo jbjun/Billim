@@ -6,9 +6,9 @@ import { Outlet } from "react-router";
 // 내부모듈
 import App from "../App";
 import HomePage from "@pages/HomePage";
-import RentalListPage from "@pages/RentalListPage";
+import RentalListPage from "@pages/RentalHistoryPage";
 import ChatListPage from "@pages/chat/ChatListPage";
-import MyPage from "@pages/MyPage";
+import MyPage from "@pages/mypage";
 import LabelBottomNavigation from "@container/MainBottomNavigationContainer";
 import ProductDetailPage from "@pages/ProductDetailPage";
 import ProductRegisterPage from "@pages/ProductRegisterPage";

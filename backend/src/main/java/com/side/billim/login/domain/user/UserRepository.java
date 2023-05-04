@@ -54,4 +54,10 @@ public class UserRepository {
     }
     return user;
   }
+
+  public User selectUser(Long id){
+    return em.createQuery("select u from User u where u.id = :id", User.class)
+        .setParameter("id", id)
+        .getSingleResult();
+  }
 }

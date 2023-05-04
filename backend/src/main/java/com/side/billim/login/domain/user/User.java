@@ -59,6 +59,12 @@ public class User {
   @ApiModelProperty(example = "인증번호")
   private String athntNmbr;
 
+  @Column(name = "image_name")
+  private String imageName;
+
+  @Column(name = "image_type")
+  private String imageType;
+
   @Builder
   public User(Long id, String type, String name, String email, Role role, String originFileName, String fullPath, String athntNmbr) {
     this.id = id;
@@ -83,6 +89,14 @@ public class User {
     this.number = number;
     this.name = nickName;
     this.email = juso;
+
+    return  this;
+  }
+
+  public User imageSave(Long id, String imageName, String imageType) {
+    this.id = id;
+    this.imageName = imageName;
+    this.imageType = imageType;
 
     return  this;
   }

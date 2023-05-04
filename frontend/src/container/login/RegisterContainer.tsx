@@ -92,11 +92,10 @@ function RegisterContainer() {
   }, [registerForm]);
 
   const onRegister = async () => {
-    const { username, email, phoneNumber, address, nickname } = registerForm;
+    const { phoneNumber, address, nickname } = registerForm;
     // server에 registerForm 정보 전송
     try {
       await registerUser({
-        email: email.value,
         phoneNumber: phoneNumber.value,
         nickname: nickname.value,
         address: address.value,
@@ -120,7 +119,7 @@ function RegisterContainer() {
   useLayoutEffect(() => {
     if (userInfo) {
       setRegisterForm({
-        username: { verified: false, value: "" },
+        username: { verified: true, value: userInfo.name },
         email: { verified: true, value: userInfo.email },
         phoneNumber: { verified: false, value: "" },
         address: { verified: false, value: "" },

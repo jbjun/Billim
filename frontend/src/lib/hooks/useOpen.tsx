@@ -3,7 +3,7 @@ import { ReactNode, useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 // wip...
-const useOpen = () => {
+const useDialog = () => {
   const [open, setOpen] = useState(false);
 
   const openDialog = ({ contents }: { contents: ReactNode }) => {
@@ -20,7 +20,7 @@ const useOpen = () => {
     ReactDOM.createPortal(null, $portal);
   };
 
-  return { open };
+  return { openDialog, closeDialog };
 };
 
-export default useOpen;
+export default useDialog;

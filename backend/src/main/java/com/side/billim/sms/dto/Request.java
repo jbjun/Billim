@@ -1,4 +1,4 @@
-package com.side.billim.sms.web.dto;
+package com.side.billim.sms.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class MessageDto {
-  String to;
-  String content;
-  Long id;
+public class Request {
+  private String recipientPhoneNumber;
+  private String title;
+  private String content;
+
 }

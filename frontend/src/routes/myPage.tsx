@@ -2,9 +2,9 @@ import FAQPage from "@pages/mypage/FAQPage";
 import MyInformationSettingPage from "@pages/mypage/MyInformationSettingPage";
 import NoticePage from "@pages/mypage/NoticePage";
 
-const NOTICE_PATH = "notice";
-const FAQ_PATH = "faq";
-const My_INFORMATION_SETTING_PATH = "my_info_setting";
+export const NOTICE_PATH = "notice";
+export const FAQ_PATH = "faq";
+export const My_INFORMATION_SETTING_PATH = "my_info_setting";
 
 const mypage_rotuer_info = [
   {

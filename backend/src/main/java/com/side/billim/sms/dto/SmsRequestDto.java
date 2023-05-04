@@ -1,4 +1,4 @@
-package com.side.billim.sms.web.dto;
+package com.side.billim.sms.dto;
 
 import lombok.*;
 
