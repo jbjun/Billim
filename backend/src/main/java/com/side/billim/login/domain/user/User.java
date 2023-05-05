@@ -77,6 +77,11 @@ public class User {
     this.athntNmbr = athntNmbr;
   }
 
+  @Builder
+  public User(Long id) {
+    this.id = id;
+  }
+
   public  User update(String type, String name, String email) {
     this.type = type;
     this.name = name;

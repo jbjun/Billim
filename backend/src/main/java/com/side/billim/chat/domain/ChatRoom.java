@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor  // 기본 생성자 자동 추가 public Posts(){}와 같은 효과
 @Entity
 @Table(name = "tb_chat_room")
 public class ChatRoom extends BaseTimeEntity {
@@ -48,12 +48,9 @@ public class ChatRoom extends BaseTimeEntity {
 
 
 	@Builder
-	public ChatRoom(Long id, User user, Product product){
-		this.id = id;
-		this.user = user;
+	public ChatRoom(Product product , User user){
 		this.product = product;
+		this.user = user;
 	}
-
-
 
 }

@@ -3,6 +3,7 @@ package com.side.billim.product.domain;
 
 import com.side.billim.common.domain.BaseTimeEntity;
 import com.side.billim.login.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +25,8 @@ public class Product extends BaseTimeEntity {
 	@JoinColumn(name = "writer_id")
 	private User user;
 
+	@Builder
+	public Product(Long id) {
+		this.id = id;
+	}
 }

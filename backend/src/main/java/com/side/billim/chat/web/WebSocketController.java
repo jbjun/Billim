@@ -1,40 +1,40 @@
 package com.side.billim.chat.web;
 
 import com.side.billim.chat.domain.ChatMessage;
-import com.side.billim.chat.web.dto.ChatMessageListDto;
+import com.side.billim.chat.service.ChatService;
+import com.side.billim.chat.web.dto.ChatSendMessageDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Log4j2
 @RequiredArgsConstructor
+@RestController
+@RequestMapping
 public class WebSocketController {
 
 	private final SimpMessagingTemplate simpMessagingTemplate;
-
+	private final ChatService chatService;
 
 	@MessageMapping("/chat/enter")
 	public void enter(ChatMessage chatMessage) {
 
-		System.out.println("연결성공@");
+		System.out.println("연결성공");
 
 //		simpMessagingTemplate.convertAndSend("/sub/chat/room/" + 1, "채팅 참가했어요");
 
 	}
 
-
 	@MessageMapping("/chat/message")
-	public void sendMessage(ChatMessageListDto chatMessageListDto, SimpMessageHeaderAccessor accessor) {
+	public void sendMessage(ChatSendMessageDto chatSendMessageDto, SimpMessageHeaderAccessor accessor) {
 
-		System.out.println("메세지 가로채기@");
+		chatSendMessageDto = chatService.saveMessage(chatSendMessageDto);
 
-		int roomId = 1;
-
-		// 디비 처리, 기타 예외 처리 부분
-
-		simpMessagingTemplate.convertAndSend("/sub/chat/room/" + roomId, chatMessageListDto);
+		simpMessagingTemplate.convertAndSend("/sub/chat/room/" + chatSendMessageDto.getRoomId(), chatSendMessageDto);
 	}
 
 
