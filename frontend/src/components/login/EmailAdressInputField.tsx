@@ -13,7 +13,6 @@ function EmailAdressInputField({ value = "" }: IEmailInputField) {
       label={"이메일"}
       value={value}
       startAdornment={<SvgIcon component={NaverCircleIcon} inheritViewBox />}
-      inputStyle={{ backgroundColor: "rgb(157 153 153 / 40%)" }}
     />
   );
 }

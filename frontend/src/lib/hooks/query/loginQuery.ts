@@ -1,20 +1,10 @@
-import { fetchUserInfo } from "@lib/api/loginApi";
+import { IUserInfoResponse, fetchUserInfo } from "@lib/api/loginApi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-export function useUserInfo():
-  | {
-      username: string;
-      email: string;
-      phoneNumber?: string;
-      address?: string;
-      nickName?: string;
-    }
-  | undefined {
+export function useUserInfo(): IUserInfoResponse | undefined {
   const { data } = useQuery(["userinfo"], async () => {
-    const {
-      data: { body, statusCode },
-    } = await fetchUserInfo();
-    return body;
+    const data = await fetchUserInfo();
+    return data;
   });
   return data;
 }

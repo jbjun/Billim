@@ -21,6 +21,8 @@ import { useUserInfo } from "@lib/hooks/query/loginQuery";
 import { registerUser } from "@lib/api/loginApi";
 import { useNavigate } from "react-router";
 import { HOME_PATH } from "@routes/index";
+import PageLayout from "@components/layout/PageLayout";
+import Header from "@components/layout/Header";
 
 function SpeechBubble() {
   const theme = useTheme();
@@ -32,9 +34,9 @@ function SpeechBubble() {
         background: "#d9d9d9",
         borderRadius: "0.4em",
         width: "90%",
-        height: "60px",
-        padding: "12px",
-        fontSize: "0.8rem",
+        height: "80px",
+        padding: "8px",
+        fontSize: "0.7rem",
         mb: 2,
         "&::after": {
           content: "''",
@@ -53,8 +55,20 @@ function SpeechBubble() {
         },
       }}
     >
-      <Typography>회원가입 완료까지 한 단계 남았어요!</Typography>
-      <Typography>회원 정보를 입력하시고 회원가입을 완료하세요.</Typography>
+      <Grid
+        container
+        sx={{ width: "100%", height: "100%" }}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Grid item>
+          <Typography sx={{ fontSize: "0.9rem" }}>
+            회원가입 완료까지 한 단계 남았어요! <br />
+            회원 정보를 입력하시고 회원가입을 완료하세요.
+          </Typography>
+        </Grid>
+      </Grid>
+      {/* <Typography>회원 정보를 입력하시고 회원가입을 완료하세요.</Typography> */}
     </Box>
   );
 }
@@ -92,11 +106,10 @@ function RegisterContainer() {
   }, [registerForm]);
 
   const onRegister = async () => {
-    const { username, email, phoneNumber, address, nickname } = registerForm;
+    const { phoneNumber, address, nickname } = registerForm;
     // server에 registerForm 정보 전송
     try {
       await registerUser({
-        email: email.value,
         phoneNumber: phoneNumber.value,
         nickname: nickname.value,
         address: address.value,
@@ -120,7 +133,7 @@ function RegisterContainer() {
   useLayoutEffect(() => {
     if (userInfo) {
       setRegisterForm({
-        username: { verified: false, value: "" },
+        username: { verified: true, value: userInfo.name },
         email: { verified: true, value: userInfo.email },
         phoneNumber: { verified: false, value: "" },
         address: { verified: false, value: "" },
@@ -133,39 +146,45 @@ function RegisterContainer() {
   }
 
   return (
-    <Grid
-      container
-      sx={{ p: 2 }}
-      spacing={4}
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Grid item xs={12}>
-        <SpeechBubble />
-      </Grid>
-      <Grid item xs={12}>
-        <NameInputField
-          id="username"
-          onVerify={onVerify}
-          value={registerForm.username.value}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <EmailAdressInputField value={registerForm.email.value} />
-      </Grid>
-      <Grid item xs={12}>
-        <PhoneNumberInputFieldContainer id="phoneNumber" onVerify={onVerify} />
-      </Grid>
-      {/* <Grid item xs={12}>
-        <VerificationCodeInputFieldContainer />
-      </Grid> */}
-      <Grid item xs={12}>
-        <AddressInputFieldContainer id="address" onVerify={onVerify} />
-      </Grid>
-      <Grid item xs={12}>
-        <NickNameInputFieldContainer id="nickname" onVerify={onVerify} />
-      </Grid>
-      <Grid item xs={12}>
+    <PageLayout
+      header={<Header title="회원가입" needBackHistory />}
+      body={
+        <Grid
+          container
+          sx={{ p: 2 }}
+          spacing={4}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Grid item xs={12}>
+            <SpeechBubble />
+          </Grid>
+          <Grid item xs={12}>
+            <NameInputField
+              id="username"
+              onVerify={onVerify}
+              value={registerForm.username.value}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <EmailAdressInputField value={registerForm.email.value} />
+          </Grid>
+          <Grid item xs={12}>
+            <PhoneNumberInputFieldContainer
+              id="phoneNumber"
+              onVerify={onVerify}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <AddressInputFieldContainer id="address" onVerify={onVerify} />
+          </Grid>
+          <Grid item xs={12}>
+            <NickNameInputFieldContainer id="nickname" onVerify={onVerify} />
+          </Grid>
+        </Grid>
+      }
+      footer={
         <Button
           variant="contained"
           sx={{
@@ -173,11 +192,12 @@ function RegisterContainer() {
           }}
           disabled={!isRegistable}
           onClick={onRegister}
+          fullWidth
         >
           회원가입 하기
         </Button>
-      </Grid>
-    </Grid>
+      }
+    />
   );
 }
 

@@ -5,22 +5,23 @@ import { HOME_PATH } from "@routes/index";
 import { NAVER_CONNECTION_PATH } from "@routes/login";
 import { setHeaderAuthorization } from "@lib/api";
 import { setCookie } from "@lib/api/cookie";
-function NaverRedirectPage() {
+
+interface INaverRedirectPageProps {
+  needRegister?: boolean;
+}
+function NaverRedirectPage({ needRegister }: INaverRedirectPageProps) {
   const navigate = useNavigate();
-  const { oauthId = "123", isRegistered = "true" } = useQueryString([
-    "oauthId",
-    "isRegistered",
-  ]);
+  const { id } = useQueryString(["id"]);
 
   useEffect(() => {
     // sessionKey 저장
-    setHeaderAuthorization(oauthId);
-    setCookie("sessionKey", oauthId);
+    setHeaderAuthorization(id);
+    setCookie("sessionKey", id);
 
-    if (isRegistered === "true") {
-      navigate(`/${HOME_PATH}`);
-    } else {
+    if (needRegister) {
       navigate(`/${NAVER_CONNECTION_PATH}`);
+    } else {
+      navigate(`/${HOME_PATH}`);
     }
   });
   return <div>NaverRedirectPage</div>;
