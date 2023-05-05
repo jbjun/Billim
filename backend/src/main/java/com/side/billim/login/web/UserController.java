@@ -103,6 +103,7 @@ public class UserController {
   }
 
   @PostMapping("/images")
+  @ApiOperation(value = "이미지 업로드", notes = "이미지 업로드 API")
   public ResponseEntity<User> uploadImage(@RequestParam("id") Long id, @RequestParam("file") MultipartFile files) throws IOException {
 
     String sourceFileName = files.getOriginalFilename();
@@ -126,7 +127,8 @@ public class UserController {
     return ResponseEntity.ok(image);
   }
 
-  @GetMapping("/images")
+  @GetMapping("/imageName")
+  @ApiOperation(value = "이미지 이름 조회", notes = "이미지 이름 조회 API")
   public ResponseEntity<String> getImage(@RequestParam("id") Long id) {
     Optional<User> image = imageRepository.findById(id);
     if (image.isPresent()) {
@@ -136,10 +138,10 @@ public class UserController {
   }
 
 
-  @ApiOperation(value = "image 조회 ", notes = "Image를 반환합니다. 못찾은경우 기본 image를 반환합니다.")
-  @GetMapping(value = "/image/{imagename}", produces = MediaType.IMAGE_JPEG_VALUE)
-  public ResponseEntity<byte[]> userSearch(@PathVariable("imagename") String imagename) throws IOException {
-    InputStream imageStream = new FileInputStream("C://billim/" + imagename);
+  @GetMapping(value = "/image/{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
+  @ApiOperation(value = "이미지 조회 ", notes = "이미지 조회 API")
+  public ResponseEntity<byte[]> userSearch(@PathVariable("imageName") String imageName) throws IOException {
+    InputStream imageStream = new FileInputStream("C://billim/" + imageName);
     byte[] imageByteArray = IOUtils.toByteArray(imageStream);
     imageStream.close();
     return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
