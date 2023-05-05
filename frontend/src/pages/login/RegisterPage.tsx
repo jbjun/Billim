@@ -1,10 +1,9 @@
 import Header from "@components/layout/Header";
 import RegisterContainer from "@container/login/RegisterContainer";
-
+import { Grid } from "@mui/material";
 function RegisterPage() {
   return (
     <>
-      <Header title="회원가입" needBackHistory />
       <RegisterContainer />
     </>
   );
