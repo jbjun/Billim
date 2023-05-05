@@ -6,7 +6,11 @@ import com.side.billim.login.domain.user.UserRepository;
 import com.side.billim.login.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -94,22 +103,48 @@ public class UserController {
   }
 
   @PostMapping("/images")
-  public ResponseEntity<User> uploadImage(@RequestParam("id") Long id, @RequestParam("file") MultipartFile file) {
+  public ResponseEntity<User> uploadImage(@RequestParam("id") Long id, @RequestParam("file") MultipartFile files) throws IOException {
+
+    String sourceFileName = files.getOriginalFilename();
+    String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
+    File destinationFile;
+    String destinationFileName;
+    // local
+    String fileUrl = "C:/billim/";
+
+    do {
+      destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
+      destinationFile = new File(fileUrl + destinationFileName);
+    } while (destinationFile.exists());
+
+    destinationFile.getParentFile().mkdirs();
+    files.transferTo(destinationFile);
 
     User image = imageRepository.findById(id).get();
-    image.imageSave(id, file.getOriginalFilename(), file.getContentType());
+    image.imageSave(id, destinationFileName, sourceFileName, fileUrl);
     imageRepository.save(image);
     return ResponseEntity.ok(image);
   }
 
-  @GetMapping("/images/{id}")
-  public ResponseEntity<String> getImage(@PathVariable Long id) {
+  @GetMapping("/images")
+  public ResponseEntity<String> getImage(@RequestParam("id") Long id) {
     Optional<User> image = imageRepository.findById(id);
     if (image.isPresent()) {
       return ResponseEntity.ok(image.get().getImageName());
     }
     return ResponseEntity.notFound().build();
   }
+
+
+  @ApiOperation(value = "image 조회 ", notes = "Image를 반환합니다. 못찾은경우 기본 image를 반환합니다.")
+  @GetMapping(value = "/image/{imagename}", produces = MediaType.IMAGE_JPEG_VALUE)
+  public ResponseEntity<byte[]> userSearch(@PathVariable("imagename") String imagename) throws IOException {
+    InputStream imageStream = new FileInputStream("C://billim/" + imagename);
+    byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+    imageStream.close();
+    return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
+  }
+
 
   @RequestMapping("/image")
   public String Insert() {
