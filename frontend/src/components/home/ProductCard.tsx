@@ -4,17 +4,16 @@ import { Box, Typography, CardMedia, CardContent, Card } from "@mui/material";
 
 // 내부모듈
 import RentalStatusTag from "@components/common/RentStatusTag";
-import { PerType, ProductType } from "@type/product/";
+import { IProductApiReturn } from "@type/product/";
 
-interface IProductCardProps extends ProductType {}
+interface IProductCardProps extends IProductApiReturn {}
 
 export default function ProductCard({
-  address,
+  location,
   title,
   price,
-  per,
+  images,
   status,
-  id,
 }: IProductCardProps) {
   return (
     <Card
@@ -27,12 +26,12 @@ export default function ProductCard({
     >
       <CardMedia
         sx={{ width: "44vw", height: 166 }}
-        image="https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg"
+        image={images[0]}
         title="test image"
       />
       <CardContent sx={{ m: 0, p: 0 }}>
         <Typography variant="caption" color="text.secondary">
-          {address}
+          {location}
         </Typography>
         <Box
           sx={{
@@ -48,24 +47,12 @@ export default function ProductCard({
           </Typography>
         </Box>
         <Typography sx={{ display: "inline-block", mt: 0.8 }} variant="b5">
-          <span style={{ fontWeight: "bold" }}>{`${price} 원 `}</span>/
-          {getPerTitle(per)}
+          <span
+            style={{ fontWeight: "bold" }}
+          >{`${price.toLocaleString()} 원 `}</span>
+          /일
         </Typography>
       </CardContent>
     </Card>
   );
-}
-
-function getPerTitle(per: PerType) {
-  switch (per) {
-    case "day":
-      return "일";
-    case "month":
-      return "월";
-    case "year":
-      return "년";
-
-    default:
-      break;
-  }
 }
