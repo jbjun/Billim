@@ -17,6 +17,7 @@ import { ReactComponent as ViewIcon } from "@assets/icons/View_icon.svg";
 import { useGetProduct, useUpdateViewCount } from "@lib/hooks/query/product";
 import Carousel from "@components/home/productDetail/Carousel";
 import { useEffect } from "react";
+import DetailSkeletonUI from "@components/home/productDetail/DetailSkeletonUI";
 
 type ProductDetailContainer = {
   onClick?: () => void;
@@ -36,7 +37,7 @@ const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
 
   const { data, isLoading } = useGetProduct(id);
 
-  if (isLoading || !data) return null; // 스켈레톤 Ui
+  if (isLoading || !data) return <DetailSkeletonUI />;
 
   const {
     title,
@@ -70,7 +71,7 @@ const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
         </Carousel>
       </Box>
       <Container sx={{ pt: "20px" }}>
-        <Stack spacing={2.5}>
+        <Stack spacing={2.5} pb="72px">
           <Box display="flex" alignItems="center">
             <Avatar sx={{ width: "36px", height: "36px" }} />
             <Box sx={{ ml: "8px" }}>
@@ -89,7 +90,7 @@ const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
           </Box>
           <Box>
             <Box sx={{ float: "left" }} mr="4px">
-              <RentalStatusTag status="rentable" bold />
+              <RentalStatusTag status={status} bold />
             </Box>
             <Typography variant="h6" lineHeight="19px">
               {title}
@@ -122,6 +123,7 @@ const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
           sx={{ width: "100%", position: "fixed", bottom: 0 }}
           p="16px 16px"
           m="0 -16px"
+          bgcolor="white"
         >
           <Button sx={{ width: "100%" }} variant="contained" onClick={onClick}>
             <Typography variant="h6">대여예약</Typography>
