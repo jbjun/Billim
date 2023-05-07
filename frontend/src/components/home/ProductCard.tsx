@@ -1,10 +1,18 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 // 외부모듈
-import { Box, Typography, CardMedia, CardContent, Card } from "@mui/material";
+import {
+  Box,
+  Typography,
+  CardMedia,
+  CardContent,
+  Card,
+  Skeleton,
+} from "@mui/material";
 
 // 내부모듈
 import RentalStatusTag from "@components/common/RentStatusTag";
 import { IProductApiReturn } from "@type/product/";
+import { useState } from "react";
 
 interface IProductCardProps extends IProductApiReturn {}
 
@@ -15,6 +23,11 @@ export default function ProductCard({
   images,
   status,
 }: IProductCardProps) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
   return (
     <Card
       sx={{
@@ -25,10 +38,24 @@ export default function ProductCard({
       variant="outlined"
     >
       <CardMedia
-        sx={{ width: "44vw", height: 166 }}
+        component="img"
+        onLoad={handleImageLoad}
+        sx={{
+          width: "44vw",
+          height: 166,
+          display: imageLoaded ? "block" : "none",
+        }}
         image={images[0]}
         title="test image"
       />
+      {!imageLoaded && (
+        <Skeleton
+          animation="wave"
+          variant="rectangular"
+          width="44vw"
+          height="166px"
+        />
+      )}
       <CardContent sx={{ m: 0, p: 0 }}>
         <Typography variant="caption" color="text.secondary">
           {location}
