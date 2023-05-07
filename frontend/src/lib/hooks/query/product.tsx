@@ -76,7 +76,7 @@ export const useInfiniteProducts = (
 };
 
 export const useGetProduct = (id: string) => {
-  return useQuery(["product"], () => fetchGetProduct(id));
+  return useQuery(["product", id], () => fetchGetProduct(id));
 };
 
 export const useUpdateViewCount = (id: string) =>
