@@ -1,6 +1,7 @@
 package com.side.billim.chat.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.side.billim.chat.domain.ChatMessage;
 import com.side.billim.chat.domain.ChatRoom;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,8 +19,7 @@ public class ChatRoomDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime lastMessageDate;
 
-	private String traderName; // 거래자 아이디
-
+	private String traderName; // 상대방 아이디
 
 	public ChatRoomDto(ChatRoom entity){
 		this.id = entity.getId();
@@ -32,9 +32,19 @@ public class ChatRoomDto {
 		}else{
 			this.traderName = entity.getProduct().getUser().getName();
 		}
-
 	}
 
+	public ChatRoomDto(ChatRoom chatRoom, ChatMessage chatMessage) {
+		this.id = chatRoom.getId();
+		this.lastMessage = chatMessage.getMessage();
+		this.lastMessageDate = chatMessage.getCreatedDate();
+		this.productName = chatRoom.getProduct().getProductName();
 
+		if(chatRoom.getUser().getId() == 2){
+			this.traderName = chatRoom.getUser().getName();
+		}else{
+			this.traderName = chatRoom.getProduct().getUser().getName();
+		}
 
+	}
 }

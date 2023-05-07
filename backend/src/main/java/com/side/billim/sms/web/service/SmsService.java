@@ -125,4 +125,8 @@ public class SmsService {
   public void updateUser(Long id, String number, String nickName, String juso) {
     smsRepository.updateUser(id,number,nickName,juso);
   }
+
+  public void deleteUser(String name) {
+    smsRepository.deleteByName(name);
+  }
 }

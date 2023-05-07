@@ -62,8 +62,12 @@ public class User {
   @Column(name = "image_name")
   private String imageName;
 
-  @Column(name = "image_type")
-  private String imageType;
+  @Column(name = "image_ori_name")
+  private String imageOriName;
+
+  @Column(name = "image_url")
+  private String imageUrl;
+
 
   @Builder
   public User(Long id, String type, String name, String email, Role role, String originFileName, String fullPath, String athntNmbr) {
@@ -75,6 +79,11 @@ public class User {
     this.originFileName = originFileName;
     this.fullPath = fullPath;
     this.athntNmbr = athntNmbr;
+  }
+
+  @Builder
+  public User(Long id) {
+    this.id = id;
   }
 
   public  User update(String type, String name, String email) {
@@ -93,10 +102,11 @@ public class User {
     return  this;
   }
 
-  public User imageSave(Long id, String imageName, String imageType) {
+  public User imageSave(Long id, String imageName, String imageOriName, String imageUrl) {
     this.id = id;
     this.imageName = imageName;
-    this.imageType = imageType;
+    this.imageOriName = imageOriName;
+    this.imageUrl = imageUrl;
 
     return  this;
   }

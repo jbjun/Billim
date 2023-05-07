@@ -3,6 +3,7 @@ package com.side.billim.chat.domain;
 import com.side.billim.common.domain.BaseTimeEntity;
 import com.side.billim.login.domain.user.User;
 import com.side.billim.product.domain.Product;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor  // 기본 생성자 자동 추가 public Posts(){}와 같은 효과
 @Entity
 @Table(name = "tb_chat_room")
 public class ChatRoom extends BaseTimeEntity {
@@ -46,5 +47,10 @@ public class ChatRoom extends BaseTimeEntity {
 //	}
 
 
+	@Builder
+	public ChatRoom(Product product , User user){
+		this.product = product;
+		this.user = user;
+	}
 
 }
