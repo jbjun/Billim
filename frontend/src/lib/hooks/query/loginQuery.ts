@@ -3,7 +3,7 @@ import {
   IUserInfoResponse,
   fetchUserInfo,
   updateUserInfo,
-} from "@lib/api/loginApi";
+} from "@lib/api/userApi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export function useUserInfo(): IUserInfoResponse | undefined {

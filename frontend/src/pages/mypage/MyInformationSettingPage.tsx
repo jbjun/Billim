@@ -17,7 +17,7 @@ import { useUserInfo } from "@lib/hooks/query/loginQuery";
 import { useNavigate } from "react-router";
 import { USER_SETTING_PATH } from "@routes/myPage";
 import BillimConfirm from "@components/common/BillimConfirm";
-import { deleteUser } from "@lib/api/loginApi";
+import { deleteUser } from "@lib/api/userApi";
 import { LOGIN_PATH } from "@routes/login";
 function MyInformationSettingPage() {
   const userInfo = useUserInfo();

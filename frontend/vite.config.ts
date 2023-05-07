@@ -2,7 +2,6 @@
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import tsconfigPaths from "vite-tsconfig-paths";
-
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 
@@ -48,8 +47,9 @@ export default defineConfig({
         target: "http://localhost:8080",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
-        secure: false,
-        ws: true,
+
+        // secure: false,
+        // ws: true,
       },
       "/socket.io": {
         target: "ws://localhost:8080",

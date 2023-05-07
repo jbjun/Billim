@@ -19,7 +19,7 @@ import Dialog from "@components/layout/Dialog";
 import BillimServiceDescription, {
   serviceDescriptionTitleProvider,
 } from "@components/common/BillimServiceDescription";
-import { fetchMarketingInformationAgreement } from "@lib/api/loginApi";
+import { fetchMarketingInformationAgreement } from "@lib/api/userApi";
 
 export type ServiceDescriptionType =
   | "service"

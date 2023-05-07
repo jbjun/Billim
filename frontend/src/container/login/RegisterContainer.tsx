@@ -18,7 +18,7 @@ import NickNameInputFieldContainer from "./input/NickNameInputFieldContainer";
 import NameInputField from "@components/login/NameInputField";
 import EmailAdressInputField from "@components/login/EmailAdressInputField";
 import { useUserInfo } from "@lib/hooks/query/loginQuery";
-import { updateUserInfo } from "@lib/api/loginApi";
+import { updateUserInfo } from "@lib/api/userApi";
 import { useNavigate } from "react-router";
 import { HOME_PATH } from "@routes/index";
 import PageLayout from "@components/layout/PageLayout";

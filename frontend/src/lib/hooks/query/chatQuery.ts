@@ -4,7 +4,7 @@ import {
   fetchChatRoomList,
   removeChatById,
 } from "@lib/api/chatApi";
-import { fetchUserInfo } from "@lib/api/loginApi";
+import { fetchUserInfo } from "@lib/api/userApi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export function useChatList(): IChatListResponse[] {

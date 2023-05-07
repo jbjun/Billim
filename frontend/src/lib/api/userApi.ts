@@ -113,6 +113,7 @@ export const deleteUser = async ({ name }: IDeleteUserProps) => {
   throw new Error("회원 탈퇴에 실패하였습니다.");
 };
 
+// image
 interface IUploadImageProps {
   data: any;
 }
@@ -123,6 +124,17 @@ export const uploadImage = async ({ data }: IUploadImageProps) => {
       `${BASE_API_PATH}/user/images?id=${id}`,
       data
     );
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getImageSrc = async (
+  imageName: string
+): Promise<string | undefined> => {
+  try {
+    const result = await axios.get(`${BASE_API_PATH}/user/image/${imageName}`);
+    return result.data;
   } catch (error) {
     console.error(error);
   }

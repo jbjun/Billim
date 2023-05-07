@@ -2,7 +2,7 @@ import { Chip } from "@mui/material";
 import React, { useState } from "react";
 import InputField from "@components/InputField";
 import { IVerifiableInputProps } from "../RegisterContainer";
-import { fetchCheckNickName } from "@lib/api/loginApi";
+import { fetchCheckNickName } from "@lib/api/userApi";
 import useStateFromProp from "@lib/hooks/useStateFromProp";
 
 interface INickNameInputFieldContainer {
