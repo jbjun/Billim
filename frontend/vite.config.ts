@@ -51,6 +51,11 @@ export default defineConfig({
         secure: false,
         ws: true,
       },
+      "/socket.io": {
+        target: "ws://localhost:8080",
+        rewrite: (path) => path.replace(/^\/socket.io/, ""),
+        ws: true,
+      },
     },
   },
 });

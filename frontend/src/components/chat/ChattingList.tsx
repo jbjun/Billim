@@ -18,7 +18,7 @@ import {
   Grid,
 } from "@mui/material";
 import SlidableList from "@components/common/SlidableList";
-import ChatRemoveConfirmDialog from "./ChatRemoveConfirmDialog";
+import BillimConfirm from "@components/common/BillimConfirm";
 
 const Trailer = ({ id, onOpenDialog }: any) => (
   <TrailingActions>
@@ -135,8 +135,10 @@ export default function ChattingList({
           }
         )}
       </SlidableList>
-      <ChatRemoveConfirmDialog
+      <BillimConfirm
         open={openDialog}
+        title={"삭제 시 대화 내용이 모두 삭제되고 채팅 목록에서도 삭제돼요."}
+        confirmMessage={"삭제"}
         onConfirm={onConfirm}
         onCancle={onCloseDialog}
       />

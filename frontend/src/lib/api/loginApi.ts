@@ -1,6 +1,7 @@
-import { BASE_API_PATH, BASE_URL } from ".";
+import { BASE_API_PATH, BASE_URL, getId } from ".";
 import axios from "axios";
 import { getCookie } from "./cookie";
+import { useMutation, useQueryClient } from "react-query";
 export const fetchCheckNickName = async (
   nickname: string
 ): Promise<boolean> => {
@@ -63,24 +64,28 @@ export interface IUserInfoResponse {
   roleKey: "ROLE_KAKAO";
 }
 export const fetchUserInfo = async (): Promise<IUserInfoResponse> => {
+  console.log("fetchUserInfo called");
   const id = getId();
   const result = await axios.get(`${BASE_API_PATH}/user/selectUser?id=${id}`);
 
   return result.data;
 };
 
-interface IRegisterUserProps {
+export interface IUpdateUserProps {
   // email: string;
+  username: string;
   phoneNumber: string;
   nickname: string;
   address: string;
 }
-export const registerUser = async ({
+
+export const updateUserInfo = async ({
   // email,
+  username,
   phoneNumber,
   nickname,
   address,
-}: IRegisterUserProps) => {
+}: IUpdateUserProps) => {
   const id = getId();
   const result = await axios.get(
     `${BASE_API_PATH}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}`
@@ -93,7 +98,32 @@ export const registerUser = async ({
   throw new Error("회원가입에 실패하였습니다.");
 };
 
-function getId() {
-  const id = 16; // 임시처리 / getCookie('sessionKey')
-  return id;
+interface IDeleteUserProps {
+  name: string;
 }
+export const deleteUser = async ({ name }: IDeleteUserProps) => {
+  const result = await axios.get(
+    `${BASE_API_PATH}/user/deleteUser?name=${name}`
+  );
+
+  if (result) {
+    return true;
+  }
+
+  throw new Error("회원 탈퇴에 실패하였습니다.");
+};
+
+interface IUploadImageProps {
+  data: any;
+}
+export const uploadImage = async ({ data }: IUploadImageProps) => {
+  try {
+    const id = getId();
+    const result = await axios.post(
+      `${BASE_API_PATH}/user/images?id=${id}`,
+      data
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
