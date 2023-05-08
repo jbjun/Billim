@@ -1,8 +1,5 @@
 // 외부모듈
-import { Box, SvgIcon, Typography } from "@mui/material";
-
-// 내부모듈
-import { ReactComponent as DividerIcon } from "@assets/icons/Hdivider.svg";
+import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const HomeTerms = () => {
