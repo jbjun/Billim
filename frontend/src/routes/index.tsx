@@ -86,7 +86,7 @@ export const router = createBrowserRouter([
     element: <ProductRegisterPage />,
   },
   {
-    path: "product/:productId",
+    path: "product/:id",
     element: <ProductDetailPage />,
   },
   /*

@@ -27,6 +27,8 @@ const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
   const theme = useTheme();
   const { id } = useParams();
 
+  console.log("??", id);
+
   if (!id) return null;
   const { mutate: updateViewCount } = useUpdateViewCount(id);
 
