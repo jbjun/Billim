@@ -5,7 +5,7 @@ import VerificationCodeInputFieldContainer from "./VerificationCodeInputFieldCon
 import { flushSync } from "react-dom";
 import { createValidator } from "@lib/utils/validator";
 import { IVerifiableInputProps } from "../RegisterContainer";
-import { fetchCheckSMS, sendVerificationCodeBySMS } from "@lib/api/loginApi";
+import { fetchCheckSMS, sendVerificationCodeBySMS } from "@lib/api/userApi";
 
 const validateWholePhoneNumber = createValidator(/^010[0-9]{8}$/);
 const validatePhoneNumber = createValidator(/^\d{0,11}$/);
@@ -97,12 +97,6 @@ function PhoneNumberInputFieldContainer({
     }
 
     return result;
-  };
-
-  const requestPhoneNumberVerificationCode = async () => {
-    // server에 인증번호 요청
-    return await fetchCheckSMS;
-    return "123456";
   };
 
   return (

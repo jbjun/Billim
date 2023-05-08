@@ -1,4 +1,9 @@
-import { IUserInfoResponse, fetchUserInfo } from "@lib/api/loginApi";
+import {
+  IUpdateUserProps,
+  IUserInfoResponse,
+  fetchUserInfo,
+  updateUserInfo,
+} from "@lib/api/userApi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export function useUserInfo(): IUserInfoResponse | undefined {
@@ -7,4 +12,16 @@ export function useUserInfo(): IUserInfoResponse | undefined {
     return data;
   });
   return data;
+}
+
+export function useUserInfoMutationByUpdate() {
+  const queryClient = useQueryClient();
+  return useMutation(
+    (userInfo: IUpdateUserProps) => {
+      return updateUserInfo(userInfo);
+    },
+    {
+      onSuccess: () => queryClient.invalidateQueries(["userinfo"]),
+    }
+  );
 }

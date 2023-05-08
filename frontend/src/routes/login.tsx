@@ -5,7 +5,7 @@ import NaverRedirectPage from "@pages/login/NaverRedirectPage";
 import RegisterPage from "@pages/login/RegisterPage";
 import RegistrationCompletedPage from "@pages/login/RegistrationCompletedPage";
 
-const LOGIN_PATH = "login";
+export const LOGIN_PATH = "login";
 export const NAVER_REDIRECT_REGISTER_PATH = "user/login";
 export const NAVER_REDIRECT_USER_PATH = "main";
 export const REGISTER_PATH = "register";

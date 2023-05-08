@@ -17,6 +17,7 @@ function NaverRedirectPage({ needRegister }: INaverRedirectPageProps) {
     // sessionKey 저장
     setHeaderAuthorization(id);
     setCookie("sessionKey", id);
+    setCookie("userId", id);
 
     if (needRegister) {
       navigate(`/${NAVER_CONNECTION_PATH}`);

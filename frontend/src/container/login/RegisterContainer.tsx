@@ -18,11 +18,12 @@ import NickNameInputFieldContainer from "./input/NickNameInputFieldContainer";
 import NameInputField from "@components/login/NameInputField";
 import EmailAdressInputField from "@components/login/EmailAdressInputField";
 import { useUserInfo } from "@lib/hooks/query/loginQuery";
-import { registerUser } from "@lib/api/loginApi";
+import { updateUserInfo } from "@lib/api/userApi";
 import { useNavigate } from "react-router";
 import { HOME_PATH } from "@routes/index";
 import PageLayout from "@components/layout/PageLayout";
 import Header from "@components/layout/Header";
+import useUpdateUser from "@lib/hooks/useUpdateUser";
 
 function SpeechBubble() {
   const theme = useTheme();
@@ -73,7 +74,7 @@ function SpeechBubble() {
   );
 }
 
-interface IRegisterForm {
+interface IuserForm {
   username: { verified: boolean; value: string };
   email: { verified: boolean; value: string };
   phoneNumber: { verified: boolean; value: string };
@@ -93,57 +94,21 @@ export interface IVerifiableInputProps {
 }
 function RegisterContainer() {
   const navigate = useNavigate();
-  const userInfo = useUserInfo();
-  const [registerForm, setRegisterForm] = useState<IRegisterForm>({
-    username: { verified: false, value: "" },
-    email: { verified: true, value: "" },
-    phoneNumber: { verified: false, value: "" },
-    address: { verified: false, value: "" },
-    nickname: { verified: false, value: "" },
+  const { userForm, onChangeUserForm, onUpdateUser } = useUpdateUser({
+    isRegister: true,
   });
+
+  // if (!userForm) {
+  //   return null;
+  // }
+
+  const onRegister = () => {
+    onUpdateUser();
+    navigate(`/${HOME_PATH}`);
+  };
   const isRegistable = useMemo(() => {
-    return Object.values(registerForm).every((info) => info.verified);
-  }, [registerForm]);
-
-  const onRegister = async () => {
-    const { phoneNumber, address, nickname } = registerForm;
-    // server에 registerForm 정보 전송
-    try {
-      await registerUser({
-        phoneNumber: phoneNumber.value,
-        nickname: nickname.value,
-        address: address.value,
-      });
-
-      navigate(`/${HOME_PATH}`);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const onVerify = ({ id, verified, value }: IVerfiyInfo) => {
-    const newRegisterForm = produce(registerForm, (draft) => {
-      draft[id].verified = verified;
-      if (value) {
-        draft[id].value = value;
-      }
-    });
-    setRegisterForm(newRegisterForm);
-  };
-
-  useLayoutEffect(() => {
-    if (userInfo) {
-      setRegisterForm({
-        username: { verified: true, value: userInfo.name },
-        email: { verified: true, value: userInfo.email },
-        phoneNumber: { verified: false, value: "" },
-        address: { verified: false, value: "" },
-        nickname: { verified: false, value: "" },
-      });
-    }
-  }, [userInfo]);
-  if (!userInfo) {
-    return null;
-  }
+    return Object.values(userForm).every((info) => info.verified);
+  }, [userForm]);
 
   return (
     <PageLayout
@@ -162,25 +127,31 @@ function RegisterContainer() {
           <Grid item xs={12}>
             <NameInputField
               id="username"
-              onVerify={onVerify}
-              value={registerForm.username.value}
+              onVerify={onChangeUserForm}
+              value={userForm.username.value}
             />
           </Grid>
           <Grid item xs={12}>
-            <EmailAdressInputField value={registerForm.email.value} />
+            <EmailAdressInputField value={userForm.email.value} />
           </Grid>
           <Grid item xs={12}>
             <PhoneNumberInputFieldContainer
               id="phoneNumber"
-              onVerify={onVerify}
+              onVerify={onChangeUserForm}
             />
           </Grid>
 
           <Grid item xs={12}>
-            <AddressInputFieldContainer id="address" onVerify={onVerify} />
+            <AddressInputFieldContainer
+              id="address"
+              onVerify={onChangeUserForm}
+            />
           </Grid>
           <Grid item xs={12}>
-            <NickNameInputFieldContainer id="nickname" onVerify={onVerify} />
+            <NickNameInputFieldContainer
+              id="nickname"
+              onVerify={onChangeUserForm}
+            />
           </Grid>
         </Grid>
       }

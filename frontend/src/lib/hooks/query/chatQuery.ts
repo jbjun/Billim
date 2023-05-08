@@ -4,15 +4,13 @@ import {
   fetchChatRoomList,
   removeChatById,
 } from "@lib/api/chatApi";
-import { fetchUserInfo } from "@lib/api/loginApi";
+import { fetchUserInfo } from "@lib/api/userApi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export function useChatList(): IChatListResponse[] {
   const { data } = useQuery(["chatlist"], async () => {
-    const {
-      data: { body, statusCode },
-    } = await fetchChatRoomList();
-    return body.chatlist;
+    const data = await fetchChatRoomList();
+    return data;
   });
 
   if (!data) {
@@ -36,10 +34,8 @@ export function useChatListMutationByRemove() {
 
 export function useChatRoom(chatId: string): any[] {
   const { data } = useQuery(["chatroom", chatId], async () => {
-    const {
-      data: { body, statusCode },
-    } = await fetchChatRoom(chatId);
-    return body.messages;
+    const data = await fetchChatRoom(chatId);
+    return data;
   });
 
   if (!data) {

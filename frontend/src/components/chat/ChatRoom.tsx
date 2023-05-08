@@ -30,7 +30,7 @@ function isOwnerSelf(owner: OwnerType) {
 export interface IMessage {
   owner: OwnerType;
   message: string;
-  timestamp: string;
+  timestamp: string; // ex. 2023-05-07 17:48:13
 }
 
 interface IChatRoomProps extends IChatInputProps {
@@ -42,6 +42,7 @@ export default function ChatRoom({
   onChangeInputMessage,
   onSendMessage,
 }: IChatRoomProps) {
+  let previousTimeStamp: any = null;
   return (
     <Grid
       container
@@ -52,18 +53,30 @@ export default function ChatRoom({
     >
       <Grid item sx={{ height: "85%" }}>
         <Grid container spacing={2} sx={{ p: 3 }}>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <ChatDateDivider date={"2023년 04월 08일"} />
-          </Grid>
-          {messages.map(({ owner, message, timestamp }, index) => (
-            <Grid item xs={12} key={index}>
-              <MessageBox
-                owner={owner}
-                message={message}
-                timestamp={timestamp}
-              />
-            </Grid>
-          ))}
+          </Grid> */}
+          {messages.map(({ owner, message, timestamp }, index) => {
+            let needDivider = !isSameYearMonthDay(previousTimeStamp, timestamp);
+
+            previousTimeStamp = timestamp;
+            return (
+              <>
+                {needDivider && (
+                  <Grid item xs={12}>
+                    <ChatDateDivider timestamp={timestamp} />
+                  </Grid>
+                )}
+                <Grid item xs={12} key={index}>
+                  <MessageBox
+                    owner={owner}
+                    message={message}
+                    timestamp={timestamp}
+                  />
+                </Grid>
+              </>
+            );
+          })}
         </Grid>
       </Grid>
       <Grid item sx={{ p: 2, width: "100%" }}>
@@ -78,12 +91,15 @@ export default function ChatRoom({
 }
 
 interface IChatDateDividerProps {
-  date: string;
+  timestamp: string;
 }
-function ChatDateDivider({ date }: IChatDateDividerProps) {
+function ChatDateDivider({ timestamp }: IChatDateDividerProps) {
+  const { year, month, day } = parseDateTime(timestamp);
   return (
     <Divider>
-      <Typography sx={{ color: "grey" }}>{date}</Typography>
+      <Typography
+        sx={{ color: "grey" }}
+      >{`${year}년 ${month}월 ${day}일`}</Typography>
     </Divider>
   );
 }
@@ -113,6 +129,7 @@ interface ITimeStampProps {
   timestamp: string;
 }
 function TimeStamp({ timestamp }: ITimeStampProps) {
+  const { hour, minute } = parseDateTime(timestamp);
   return (
     <Box
       component={"span"}
@@ -123,7 +140,7 @@ function TimeStamp({ timestamp }: ITimeStampProps) {
         verticalAlign: "bottom",
       }}
     >
-      {timestamp}
+      {`${hour}:${minute}`}
     </Box>
   );
 }
@@ -163,4 +180,48 @@ function ChatInput({
       }}
     />
   );
+}
+
+function isSameYearMonthDay(
+  previousTimestamp: string | null,
+  currentTimestamp: string
+) {
+  if (previousTimestamp === null) return false;
+  const {
+    year: prevYear,
+    month: prevMonth,
+    day: prevDay,
+  } = parseDateTime(previousTimestamp);
+  const {
+    year: currentYear,
+    month: currentMonth,
+    day: currentDay,
+  } = parseDateTime(currentTimestamp);
+
+  if (
+    prevYear === currentYear &&
+    prevMonth === currentMonth &&
+    prevDay === currentDay
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+function parseDateTime(text: string): {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+} {
+  const dateTime = new Date(text);
+  const year = dateTime.getFullYear();
+  const month = dateTime.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
+  const day = dateTime.getDate();
+  const hour = dateTime.getHours();
+  const minute = dateTime.getMinutes();
+
+  return { year, month, day, hour, minute };
 }

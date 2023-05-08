@@ -1,21 +1,33 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 // 외부모듈
-import { Box, Typography, CardMedia, CardContent, Card } from "@mui/material";
+import {
+  Box,
+  Typography,
+  CardMedia,
+  CardContent,
+  Card,
+  Skeleton,
+} from "@mui/material";
 
 // 내부모듈
 import RentalStatusTag from "@components/common/RentStatusTag";
-import { PerType, ProductType } from "@type/product/";
+import { IProductApiReturn } from "@type/product/";
+import { useState } from "react";
 
-interface IProductCardProps extends ProductType {}
+interface IProductCardProps extends IProductApiReturn {}
 
 export default function ProductCard({
-  address,
+  location,
   title,
   price,
-  per,
+  images,
   status,
-  id,
 }: IProductCardProps) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
   return (
     <Card
       sx={{
@@ -26,13 +38,27 @@ export default function ProductCard({
       variant="outlined"
     >
       <CardMedia
-        sx={{ width: "44vw", height: 166 }}
-        image="https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg"
+        component="img"
+        onLoad={handleImageLoad}
+        sx={{
+          width: "44vw",
+          height: 166,
+          display: imageLoaded ? "block" : "none",
+        }}
+        image={images[0]}
         title="test image"
       />
+      {!imageLoaded && (
+        <Skeleton
+          animation="wave"
+          variant="rectangular"
+          width="44vw"
+          height="166px"
+        />
+      )}
       <CardContent sx={{ m: 0, p: 0 }}>
         <Typography variant="caption" color="text.secondary">
-          {address}
+          {location}
         </Typography>
         <Box
           sx={{
@@ -48,24 +74,12 @@ export default function ProductCard({
           </Typography>
         </Box>
         <Typography sx={{ display: "inline-block", mt: 0.8 }} variant="b5">
-          <span style={{ fontWeight: "bold" }}>{`${price} 원 `}</span>/
-          {getPerTitle(per)}
+          <span
+            style={{ fontWeight: "bold" }}
+          >{`${price.toLocaleString()} 원 `}</span>
+          /일
         </Typography>
       </CardContent>
     </Card>
   );
-}
-
-function getPerTitle(per: PerType) {
-  switch (per) {
-    case "day":
-      return "일";
-    case "month":
-      return "월";
-    case "year":
-      return "년";
-
-    default:
-      break;
-  }
 }

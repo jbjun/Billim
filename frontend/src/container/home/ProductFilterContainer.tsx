@@ -6,25 +6,27 @@ import { useState } from "react";
 // 내부모듈
 import Dialog from "@components/layout/Dialog";
 import ProductFilterDialog from "@components/home/ProductFilterDialog";
+import { IOrderby } from "./HomeContainer";
 
-export interface IFilterOptionState {
-  text: TFilterOption;
+export interface IProductFilterContainerProps {
+  orderby: IOrderby;
+  handleOrderby: (orderby: IOrderby) => void;
 }
-export type TFilterOption =
+
+export type FilterOptionType =
   | "최근 등록순"
   | "대여료 낮은순"
   | "대여료 높은순"
   | "가까운 순";
 
-const ProductFilterContainer = () => {
+const ProductFilterContainer = ({
+  orderby,
+  handleOrderby,
+}: IProductFilterContainerProps) => {
   const [open, setOpen] = useState(false);
-  const [selectedFilterOption, setSelectedFilterOption] =
-    useState<IFilterOptionState>({
-      text: "최근 등록순",
-    });
 
-  const handleSelectFilterOption = (option: IFilterOptionState) => {
-    setSelectedFilterOption(option);
+  const handleSelectFilterOption = (value: IOrderby) => {
+    handleOrderby(value);
     setOpen(false);
   };
 
@@ -47,7 +49,7 @@ const ProductFilterContainer = () => {
         }}
       >
         <ProductFilterDialog
-          selectedFilterOption={selectedFilterOption}
+          selectedFilterOption={orderby}
           handleSelectFilterOption={handleSelectFilterOption}
         />
       </Dialog>
@@ -66,7 +68,7 @@ const ProductFilterContainer = () => {
         }}
       >
         <Typography variant="b5" lineHeight="50%">
-          {selectedFilterOption.text}
+          {orderby.text}
         </Typography>
         <SvgIcon component={ArrowDropDownIcon} />
       </ButtonBase>

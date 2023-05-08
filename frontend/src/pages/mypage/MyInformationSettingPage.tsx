@@ -5,37 +5,65 @@ import {
   Chip,
   Divider,
   Grid,
+  IconButton,
   SvgIcon,
   Switch,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as EditIcon } from "@assets/icons/mypage/Edit_icon.svg";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import { useUserInfo } from "@lib/hooks/query/loginQuery";
+import { useNavigate } from "react-router";
+import { USER_SETTING_PATH } from "@routes/myPage";
+import BillimConfirm from "@components/common/BillimConfirm";
+import { deleteUser } from "@lib/api/userApi";
+import { LOGIN_PATH } from "@routes/login";
 function MyInformationSettingPage() {
+  const userInfo = useUserInfo();
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const onOpen = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const onDeleteUser = async () => {
+    if (!userInfo?.name) {
+      throw new Error("회원 탈퇴 중 문제가 발생하였습니다.");
+    }
+
+    await deleteUser({ name: userInfo.name });
+    navigate(`/${LOGIN_PATH}`);
+  };
+  if (!userInfo) return null;
   return (
     <>
       <Header title="내 정보 관리" needBackHistory />
       <Grid container>
         <Grid item xs={12} sx={{ p: 1 }}>
-          <UserImageSlot />
+          <UserImageSlot username={userInfo.name} />
         </Grid>
         <InformationDivider />
         <UserInformationSlot title={"회원 정보"}>
           <UserInforamtion title="휴대폰 번호">
-            <Typography>010-1234-5678</Typography>
+            <Typography>{userInfo.number}</Typography>
           </UserInforamtion>
           <UserInforamtion title="닉네임">
-            <Typography>빌리빌리진</Typography>
+            <Typography>{userInfo.nickName}</Typography>
           </UserInforamtion>
           <UserInforamtion title="주소">
-            <Typography>서울시 광진구 능동</Typography>
+            <Typography>{userInfo.juso}</Typography>
           </UserInforamtion>
         </UserInformationSlot>
         <InformationDivider />
         <UserInformationSlot title={"계정 정보"}>
           <UserInforamtion title="이메일 주소">
-            <Typography>billim@naver.com</Typography>
+            <Typography>{userInfo.email}</Typography>
           </UserInforamtion>
         </UserInformationSlot>
         <InformationDivider />
@@ -54,8 +82,17 @@ function MyInformationSettingPage() {
               <Typography variant="h6">회원 탈퇴</Typography>
             </Grid>
             <Grid item>
-              <ArrowForwardIosSharpIcon
-                sx={{ fontSize: "1.3rem", color: "black" }}
+              <IconButton onClick={onOpen}>
+                <ArrowForwardIosSharpIcon
+                  sx={{ fontSize: "1.3rem", color: "black" }}
+                />
+              </IconButton>
+              <BillimConfirm
+                open={open}
+                title="회원 탈퇴를 하시겠습니까?"
+                confirmMessage="회원 탈퇴"
+                onConfirm={onDeleteUser}
+                onCancle={onClose}
               />
             </Grid>
           </Grid>
@@ -92,7 +129,16 @@ function UserInformationSlot({ title, children }: IUserInformationSlotProps) {
     </Grid>
   );
 }
-function UserImageSlot() {
+
+interface IUserImageSlotProps {
+  username: string;
+}
+function UserImageSlot({ username }: IUserImageSlotProps) {
+  const navigate = useNavigate();
+
+  const onEdit = () => {
+    navigate(`/${USER_SETTING_PATH}`);
+  };
   return (
     <Box sx={{ position: "relative" }}>
       <Box
@@ -117,7 +163,7 @@ function UserImageSlot() {
         />
       </Box>
       <Box sx={{ textAlign: "center", mt: 1 }}>
-        <Typography variant="h5">빌리진님</Typography>
+        <Typography variant="h5">{username}님</Typography>
       </Box>
       <Box sx={{ position: "absolute", top: 0, right: 5 }}>
         <Chip
@@ -125,10 +171,12 @@ function UserImageSlot() {
           label="수정하기"
           variant="outlined"
           deleteIcon={
-            <SvgIcon component={EditIcon} inheritViewBox fontSize="large" />
+            <IconButton onClick={onEdit} size="small">
+              <SvgIcon component={EditIcon} inheritViewBox fontSize="small" />
+            </IconButton>
           }
-          onClick={() => {}}
-          onDelete={() => {}}
+          onClick={onEdit}
+          onDelete={onEdit}
         />
       </Box>
     </Box>
