@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -24,12 +22,9 @@ public class Product extends BaseTimeEntity {
 	@Column(nullable = false)
 	private String productName;
 
-	@ManyToOne(fetch =  FetchType.LAZY)
+	@ManyToOne(fetch =  FetchType.EAGER)
 	@JoinColumn(name = "writer_id")
 	private User user;
-
-	@OneToMany(mappedBy = "productImg")
-	private List<ProductImg> productImgList = new ArrayList<>();
 
 	@Column
 	private String productCategory;
@@ -45,7 +40,7 @@ public class Product extends BaseTimeEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private String productState;
+	private ProductState productState;
 
 	@Column
 	private int productHit;

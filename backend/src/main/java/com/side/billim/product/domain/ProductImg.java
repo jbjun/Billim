@@ -1,6 +1,5 @@
 package com.side.billim.product.domain;
 
-
 import com.side.billim.common.domain.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,7 @@ public class ProductImg extends BaseTimeEntity {
 	private Product product;
 
 	@Column(nullable = false)
-	private int order;
+	private int fileOrder;
 
 	@Column
 	private String filePath;
