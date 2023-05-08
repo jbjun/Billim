@@ -1,18 +1,16 @@
-import React, { useState, useMemo, useLayoutEffect } from "react";
-import { Box, Button, Chip, FormControl, Grid } from "@mui/material";
-
+import React, { useState, useMemo } from "react";
+import { Button, Grid } from "@mui/material";
 import NameInputField from "@components/login/NameInputField";
-import { updateUserInfo, uploadImage } from "@lib/api/userApi";
+import { uploadImage } from "@lib/api/userApi";
 import { useNavigate } from "react-router";
 import PageLayout from "@components/layout/PageLayout";
 import Header from "@components/layout/Header";
 import useUpdateUser from "@lib/hooks/useUpdateUser";
-import PhoneNumberInputFieldContainer from "@container/login/input/PhoneNumberInputFieldContainer";
-import AddressInputFieldContainer from "@container/login/input/AddressInputFieldContainer";
 import NickNameInputFieldContainer from "@container/login/input/NickNameInputFieldContainer";
 import InputField from "@components/InputField";
 import { My_INFORMATION_SETTING_PATH } from "@routes/myPage";
 import ProfileImageEdit from "@components/login/ProfileImage";
+import AddressInputFieldContainer from "@container/login/input/AddressInputFieldContainer";
 
 function UpdateUserContainer() {
   const navigate = useNavigate();

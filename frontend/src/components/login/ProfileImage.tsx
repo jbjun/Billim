@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Box, Button, CircularProgress, Grid, IconButton } from "@mui/material";
-import { PhotoCamera } from "@mui/icons-material";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 interface IProfileImageEditProps {
   src: string;

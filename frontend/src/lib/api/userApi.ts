@@ -119,11 +119,15 @@ interface IUploadImageProps {
 }
 export const uploadImage = async ({ data }: IUploadImageProps) => {
   try {
+    const formData = new FormData();
+    formData.append("files", data);
     const id = getId();
-    const result = await axios.post(
-      `${BASE_API_PATH}/user/images?id=${id}`,
-      data
-    );
+    const result = await axios({
+      method: "post",
+      url: `${BASE_API_PATH}/user/images?id=${id}`,
+      headers: { "Content-Type": "multipart/form-data" },
+      data: formData,
+    });
   } catch (error) {
     console.error(error);
   }

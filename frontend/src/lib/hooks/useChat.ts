@@ -1,24 +1,31 @@
 import { BASE_SOKET_IO_PATH } from "@lib/api";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const { SockJS, Stomp } = window as any;
 interface IUseChatProps {
   roomId: string;
   initMessages: any;
 }
-const sockJs = new SockJS(`${BASE_SOKET_IO_PATH}/stomp/chat`);
-const stomp = Stomp.over(sockJs);
 function useChat({ initMessages, roomId }: IUseChatProps) {
   const [messages, setMessages] = useState<any>(initMessages);
   const userId = 16;
 
-  const onSendMessage = useCallback((value: string) => {
-    stomp.send(
-      `/pub/chat/message`,
-      {},
-      JSON.stringify({ roomId: roomId, userId: userId, message: value })
-    );
-  }, []);
+  const stomp = useRef<any>(() => {
+    const sockJs = new SockJS(`${BASE_SOKET_IO_PATH}/stomp/chat`);
+    const stomp = Stomp.over(sockJs);
+    return stomp;
+  });
+
+  const onSendMessage = useCallback(
+    (value: string) => {
+      stomp.current.send(
+        `/pub/chat/message`,
+        {},
+        JSON.stringify({ roomId: roomId, userId: userId, message: value })
+      );
+    },
+    [stomp]
+  );
 
   useEffect(() => {
     // const sockJs = new SockJS("/stomp/chat");
@@ -26,11 +33,11 @@ function useChat({ initMessages, roomId }: IUseChatProps) {
     // const stomp = Stomp.over(sockJs);
 
     //2. connection이 맺어지면 실행
-    stomp.connect({}, function () {
+    stomp.current.connect({}, function () {
       console.log("STOMP Connection");
 
       //4. subscribe(path, callback)으로 메세지를 받을 수 있음
-      stomp.subscribe(`/sub/chat/room/` + roomId, function (chat: any) {
+      stomp.current.subscribe(`/sub/chat/room/` + roomId, function (chat: any) {
         const {
           message,
           createdDate,
@@ -52,7 +59,7 @@ function useChat({ initMessages, roomId }: IUseChatProps) {
     return () => {
       //   stomp.disconnect();
     };
-  }, []);
+  }, [stomp]);
 
   return {
     messages,
