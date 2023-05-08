@@ -9,7 +9,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useLocation } from "react-router";
+import { useParams } from "react-router-dom";
 
 // 내부모듈
 import RentalStatusTag from "@components/common/RentStatusTag";
@@ -25,8 +25,7 @@ type ProductDetailContainer = {
 
 const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
   const theme = useTheme();
-  const { pathname } = useLocation();
-  const id = pathname.split("/").pop();
+  const { id } = useParams();
 
   if (!id) return null;
   const { mutate: updateViewCount } = useUpdateViewCount(id);
@@ -71,7 +70,7 @@ const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
         </Carousel>
       </Box>
       <Container sx={{ pt: "20px" }}>
-        <Stack spacing={2.5} pb="72px">
+        <Stack spacing={2.5} pb="84px">
           <Box display="flex" alignItems="center">
             <Avatar sx={{ width: "36px", height: "36px" }} />
             <Box sx={{ ml: "8px" }}>

@@ -1,20 +1,18 @@
 // 외부모듈
-import { Box, Drawer, IconButton, SvgIcon } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
+import { Box, IconButton } from "@mui/material";
 
 // 내부모듈
 import { ReactComponent as HmbIcon } from "@assets/icons/btn_hmb.svg";
+import { useNavigate } from "react-router";
+import { CATEGORY_PATH } from "@routes/index";
 
 const HeaderHomeMenu = () => {
-  const [open, setOpen] = useState(false);
+  const navigator = useNavigate();
+  const handleClick = () => navigator(CATEGORY_PATH);
   return (
     <>
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <Box width="50vw"></Box>
-      </Drawer>
       <Box height="100%" display="flex" justifyContent="flex-end">
-        <IconButton onClick={() => setOpen(true)} sx={{ p: 0 }}>
+        <IconButton onClick={handleClick} sx={{ p: 0 }}>
           <HmbIcon />
         </IconButton>
       </Box>

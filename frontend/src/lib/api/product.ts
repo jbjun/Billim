@@ -14,6 +14,7 @@ export interface IfetchProductsOption {
   orderBy?: TOrderby;
   pageSize?: number | string;
   page?: number | string;
+  category?: string | null;
 }
 
 export interface IRegistationProduct {
@@ -30,7 +31,8 @@ export const fetchRegistrationProduct = async (product: FormData) => {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
-  await sleep(2000);
+  // TODO 추후수정
+  await sleep(3000);
 
   return data;
 };
@@ -40,9 +42,10 @@ export const fetchGetProducts = async ({
   orderBy = "recent",
   pageSize = 10,
   page = 1,
+  category,
 }: IfetchProductsOption): Promise<IProductApiReturn[]> => {
   const response = await axios.get(`${BASE_URL}/getProducts`, {
-    params: { location, orderBy, pageSize, page },
+    params: { location, orderBy, pageSize, page, category },
   });
 
   return response.data.products;

@@ -1,4 +1,4 @@
-import CategoryPage from "@pages/login/CategoryPage";
+import CategoryPage from "@pages/CategoryPage";
 import LoginPage from "@pages/login/LoginPage";
 import NaverConnectionPage from "@pages/login/NaverConnectionPage";
 import NaverRedirectPage from "@pages/login/NaverRedirectPage";
@@ -13,7 +13,6 @@ export const NAVER_CONNECTION_PATH = "naver-connection";
 export const SERVICE_DESCRIPTION_PATH = "service-description";
 const SERVICE_DESCRIPTION_DYNAMIC_PATH = "/:descriptionType";
 const REGISTRATION_COMPLETED_PATH = "registration-completed";
-const CATEGORY_PATH = "category";
 
 const login_rotuer_info = [
   {
@@ -39,10 +38,6 @@ const login_rotuer_info = [
   {
     path: REGISTRATION_COMPLETED_PATH,
     element: <RegistrationCompletedPage />,
-  },
-  {
-    path: CATEGORY_PATH,
-    element: <CategoryPage />,
   },
 ];
 
