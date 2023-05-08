@@ -34,7 +34,6 @@ interface ICategoryInputContainerdProps {
 }
 
 const CategoryInputContainerd = ({
-  register,
   categoryValue,
   onCategoryClick,
 }: ICategoryInputContainerdProps) => {

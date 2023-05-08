@@ -17,14 +17,19 @@ import { ReactComponent as OChatIcon } from "@assets/icons/Chat_outlined.svg";
 import { ReactComponent as FChatIcon } from "@assets/icons/Chat_filled.svg";
 import { ReactComponent as OProfileIcon } from "@assets/icons/Profile_outlined.svg";
 import { ReactComponent as FProfileIcon } from "@assets/icons/Profile_filled.svg";
-import { CHAT_LIST_PATH } from "routes";
+import {
+  CHAT_LIST_PATH,
+  RENTAL_HISTORY_PATH,
+  HOME_PATH,
+  MY_PATH,
+} from "routes";
 
 const LabelBottomNavigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
   const [value, setValue] = useState(location.pathname);
-  const handleChange = (event: React.SyntheticEvent, path: string) => {
+  const handleChange = (_: React.SyntheticEvent, path: string) => {
     if (location.pathname === path) return;
     navigate(path);
     setValue(path);
@@ -38,9 +43,9 @@ const LabelBottomNavigation = () => {
       <BottomNavigation value={value} onChange={handleChange} showLabels>
         <BottomNavigationAction
           label="홈"
-          value="/home"
+          value={HOME_PATH}
           icon={
-            pathname === `/home` ? (
+            pathname === HOME_PATH ? (
               <SvgIcon component={FHomeIcon} />
             ) : (
               <SvgIcon component={OHomeIcon} />
@@ -49,9 +54,9 @@ const LabelBottomNavigation = () => {
         />
         <BottomNavigationAction
           label="대여 내역"
-          value="/rentalList"
+          value={RENTAL_HISTORY_PATH}
           icon={
-            pathname === `/rentalList` ? (
+            pathname === RENTAL_HISTORY_PATH ? (
               <SvgIcon component={FListIcon} />
             ) : (
               <SvgIcon component={OListIcon} />
@@ -60,9 +65,9 @@ const LabelBottomNavigation = () => {
         />
         <BottomNavigationAction
           label="채팅"
-          value={`/${CHAT_LIST_PATH}`}
+          value={CHAT_LIST_PATH}
           icon={
-            pathname === `/${CHAT_LIST_PATH}` ? (
+            pathname === CHAT_LIST_PATH ? (
               <SvgIcon component={FChatIcon} />
             ) : (
               <SvgIcon component={OChatIcon} />
@@ -71,9 +76,9 @@ const LabelBottomNavigation = () => {
         />
         <BottomNavigationAction
           label="내 정보"
-          value="/my"
+          value={MY_PATH}
           icon={
-            pathname === "/my" ? (
+            pathname === MY_PATH ? (
               <SvgIcon component={FProfileIcon} />
             ) : (
               <SvgIcon component={OProfileIcon} />

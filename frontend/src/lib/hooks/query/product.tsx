@@ -69,10 +69,19 @@ export const useInfiniteProducts = (
 ) => {
   // const queryClient = useQueryClient();
 
-  return useInfiniteQuery(["products", props], () => fetchGetProducts(props), {
-    // getNextPageParam: (lastPage, page) => {},
-    ...option,
-  });
+  return useInfiniteQuery(
+    ["products", props],
+    ({ pageParam }) => fetchGetProducts({ ...props, page: pageParam }),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        const pageSize = Number(props.pageSize) || 10;
+        if (lastPage.length < pageSize) return undefined;
+        const nextPage = allPages.length + 1;
+        return nextPage;
+      },
+      ...option,
+    }
+  );
 };
 
 export const useGetProduct = (id: string) => {
