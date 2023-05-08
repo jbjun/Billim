@@ -1,5 +1,5 @@
 // hooks/useScrollToTop.js
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useLocation } from "react-router";
 import { useSessionStorage } from "usehooks-ts";
 
