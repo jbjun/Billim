@@ -25,15 +25,15 @@ const HomeTerms = () => {
           <Link to="/terms/service">
             <Typography variant="b7">서비스 이용약관</Typography>
           </Link>
-          <Box mx="4px">
-            <DividerIcon />
-          </Box>
+          <Typography mx="4px" fontSize="10px">
+            |
+          </Typography>
           <Link to="/terms/personal_information_processing_policy">
             <Typography variant="b7">개인정보 처리 방침</Typography>
           </Link>
-          <Box mx="4px">
-            <DividerIcon />
-          </Box>
+          <Typography mx="4px" fontSize="10px">
+            |
+          </Typography>
           <Link to="/terms/location">
             <Typography variant="b7">위치정보 이용 약관</Typography>
           </Link>
