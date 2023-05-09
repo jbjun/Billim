@@ -21,8 +21,8 @@ export default defineConfig({
         "splash-1.png",
       ],
       manifest: {
-        name: "Billim",
-        short_name: "Billim",
+        name: "빌림",
+        short_name: "빌림",
         description: "필요한걸 내주변에서 빌리자",
         display: "standalone",
         theme_color: "#ffffff",

@@ -50,6 +50,7 @@ export const TERMS_PATH = "/terms/:term";
 export const router = createBrowserRouter([
   {
     path: ROOT_PATH,
+    index: true,
     element: <App />,
   },
   {
