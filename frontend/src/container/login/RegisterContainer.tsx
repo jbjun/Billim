@@ -24,6 +24,7 @@ import { HOME_PATH } from "@routes/index";
 import PageLayout from "@components/layout/PageLayout";
 import Header from "@components/layout/Header";
 import useUpdateUser from "@lib/hooks/useUpdateUser";
+import { REGISTRATION_COMPLETED_PATH } from "@routes/login";
 
 function SpeechBubble() {
   const theme = useTheme();
@@ -104,7 +105,7 @@ function RegisterContainer() {
 
   const onRegister = () => {
     onUpdateUser();
-    navigate(`/${HOME_PATH}`);
+    navigate(`/${REGISTRATION_COMPLETED_PATH}`);
   };
   const isRegistable = useMemo(() => {
     return Object.values(userForm).every((info) => info.verified);

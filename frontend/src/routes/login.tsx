@@ -12,7 +12,7 @@ export const REGISTER_PATH = "register";
 export const NAVER_CONNECTION_PATH = "naver-connection";
 export const SERVICE_DESCRIPTION_PATH = "service-description";
 const SERVICE_DESCRIPTION_DYNAMIC_PATH = "/:descriptionType";
-const REGISTRATION_COMPLETED_PATH = "registration-completed";
+export const REGISTRATION_COMPLETED_PATH = "registration-completed";
 
 const login_rotuer_info = [
   {

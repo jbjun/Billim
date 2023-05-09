@@ -4,7 +4,14 @@ import React from "react";
 import CompletedRegisterBillimCharacter from "@assets/images/login/Completed_register_billim_character.png";
 import BillimImage from "@components/common/BillimImage";
 import PageLayout from "@components/layout/PageLayout";
+import { HOME_PATH } from "@routes/index";
+import { useNavigate } from "react-router";
 function RegistrationCompletedPage() {
+  const navigate = useNavigate();
+
+  const onMoveHome = () => {
+    navigate(`/${HOME_PATH}`);
+  };
   return (
     <>
       <PageLayout
@@ -24,6 +31,7 @@ function RegistrationCompletedPage() {
         }
         footer={
           <Button
+            onClick={onMoveHome}
             variant="contained"
             sx={{
               width: "100%",

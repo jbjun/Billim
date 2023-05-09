@@ -19,8 +19,15 @@ import mypage_rotuer_info from "./myPage";
 import CategoryPage from "@pages/CategoryPage";
 import CategoryHomePage from "@pages/CategoryHomePage";
 import TermsPage from "@pages/TermsPage";
+import GuidePage from "@pages/GuidePage";
+import IntroPage from "@pages/IntroPage";
 
 export const ROOT_PATH = "/";
+
+export const INTRO_PATH = "intro";
+
+// guide
+export const GUIDE_PATH = "guide";
 
 // chat
 export const CHAT_LIST_PATH = "chat-list";
@@ -44,6 +51,14 @@ export const router = createBrowserRouter([
   {
     path: ROOT_PATH,
     element: <App />,
+  },
+  {
+    path: INTRO_PATH,
+    element: <IntroPage />,
+  },
+  {
+    path: GUIDE_PATH,
+    element: <GuidePage />,
   },
   {
     element: (

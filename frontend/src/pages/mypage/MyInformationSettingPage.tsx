@@ -46,7 +46,10 @@ function MyInformationSettingPage() {
       <Header title="내 정보 관리" needBackHistory />
       <Grid container>
         <Grid item xs={12} sx={{ p: 1 }}>
-          <UserImageSlot username={userInfo.name} />
+          <UserImageSlot
+            username={userInfo.name}
+            imageSrc={userInfo.fullPath}
+          />
         </Grid>
         <InformationDivider />
         <UserInformationSlot title={"회원 정보"}>
@@ -132,8 +135,9 @@ function UserInformationSlot({ title, children }: IUserInformationSlotProps) {
 
 interface IUserImageSlotProps {
   username: string;
+  imageSrc: string;
 }
-function UserImageSlot({ username }: IUserImageSlotProps) {
+function UserImageSlot({ username, imageSrc }: IUserImageSlotProps) {
   const navigate = useNavigate();
 
   const onEdit = () => {
@@ -152,9 +156,7 @@ function UserImageSlot({ username }: IUserImageSlotProps) {
         }}
       >
         <img
-          src={
-            "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg"
-          }
+          src={imageSrc}
           style={{
             width: "100%",
             height: "100%",
