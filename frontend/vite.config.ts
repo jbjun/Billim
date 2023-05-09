@@ -12,7 +12,14 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png"],
+      includeAssets: [
+        "iOS-120x120.png",
+        "iOS-152x152.png",
+        "iOS-167x167.png",
+        "iOS-180x180.png",
+        "AOS-192x192.png",
+        "splash-1.png",
+      ],
       manifest: {
         name: "Billim",
         short_name: "Billim",
@@ -21,13 +28,8 @@ export default defineConfig({
         theme_color: "#ffffff",
         icons: [
           {
-            src: "pwa-192x192.png",
+            src: "AOS-192x192.png",
             sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "pwa-512x512.png",
-            sizes: "512x512",
             type: "image/png",
           },
         ],
