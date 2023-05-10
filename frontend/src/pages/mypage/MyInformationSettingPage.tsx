@@ -33,11 +33,7 @@ function MyInformationSettingPage() {
   };
 
   const onDeleteUser = async () => {
-    if (!userInfo?.name) {
-      throw new Error("회원 탈퇴 중 문제가 발생하였습니다.");
-    }
-
-    await deleteUser({ name: userInfo.name });
+    await deleteUser();
     navigate(`/${LOGIN_PATH}`);
   };
   if (!userInfo) return null;
@@ -48,7 +44,7 @@ function MyInformationSettingPage() {
         <Grid item xs={12} sx={{ p: 1 }}>
           <UserImageSlot
             username={userInfo.name}
-            imageSrc={userInfo.fullPath}
+            imageSrc={userInfo.imageName}
           />
         </Grid>
         <InformationDivider />

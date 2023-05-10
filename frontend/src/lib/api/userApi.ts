@@ -1,6 +1,6 @@
 import { BASE_API_PATH, BASE_URL, getId } from ".";
 import axios from "axios";
-import { getCookie } from "./cookie";
+import { getCookie, removeCookie } from "./cookie";
 import { useMutation, useQueryClient } from "react-query";
 export const fetchCheckNickName = async (
   nickname: string
@@ -88,7 +88,7 @@ export const updateUserInfo = async ({
 }: IUpdateUserProps) => {
   const id = getId();
   const result = await axios.get(
-    `${BASE_API_PATH}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}`
+    `${BASE_API_PATH}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}&name=${username}`
   );
 
   if (result) {
@@ -98,15 +98,12 @@ export const updateUserInfo = async ({
   throw new Error("회원가입에 실패하였습니다.");
 };
 
-interface IDeleteUserProps {
-  name: string;
-}
-export const deleteUser = async ({ name }: IDeleteUserProps) => {
-  const result = await axios.get(
-    `${BASE_API_PATH}/user/deleteUser?name=${name}`
-  );
+export const deleteUser = async () => {
+  const id = getId();
+  const result = await axios.get(`${BASE_API_PATH}/user/deleteUser?id=${id}`);
 
   if (result) {
+    removeCookie("userId");
     return true;
   }
 

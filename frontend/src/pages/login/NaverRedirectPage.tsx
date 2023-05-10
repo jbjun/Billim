@@ -15,8 +15,8 @@ function NaverRedirectPage({ needRegister }: INaverRedirectPageProps) {
 
   useEffect(() => {
     // sessionKey 저장
-    setHeaderAuthorization(id);
-    setCookie("sessionKey", id);
+    // setHeaderAuthorization(id);
+    // setCookie("sessionKey", id);
     setCookie("userId", id);
 
     if (needRegister) {
