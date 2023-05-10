@@ -2,6 +2,7 @@ package com.side.billim.sms.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.side.billim.login.domain.user.UserRepository;
 import com.side.billim.sms.domain.SmsRepository;
 import com.side.billim.sms.dto.MessageDto;
 import com.side.billim.sms.dto.SmsRequestDto;
@@ -43,7 +44,6 @@ public class SmsService {
 
   @Autowired
   private SmsRepository smsRepository;
-
 
   public SmsResponseDto sendSms(MessageDto messageDto) throws JsonProcessingException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, URISyntaxException {
     Long time = System.currentTimeMillis();
@@ -126,7 +126,12 @@ public class SmsService {
     smsRepository.updateUser(id,number,nickName,juso);
   }
 
-  public void deleteUser(String name) {
-    smsRepository.deleteByName(name);
+  public void deleteUser(Long id) {
+
+    smsRepository.deleteChatMessage(id);
+    smsRepository.deleteChatRoom(id);
+    smsRepository.deleteProductImg(id);
+
+    smsRepository.deleteById(id);
   }
 }

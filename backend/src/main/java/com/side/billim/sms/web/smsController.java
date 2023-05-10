@@ -60,9 +60,9 @@ public class smsController {
   }
 
   @GetMapping("/user/deleteUser")
-  @ApiOperation(value = "회원탈퇴 임시", notes = "회원탈퇴 임시 API")
-  public ResponseEntity<?> deleteUser(@RequestParam("name") String name) {
-    smsService.deleteUser(name);
+  @ApiOperation(value = "회원탈퇴 임시", notes = "회원탈퇴 API")
+  public ResponseEntity<?> deleteUser(@RequestParam("id") Long id) {
+    smsService.deleteUser(id);
     return ResponseEntity.status(HttpStatus.OK).body(true);
   }
 
