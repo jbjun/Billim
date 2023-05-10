@@ -5,17 +5,22 @@ import IconButton from "@mui/material/IconButton";
 import Dialog from "@components/layout/Dialog";
 import AddressFinderContainer from "./AddressFinderContainer";
 import { IVerifiableInputProps } from "../RegisterContainer";
+import useStateFromProp from "@lib/hooks/useStateFromProp";
 
 interface IAddressInputFieldContainer {
   id: IVerifiableInputProps["id"];
   onVerify: IVerifiableInputProps["onVerify"];
+  value?: string;
+  required?: boolean;
 }
 function AddressInputFieldContainer({
   id,
   onVerify,
+  value,
+  required = true,
 }: IAddressInputFieldContainer) {
   const [error, setError] = useState(false);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useStateFromProp(value);
   const [openAdressDialog, setOpenAdressDialog] = useState(false);
 
   const onOpenAdressDialog = () => {
@@ -36,12 +41,12 @@ function AddressInputFieldContainer({
     <>
       <InputField
         label="주소"
-        value={address}
+        value={address || ""}
         onChange={onChange}
         placeholder="주소를 선택해 주세요"
         error={error}
         helperText="주소를 입력해 주세요"
-        required
+        required={required}
         endAdornment={
           <IconButton onClick={onOpenAdressDialog} edge="end">
             <SearchIcon />

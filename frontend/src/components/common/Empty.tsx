@@ -3,11 +3,17 @@ import { Box, Typography } from "@mui/material";
 // 내부모듈
 import CharacterImg from "@assets/images/login/Login_billim_character.png";
 
-const Empty = () => {
+interface IEmptyProps {
+  width?: string;
+  height?: string;
+  message: string;
+}
+
+const Empty = ({ width, height, message }: IEmptyProps) => {
   return (
     <Box
-      width="100vw"
-      height="calc(100vh - 171px)"
+      width={width || "100vw"}
+      height={height || "calc(100vh - 171px)"}
       display="flex"
       flexDirection="column"
       justifyContent="center"
@@ -16,7 +22,7 @@ const Empty = () => {
     >
       <img src={CharacterImg} />
       <Typography mt="20px" variant="h6">
-        비어있습니다 빌림을 적극 이용해보세요.
+        {message}
       </Typography>
     </Box>
   );

@@ -5,9 +5,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import React, { ReactNode } from "react";
 import { styled, useTheme } from "@mui/material";
+import { PaginationOptions, Swiper as SwiperTypes } from "swiper/types";
 
 type CarouselProps = {
   children: ReactNode;
+  customPagination?: PaginationOptions;
+  onActiveIndex?: (index: number) => void;
 };
 
 const WrapperStyle = styled("div")(() => ({
@@ -26,21 +29,32 @@ const WrapperStyle = styled("div")(() => ({
   },
 }));
 
-const Carousel = ({ children }: CarouselProps) => {
+const Carousel = ({
+  children,
+  customPagination,
+  onActiveIndex,
+}: CarouselProps) => {
   const theme = useTheme();
   return (
     <WrapperStyle>
       <Swiper
+        onActiveIndexChange={(swiper: SwiperTypes) => {
+          onActiveIndex?.(swiper.activeIndex);
+        }}
         style={{
           //@ts-ignore
           "--swiper-theme-color": theme.palette.primary[200],
         }}
         modules={[Pagination]}
-        pagination={{
-          type: "progressbar",
-          renderProgressbar: (progressbarFillClass) =>
-            '<span class="' + progressbarFillClass + '"></span>',
-        }}
+        pagination={
+          customPagination
+            ? customPagination
+            : {
+                type: "progressbar",
+                renderProgressbar: (progressbarFillClass) =>
+                  '<span class="' + progressbarFillClass + '"></span>',
+              }
+        }
       >
         {React.Children.map(children, (child) => (
           <SwiperSlide>{child}</SwiperSlide>

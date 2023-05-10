@@ -1,6 +1,7 @@
-import { BASE_API_PATH, BASE_URL } from ".";
+import { BASE_API_PATH, BASE_URL, getId } from ".";
 import axios from "axios";
 import { getCookie } from "./cookie";
+import { useMutation, useQueryClient } from "react-query";
 export const fetchCheckNickName = async (
   nickname: string
 ): Promise<boolean> => {
@@ -63,31 +64,82 @@ export interface IUserInfoResponse {
   roleKey: "ROLE_KAKAO";
 }
 export const fetchUserInfo = async (): Promise<IUserInfoResponse> => {
+  console.log("fetchUserInfo called");
   const id = getId();
   const result = await axios.get(`${BASE_API_PATH}/user/selectUser?id=${id}`);
 
   return result.data;
 };
 
-interface IRegisterUserProps {
+export interface IUpdateUserProps {
   // email: string;
+  username: string;
   phoneNumber: string;
   nickname: string;
   address: string;
 }
-export const registerUser = ({
+
+export const updateUserInfo = async ({
   // email,
+  username,
   phoneNumber,
   nickname,
   address,
-}: IRegisterUserProps) => {
+}: IUpdateUserProps) => {
   const id = getId();
-  axios.get(
-    `${BASE_URL}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}`
+  const result = await axios.get(
+    `${BASE_API_PATH}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}`
   );
+
+  if (result) {
+    return true;
+  }
+
+  throw new Error("회원가입에 실패하였습니다.");
 };
 
-function getId() {
-  const id = 16; // 임시처리 / getCookie('sessionKey')
-  return id;
+interface IDeleteUserProps {
+  name: string;
 }
+export const deleteUser = async ({ name }: IDeleteUserProps) => {
+  const result = await axios.get(
+    `${BASE_API_PATH}/user/deleteUser?name=${name}`
+  );
+
+  if (result) {
+    return true;
+  }
+
+  throw new Error("회원 탈퇴에 실패하였습니다.");
+};
+
+// image
+interface IUploadImageProps {
+  data: any;
+}
+export const uploadImage = async ({ data }: IUploadImageProps) => {
+  try {
+    const formData = new FormData();
+    formData.append("files", data);
+    const id = getId();
+    const result = await axios({
+      method: "post",
+      url: `${BASE_API_PATH}/user/images?id=${id}`,
+      headers: { "Content-Type": "multipart/form-data" },
+      data: formData,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getImageSrc = async (
+  imageName: string
+): Promise<string | undefined> => {
+  try {
+    const result = await axios.get(`${BASE_API_PATH}/user/image/${imageName}`);
+    return result.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

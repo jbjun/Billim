@@ -1,17 +1,25 @@
 import { Dialog as MUIDialog, Grid, Typography, Button } from "@mui/material";
 
-interface IChattingListRemoveConfirmDialogProps {
+interface IConfirmProps {
   open: boolean;
-  // 삭제
+
+  // 컨펌창 메시지
+  title: string;
+  // 컨펌 버튼 메시지
+  confirmMessage: string;
+
+  // 컨펌 시 실행 할 핸들러
   onConfirm: any;
   // 취소
   onCancle: any;
 }
-export default function ChatRemoveConfirmDialog({
+export default function BillimConfirm({
   open,
+  title,
   onConfirm,
   onCancle,
-}: IChattingListRemoveConfirmDialogProps) {
+  confirmMessage,
+}: IConfirmProps) {
   return (
     <MUIDialog
       open={open}
@@ -26,9 +34,7 @@ export default function ChatRemoveConfirmDialog({
         alignItems={"center"}
       >
         <Grid item xs={12}>
-          <Typography>
-            삭제 시 대화 내용이 모두 삭제되고 채팅 목록에서도 삭제돼요.
-          </Typography>
+          <Typography>{title}</Typography>
         </Grid>
         <Grid item xs={6}>
           <Button fullWidth variant="contained" onClick={onCancle}>
@@ -37,7 +43,7 @@ export default function ChatRemoveConfirmDialog({
         </Grid>
         <Grid item xs={6}>
           <Button fullWidth variant="contained" onClick={onConfirm}>
-            삭제
+            {confirmMessage}
           </Button>
         </Grid>
       </Grid>

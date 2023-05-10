@@ -202,7 +202,7 @@ export const theme = createTheme(
             height: "32px",
           },
           sizeMedium: {
-            height: "40px",
+            height: "48px",
           },
           sizeLarge: {
             height: "48px",
@@ -220,10 +220,16 @@ export const theme = createTheme(
               },
             },
             "& .MuiInputBase-root": {
-              paddingBottom: "11px",
+              paddingBottom: "5px",
               "&:before": {
                 borderBottom: "1px solid #E5E5E5",
               },
+            },
+            "& .MuiFormLabel-root": {
+              color: "black !important",
+            },
+            "& .MuiFormLabel-asterisk": {
+              color: "red",
             },
             textarea: {
               fontSize: "14px",

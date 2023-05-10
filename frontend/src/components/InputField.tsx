@@ -1,12 +1,6 @@
 import { InputAdornment, SxProps, TextField, Theme } from "@mui/material";
-import { green } from "@mui/material/colors";
 import _ from "lodash";
 import React from "react";
-
-// 입력값
-// 변하면 event 발생
-// 버튼 여부
-// 필수 여부
 
 interface InputFieldProps {
   label?: string;
@@ -63,7 +57,7 @@ function InputField({
       helperText={getHelperText(error, helperText, success, successHelperText)}
       onChange={onChange}
       InputProps={{
-        sx: getInputStyle(success, inputStyle),
+        sx: getInputStyle({ success, disabled, inputStyle }),
         // label의 value 가림 방지용 / 추후 css 적으로 처리할 수 있는지 확인 필요
         startAdornment: startAdornment ? (
           <InputAdornment position="start">{startAdornment}</InputAdornment>
@@ -98,16 +92,29 @@ function getHelperText(
   return "";
 }
 
-function getInputStyle(
-  success: boolean | undefined,
-  inputStyle: SxProps<Theme> | undefined
-): SxProps<Theme> | undefined {
+interface IGetInputStyleProps {
+  success: boolean | undefined;
+  disabled: boolean | undefined;
+  inputStyle: SxProps<Theme> | undefined;
+}
+function getInputStyle({
+  success,
+  inputStyle,
+  disabled,
+}: IGetInputStyleProps): SxProps<Theme> | undefined {
   let result = {};
   if (success) {
-    result = {
+    _.merge(result, {
       "&::before": { borderBottomColor: "green !important" },
       "&::after": { borderBottomColor: "green !important" },
-    };
+    });
+  }
+
+  if (disabled) {
+    _.merge(result, {
+      backgroundColor: "rgb(157 153 153 / 40%)",
+      p: "5px !important",
+    });
   }
 
   return _.merge(result, inputStyle);

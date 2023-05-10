@@ -16,6 +16,7 @@ import TitleInput from "@container/home/register/TitleInputContainer";
 import PriceInput from "@container/home/register/PriceInputContainer";
 import TextInput from "@container/home/register/TextInputContainer";
 import CategoryInput from "@container/home/register/CategoryInputContainer";
+import { useRegistrationProduct } from "@lib/hooks/query/product";
 
 export interface IProductRegisterState {
   title: string;
@@ -45,6 +46,8 @@ const ProductRegisterContainer = () => {
     },
   });
 
+  const { mutate: productRegister } = useRegistrationProduct();
+
   const { errors, isValid } = formState;
 
   const categoryValue = watch("category");
@@ -56,8 +59,22 @@ const ProductRegisterContainer = () => {
     trigger("category");
   };
 
-  const onSubmit = (data: any) => {
-    console.log("Form Data: ", data);
+  const onSubmit = (data: IProductRegisterState) => {
+    const { title, text, price, category, files } = data;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("text", text);
+    formData.append("price", String(price));
+    formData.append("category", category);
+    formData.append("location", "자양동"); // 쿠키에서 가져오기
+    formData.append("publisherId", "1"); // 쿠키에서 가져오기
+    formData.append("nickName", "이빌리"); // 쿠키에서 가져오기
+    formData.append("profileImg", ""); // 쿠키에서 가져오기
+    files.forEach((image, index) =>
+      formData.append(`images[${index}]`, image, image.name)
+    );
+
+    productRegister(formData);
   };
 
   return (

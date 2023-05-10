@@ -2,6 +2,7 @@ package com.side.billim.chat.domain;
 
 import com.side.billim.common.domain.BaseTimeEntity;
 import com.side.billim.login.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,15 @@ public class ChatMessage extends BaseTimeEntity{
 	@Column(name = "message")
 	private String message;
 
+
+	@Builder
+	public ChatMessage(ChatRoom chatRoom , User user, String message){
+		this.chatRoom = chatRoom;
+		this.user = user;
+		this.message = message;
+	}
+
+	public ChatMessage(ChatRoom chatRoom, User user) {
+		super();
+	}
 }

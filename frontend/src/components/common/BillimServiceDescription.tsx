@@ -611,9 +611,11 @@ function replaceNewlineWithBr(text: string) {
 
 function Description({ children }: any) {
   return (
-    <Grid container sx={{ p: 1 }} alignItems={"center"}>
-      {children}
-    </Grid>
+    <div>
+      <Grid container sx={{ p: 1 }} alignItems={"center"}>
+        {children}
+      </Grid>
+    </div>
   );
 }
 function DescriptionTitle({ children }: any) {

@@ -2,19 +2,24 @@ import { Chip } from "@mui/material";
 import React, { useState } from "react";
 import InputField from "@components/InputField";
 import { IVerifiableInputProps } from "../RegisterContainer";
-import { fetchCheckNickName } from "@lib/api/loginApi";
+import { fetchCheckNickName } from "@lib/api/userApi";
+import useStateFromProp from "@lib/hooks/useStateFromProp";
 
 interface INickNameInputFieldContainer {
   id: IVerifiableInputProps["id"];
   onVerify: IVerifiableInputProps["onVerify"];
+  value?: string;
+  required?: boolean;
 }
 function NickNameInputFieldContainer({
   id,
   onVerify,
+  value,
+  required = true,
 }: INickNameInputFieldContainer) {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [nickName, setNickName] = useState("");
+  const [nickName, setNickName] = useStateFromProp(value || "");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -42,7 +47,7 @@ function NickNameInputFieldContainer({
       value={nickName}
       onChange={onChange}
       placeholder="거래시 사용할 닉네임을 입력해주세요"
-      required
+      required={required}
       error={error}
       helperText="이미 사용중인 닉네임 입니다. 다른 닉네임을 입력해 주세요."
       success={success}

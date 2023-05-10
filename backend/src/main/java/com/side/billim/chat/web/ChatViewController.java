@@ -20,6 +20,8 @@ public class ChatViewController {
 	@GetMapping("/chat/room")
 	public String getRoom(String roomId, Model model){
 
+		roomId = "1";
+
 		log.info("# get Chat Room, roomID : " + roomId);
 
 		return "/chat/room";

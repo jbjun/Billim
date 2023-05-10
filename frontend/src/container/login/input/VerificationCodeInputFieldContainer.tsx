@@ -4,7 +4,7 @@ import { Button, Typography } from "@mui/material";
 import { createValidator } from "@lib/utils/validator";
 import { flushSync } from "react-dom";
 
-const validateCode = createValidator(/^[1-9]{0,4}$/);
+const validateCode = createValidator(/^[0-9]{0,4}$/);
 const initialTime = 120;
 interface IVerificationCodeInputFieldContainerProps {
   onVerify: any;

@@ -1,6 +1,7 @@
 package com.side.billim.sms.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.side.billim.login.domain.user.User;
 import com.side.billim.sms.dto.MessageDto;
 import com.side.billim.sms.dto.SmsResponseDto;
 import com.side.billim.sms.web.service.SmsService;
@@ -51,10 +52,18 @@ public class smsController {
   public ResponseEntity<?> updateUser(@RequestParam Long id,
                                   @RequestParam String number,
                                   @RequestParam String nickName,
-                                  @RequestParam String juso
+                                  @RequestParam String juso,
+                                  @RequestParam String name
   ){
-    smsService.updateUser(id, number, nickName, juso);
+    smsService.updateUser(id, number, nickName, juso, name);
 
+    return ResponseEntity.status(HttpStatus.OK).body(true);
+  }
+
+  @GetMapping("/user/deleteUser")
+  @ApiOperation(value = "회원탈퇴 임시", notes = "회원탈퇴 API")
+  public ResponseEntity<?> deleteUser(@RequestParam("id") Long id) {
+    smsService.deleteUser(id);
     return ResponseEntity.status(HttpStatus.OK).body(true);
   }
 

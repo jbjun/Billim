@@ -1,7 +1,16 @@
+// 외부모듈
 import Header from "@components/layout/Header";
-import React from "react";
-import { IconButton, Grid, SvgIcon, Stack, Typography } from "@mui/material";
+import {
+  IconButton,
+  Grid,
+  SvgIcon,
+  Stack,
+  Typography,
+  Box,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+
+// 내부모듈
 import { ReactComponent as DegitalDeviceIcon } from "@assets/icons/category/digital_device.svg";
 import { ReactComponent as HouseHoldIcon } from "@assets/icons/category/Household_icon.svg";
 import { ReactComponent as FurnitureInteriorIcon } from "@assets/icons/category/Furniture_interior.svg";
@@ -14,119 +23,110 @@ import { ReactComponent as GameIcon } from "@assets/icons/category/Game_icon.svg
 import { ReactComponent as BookIcon } from "@assets/icons/category/Book_icon.svg";
 import { ReactComponent as PetGoodsIcon } from "@assets/icons/category/Pet_goods.svg";
 import { ReactComponent as ETCIcon } from "@assets/icons/category/ETC.svg";
+import { useNavigate } from "react-router";
+import { createSearchParams } from "react-router-dom";
+
 const categories = [
   {
-    id: "digital_device",
+    id: "digitalDevice",
     label: "디지털기기",
-    icon: (
-      <SvgIcon component={DegitalDeviceIcon} inheritViewBox fontSize="large" />
-    ),
+    icon: DegitalDeviceIcon,
   },
   {
     id: "household",
     label: "생활가전",
-    icon: <SvgIcon component={HouseHoldIcon} inheritViewBox fontSize="large" />,
+    icon: HouseHoldIcon,
   },
   {
-    id: "furniture_interior",
+    id: "furnitureInterior",
     label: "가구/인테리어",
-    icon: (
-      <SvgIcon
-        component={FurnitureInteriorIcon}
-        inheritViewBox
-        fontSize="large"
-      />
-    ),
+    icon: FurnitureInteriorIcon,
   },
   {
-    id: "living_kitchen",
+    id: "livingKitchen",
     label: "생활/주방",
-    icon: (
-      <SvgIcon component={LivingKitchenIcon} inheritViewBox fontSize="large" />
-    ),
+    icon: LivingKitchenIcon,
   },
   {
-    id: "Baby_goods",
-    label: "유아동",
-    icon: <SvgIcon component={BabyGoodsIcon} inheritViewBox fontSize="large" />,
+    id: "babyGoods",
+    label: "유아",
+    icon: BabyGoodsIcon,
   },
   {
-    id: "clothing_goods",
+    id: "clothingGoods",
     label: "의류/잡화",
-    icon: (
-      <SvgIcon component={ClothingGoodsIcon} inheritViewBox fontSize="large" />
-    ),
+    icon: ClothingGoodsIcon,
   },
   {
     id: "Beauty",
     label: "뷰티/미용",
-    icon: <SvgIcon component={BeautyIcon} inheritViewBox fontSize="large" />,
+    icon: BeautyIcon,
   },
   {
-    id: "sports_leisure",
+    id: "sportsLeisure",
     label: "스포츠/레저",
-    icon: (
-      <SvgIcon component={SportsLeisureIcon} inheritViewBox fontSize="large" />
-    ),
+    icon: SportsLeisureIcon,
   },
   {
     id: "game",
     label: "취미/게임/음반",
-    icon: <SvgIcon component={GameIcon} inheritViewBox fontSize="large" />,
+    icon: GameIcon,
   },
   {
     id: "book",
     label: "도서",
-    icon: <SvgIcon component={BookIcon} inheritViewBox fontSize="large" />,
+    icon: BookIcon,
   },
   {
-    id: "pet_goods",
+    id: "petGoods",
     label: "반려동물용품",
-    icon: <SvgIcon component={PetGoodsIcon} inheritViewBox fontSize="large" />,
+    icon: PetGoodsIcon,
   },
   {
     id: "etc",
     label: "기타물품",
-    icon: <SvgIcon component={ETCIcon} inheritViewBox fontSize="large" />,
+    icon: ETCIcon,
   },
 ];
 function CategoryPage() {
-  const onClose = () => {};
+  const navigator = useNavigate();
+  const handleClick = (path: string, label: string) =>
+    navigator({
+      pathname: `/${path}/home`,
+      search: createSearchParams({ label }).toString(),
+    });
+
   return (
     <>
-      <Header title="카테고리" adornment={<CloseButton onClose={onClose} />} />
+      <Header title="카테고리" needBackHistory />
       <Grid
         container
         justifyContent="center"
         alignItems="center"
-        sx={{ textAlign: "center", p: 2, mt: 2 }}
-        height="100%"
         spacing={2}
+        mt="40px"
       >
         {categories.map(({ id, label, icon }) => (
           <Grid item xs={4} key={id}>
-            <Stack>
-              <IconButton size="large">{icon}</IconButton>
-              <Typography>{label}</Typography>
-            </Stack>
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <IconButton onClick={() => handleClick(id, label)}>
+                <SvgIcon
+                  component={icon}
+                  inheritViewBox
+                  fontSize="inherit"
+                  sx={{ width: "60px", height: "60px" }}
+                />
+              </IconButton>
+              <Typography variant="b7">{label}</Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>
-    </>
-  );
-}
-
-function CloseButton({ onClose }: any) {
-  return (
-    <>
-      <IconButton
-        size="large"
-        edge="start"
-        sx={{ p: 0, color: "black" }}
-        onClick={onClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
     </>
   );
 }
