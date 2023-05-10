@@ -52,9 +52,10 @@ public class smsController {
   public ResponseEntity<?> updateUser(@RequestParam Long id,
                                   @RequestParam String number,
                                   @RequestParam String nickName,
-                                  @RequestParam String juso
+                                  @RequestParam String juso,
+                                  @RequestParam String name
   ){
-    smsService.updateUser(id, number, nickName, juso);
+    smsService.updateUser(id, number, nickName, juso, name);
 
     return ResponseEntity.status(HttpStatus.OK).body(true);
   }

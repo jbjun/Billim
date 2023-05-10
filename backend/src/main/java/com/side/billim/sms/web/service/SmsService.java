@@ -122,8 +122,8 @@ public class SmsService {
     return smsRepository.selectContent(id);
   }
 
-  public void updateUser(Long id, String number, String nickName, String juso) {
-    smsRepository.updateUser(id,number,nickName,juso);
+  public void updateUser(Long id, String number, String nickName, String juso, String name) {
+    smsRepository.updateUser(id,number,nickName,juso,name);
   }
 
   public void deleteUser(Long id) {
