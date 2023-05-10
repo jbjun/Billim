@@ -54,7 +54,7 @@ export default defineConfig({
         // ws: true,
       },
       "/socket.io": {
-        target: "ws://localhost:8080",
+        target: "ws://44.203.121.190:8080",
         rewrite: (path) => path.replace(/^\/socket.io/, ""),
         ws: true,
       },
