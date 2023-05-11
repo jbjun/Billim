@@ -3,10 +3,12 @@ package com.side.billim.chat.web;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Log4j2
 @Controller
+@CrossOrigin(origins="*", allowedHeaders = "*")
 public class ChatViewController {
 
 	@GetMapping("/chat/roomList")

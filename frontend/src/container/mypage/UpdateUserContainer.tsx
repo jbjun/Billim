@@ -57,9 +57,7 @@ function UpdateUserContainer() {
         >
           <Grid item xs={12}>
             <ProfileImageEdit
-              src={
-                "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg"
-              }
+              src={userForm.profile.value}
               onFileChange={handleFileInput}
             />
           </Grid>
