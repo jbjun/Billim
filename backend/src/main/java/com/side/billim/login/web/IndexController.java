@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@CrossOrigin(origins = "http://localhost:7777")
+@CrossOrigin(origins="*", allowedHeaders = "*")
 public class IndexController {
 
   private final HttpSession httpSession;
