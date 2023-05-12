@@ -19,7 +19,7 @@ import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins="*", allowedHeaders = "*")
+//@CrossOrigin(origins="*", allowedHeaders = "*")
 public class smsController {
 
   private final SmsService smsService;

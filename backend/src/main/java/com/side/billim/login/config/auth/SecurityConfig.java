@@ -13,6 +13,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -37,10 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration config = new CorsConfiguration();
 
+    config.setAllowedOriginPatterns(Collections.singletonList("*"));
+    config.addAllowedHeader("*");
+    config.addAllowedMethod("*"); // 모든 메소드 허용.
     config.setAllowCredentials(true);
-    config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-    config.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT"));
-    config.setAllowedHeaders(Arrays.asList("*"));
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", config);
@@ -49,9 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable().headers().frameOptions().disable()
-      .and()
-      .cors().configurationSource(corsConfigurationSource())
+    http.cors().configurationSource(corsConfigurationSource())
+      .and().csrf().disable().headers().frameOptions().disable()
       .and()
       .authorizeRequests()
 //      .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
