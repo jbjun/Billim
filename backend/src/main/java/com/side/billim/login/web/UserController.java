@@ -33,7 +33,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
-@CrossOrigin(origins="*", allowedHeaders = "*")
+//@CrossOrigin(origins="*", allowedHeaders = "*")
 public class UserController {
   private final UserRepository userRepository;
   private final UserService userService;

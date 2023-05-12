@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Log4j2
 @Controller
-@CrossOrigin(origins="*", allowedHeaders = "*")
+//@CrossOrigin(origins="*", allowedHeaders = "*")
 public class ChatViewController {
 
 	@GetMapping("/chat/roomList")
