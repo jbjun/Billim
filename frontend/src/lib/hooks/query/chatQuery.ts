@@ -1,3 +1,4 @@
+import { IChatInfo } from "@components/chat/ChattingList";
 import {
   IChatListResponse,
   createChatRoom,
@@ -8,9 +9,10 @@ import {
 import { fetchUserInfo } from "@lib/api/userApi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-export function useChatList(): IChatListResponse[] {
+export function useChatList(): IChatInfo[] {
   const { data } = useQuery(["chatlist"], async () => {
     const data = await fetchChatRoomList();
+    initlizeDefaultChatListInfo(data);
     return data;
   });
 
@@ -18,7 +20,16 @@ export function useChatList(): IChatListResponse[] {
     return [];
   }
 
-  return data as IChatListResponse[];
+  return data as IChatInfo[];
+}
+
+function initlizeDefaultChatListInfo(dataList: IChatListResponse[]) {
+  dataList.forEach((aData) => {
+    if (!aData.imageName) {
+      aData.imageName =
+        "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg";
+    }
+  });
 }
 
 export function useChatListMutationByRemove() {

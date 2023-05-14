@@ -7,6 +7,8 @@ export interface IChatListResponse {
   lastMessageDate: string; //"yyyy-MM-dd HH:mm:ss";
   productName: string;
   traderName: string;
+  // image 경로
+  imageName?: string;
 }
 export const fetchChatRoomList = async () => {
   const result = await axios.get(`${BASE_URL}/api/v1/chatRoomList`, {

@@ -155,7 +155,11 @@ export const router = createBrowserRouter([
   */
   {
     path: CHAT_PATH + CHAT_DYNAMIC_PATH,
-    element: <ChatPage />,
+    element: (
+      <AuthorizedPage>
+        <ChatPage />
+      </AuthorizedPage>
+    ),
   },
 
   /**
