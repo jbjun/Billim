@@ -1,5 +1,6 @@
 import {
   IChatListResponse,
+  createChatRoom,
   fetchChatRoom,
   fetchChatRoomList,
   removeChatById,
@@ -25,6 +26,18 @@ export function useChatListMutationByRemove() {
   return useMutation(
     (chatId: string) => {
       return removeChatById(chatId);
+    },
+    {
+      onSuccess: () => queryClient.invalidateQueries(["chatlist"]),
+    }
+  );
+}
+
+export function useChatListMutationByCreate() {
+  const queryClient = useQueryClient();
+  return useMutation(
+    (productId: string) => {
+      return createChatRoom(productId);
     },
     {
       onSuccess: () => queryClient.invalidateQueries(["chatlist"]),

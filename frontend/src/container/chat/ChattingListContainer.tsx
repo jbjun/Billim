@@ -9,6 +9,7 @@ import {
   useChatList,
   useChatListMutationByRemove,
 } from "@lib/hooks/query/chatQuery";
+import { createChatRoom } from "@lib/api/chatApi";
 function ChattingListContainer() {
   const navigate = useNavigate();
   const chattingLists = useChatList();
@@ -23,6 +24,10 @@ function ChattingListContainer() {
     navigate(`/${CHAT_PATH}/${chatId}`);
   };
 
+  const onCreateChatRoom = async () => {
+    await createChatRoom("1");
+  };
+
   return (
     <>
       {chattingLists.length > 0 ? (
@@ -34,6 +39,7 @@ function ChattingListContainer() {
       ) : (
         <EmptyChatting />
       )}
+      <Button onClick={onCreateChatRoom}>방 생성 테스트</Button>
     </>
   );
 }

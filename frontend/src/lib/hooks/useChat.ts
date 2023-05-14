@@ -1,4 +1,4 @@
-import { BASE_SOKET_IO_PATH } from "@lib/api";
+import { BASE_SOKET_IO_PATH, getId } from "@lib/api";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const { SockJS, Stomp } = window as any;
@@ -7,14 +7,14 @@ interface IUseChatProps {
   initMessages: any;
 }
 function useChat({ initMessages, roomId }: IUseChatProps) {
+  const stomp = useRef<null | any>(null);
   const [messages, setMessages] = useState<any>(initMessages);
-  const userId = 16;
+  const userId = getId();
 
-  const stomp = useRef<any>(() => {
+  if (stomp.current === null) {
     const sockJs = new SockJS(`${BASE_SOKET_IO_PATH}/stomp/chat`);
-    const stomp = Stomp.over(sockJs);
-    return stomp;
-  });
+    stomp.current = Stomp.over(sockJs);
+  }
 
   const onSendMessage = useCallback(
     (value: string) => {
@@ -48,7 +48,7 @@ function useChat({ initMessages, roomId }: IUseChatProps) {
         // const sender = content.userId;
         // const nickName = content.nickName;
         // const message = content.message;
-        const owner = senderUserId === userId ? "self" : "another";
+        const owner = String(senderUserId) === userId ? "self" : "another";
 
         setMessages((messages: any) =>
           messages.concat({ owner, message, timestamp: createdDate })

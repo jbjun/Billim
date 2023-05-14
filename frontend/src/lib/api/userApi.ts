@@ -6,7 +6,8 @@ export const fetchCheckNickName = async (
   nickname: string
 ): Promise<boolean> => {
   const result = await axios.get(
-    `${BASE_API_PATH}/user/chkUser?nickName=${nickname}`
+    `${BASE_API_PATH}/user/chkUser?nickName=${nickname}`,
+    { withCredentials: true }
   );
   return result.data;
 };
@@ -16,7 +17,8 @@ export const fetchCheckSMS = async (
 ): Promise<boolean> => {
   const id = getId();
   const result = await axios.get(
-    `${BASE_API_PATH}/user/smsChk?content=${code}&id=${id}&to=${phoneNumber}`
+    `${BASE_API_PATH}/user/smsChk?content=${code}&id=${id}&to=${phoneNumber}`,
+    { withCredentials: true }
   );
 
   return result.data;
@@ -28,7 +30,8 @@ export const sendVerificationCodeBySMS = async (
   const id = getId();
   // return true;
   const result = await axios.get(
-    `${BASE_API_PATH}/user/sms?id=${id}&to=${phoneNumber}`
+    `${BASE_API_PATH}/user/sms?id=${id}&to=${phoneNumber}`,
+    { withCredentials: true }
   );
   if (result.data?.statusName === "success") {
     return true;
@@ -66,7 +69,9 @@ export interface IUserInfoResponse {
 export const fetchUserInfo = async (): Promise<IUserInfoResponse> => {
   console.log("fetchUserInfo called");
   const id = getId();
-  const result = await axios.get(`${BASE_API_PATH}/user/selectUser?id=${id}`);
+  const result = await axios.get(`${BASE_API_PATH}/user/selectUser?id=${id}`, {
+    withCredentials: true,
+  });
 
   return result.data;
 };
@@ -88,7 +93,8 @@ export const updateUserInfo = async ({
 }: IUpdateUserProps) => {
   const id = getId();
   const result = await axios.get(
-    `${BASE_API_PATH}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}&name=${username}`
+    `${BASE_API_PATH}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}&name=${username}`,
+    { withCredentials: true }
   );
 
   if (result) {
@@ -100,7 +106,9 @@ export const updateUserInfo = async ({
 
 export const deleteUser = async () => {
   const id = getId();
-  const result = await axios.get(`${BASE_API_PATH}/user/deleteUser?id=${id}`);
+  const result = await axios.get(`${BASE_API_PATH}/user/deleteUser?id=${id}`, {
+    withCredentials: true,
+  });
 
   if (result) {
     removeCookie("userId");
@@ -134,7 +142,9 @@ export const getImageSrc = async (
   imageName: string
 ): Promise<string | undefined> => {
   try {
-    const result = await axios.get(`${BASE_API_PATH}/user/image/${imageName}`);
+    const result = await axios.get(`${BASE_API_PATH}/user/image/${imageName}`, {
+      withCredentials: true,
+    });
     return result.data;
   } catch (error) {
     console.error(error);

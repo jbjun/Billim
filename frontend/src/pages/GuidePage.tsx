@@ -35,7 +35,7 @@ function GuidePage() {
   const lastImageIndex = images.length - 1;
 
   const onMoveLogin = () => {
-    navigate(`/${HOME_PATH}`);
+    navigate(`${HOME_PATH}`);
   };
   const onActiveCarouselIndex = (index: number) => {
     setShowNavigator(lastImageIndex === index);

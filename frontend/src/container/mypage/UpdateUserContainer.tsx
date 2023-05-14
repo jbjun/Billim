@@ -11,6 +11,7 @@ import InputField from "@components/InputField";
 import { My_INFORMATION_SETTING_PATH } from "@routes/myPage";
 import ProfileImageEdit from "@components/login/ProfileImage";
 import AddressInputFieldContainer from "@container/login/input/AddressInputFieldContainer";
+import { BASE_API_PATH } from "@lib/api";
 
 function UpdateUserContainer() {
   const navigate = useNavigate();
@@ -60,6 +61,25 @@ function UpdateUserContainer() {
               src={userForm.profile.value}
               onFileChange={handleFileInput}
             />
+            <form
+              action={`${BASE_API_PATH}/user/images?id=1`}
+              method="post"
+              encType="multipart/form-data"
+            >
+              <input type="file" name="file" />
+              <input type="hidden" name="id" value="1" />
+
+              <button type="submit" className="btn btn-dark">
+                업로드
+              </button>
+            </form>
+
+            <div>
+              <img
+                src="/user/image/1qd5VopAZElQVbm7VlWeksjL1cAHZPps.png"
+                style={{ width: "300px", height: "auto" }}
+              />
+            </div>
           </Grid>
           <Grid item xs={12}>
             <NameInputField
