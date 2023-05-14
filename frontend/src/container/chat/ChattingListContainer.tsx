@@ -9,23 +9,19 @@ import {
   useChatList,
   useChatListMutationByRemove,
 } from "@lib/hooks/query/chatQuery";
-import { createChatRoom } from "@lib/api/chatApi";
 function ChattingListContainer() {
   const navigate = useNavigate();
   const chattingLists = useChatList();
-  const chatListMutation = useChatListMutationByRemove();
+  const chatListMutationByRemove = useChatListMutationByRemove();
+
   const onRemove = (chatId: string) => {
     const newChattingLists = chattingLists.filter((chat) => chat.id !== chatId);
     // mutation 처리
-    chatListMutation.mutate(chatId);
+    chatListMutationByRemove.mutate(chatId);
   };
 
   const onMoveChat = (chatId: string) => {
     navigate(`/${CHAT_PATH}/${chatId}`);
-  };
-
-  const onCreateChatRoom = async () => {
-    await createChatRoom("1");
   };
 
   return (
@@ -39,7 +35,6 @@ function ChattingListContainer() {
       ) : (
         <EmptyChatting />
       )}
-      <Button onClick={onCreateChatRoom}>방 생성 테스트</Button>
     </>
   );
 }

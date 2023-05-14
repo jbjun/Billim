@@ -32,8 +32,6 @@ function UpdateUserContainer() {
   const onUpdate = () => {
     // 이미지 업로드
     if (imageFile !== null) {
-      const formData = new FormData();
-      formData.append("file", imageFile);
       uploadImage({ data: imageFile });
     }
 
@@ -61,25 +59,6 @@ function UpdateUserContainer() {
               src={userForm.profile.value}
               onFileChange={handleFileInput}
             />
-            <form
-              action={`${BASE_API_PATH}/user/images?id=1`}
-              method="post"
-              encType="multipart/form-data"
-            >
-              <input type="file" name="file" />
-              <input type="hidden" name="id" value="1" />
-
-              <button type="submit" className="btn btn-dark">
-                업로드
-              </button>
-            </form>
-
-            <div>
-              <img
-                src="/user/image/1qd5VopAZElQVbm7VlWeksjL1cAHZPps.png"
-                style={{ width: "300px", height: "auto" }}
-              />
-            </div>
           </Grid>
           <Grid item xs={12}>
             <NameInputField

@@ -3,6 +3,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import NaverLogo from "@assets/images/login/Naver_btn.png";
 import LoginBillimCharacter from "@assets/images/login/Login_billim_character.png";
 import BillimImage from "@components/common/BillimImage";
+import { BASE_URL } from "@lib/api";
 function LoginPage() {
   return (
     <>
@@ -19,7 +20,7 @@ function LoginPage() {
         </Grid>
         <Grid item xs={12}>
           <a
-            href="http://localhost:8080/oauth2/authorization/naver"
+            href={`${BASE_URL}/oauth2/authorization/naver`}
             // href={`http://localhost:7777/${NAVER_REDIRECT_PATH}?oauthId=123&isRegistered=true`}
           >
             <Button
