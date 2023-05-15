@@ -10,14 +10,18 @@ function RegistrationCompletedPage() {
   const navigate = useNavigate();
 
   const onMoveHome = () => {
-    navigate(`/${HOME_PATH}`);
+    navigate(`${HOME_PATH}`);
   };
   return (
     <>
       <PageLayout
         header={<Header title="네이버 회원가입 완료" needBackHistory />}
         body={
-          <Grid container spacing={2} sx={{ mt: 2, p: 1.5 }}>
+          <Grid
+            container
+            spacing={2}
+            sx={{ mt: 2, p: 1.5, textAlign: "center" }}
+          >
             <Grid item xs={12}>
               <Typography variant="h5">빌리진님 환영합니다!</Typography>
               <Typography variant="subtitle1">

@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -22,6 +19,7 @@ import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequiredArgsConstructor
+//@CrossOrigin(origins="*", allowedHeaders = "*")
 public class smsController {
 
   private final SmsService smsService;
@@ -52,17 +50,18 @@ public class smsController {
   public ResponseEntity<?> updateUser(@RequestParam Long id,
                                   @RequestParam String number,
                                   @RequestParam String nickName,
-                                  @RequestParam String juso
+                                  @RequestParam String juso,
+                                  @RequestParam String name
   ){
-    smsService.updateUser(id, number, nickName, juso);
+    smsService.updateUser(id, number, nickName, juso, name);
 
     return ResponseEntity.status(HttpStatus.OK).body(true);
   }
 
   @GetMapping("/user/deleteUser")
-  @ApiOperation(value = "회원탈퇴 임시", notes = "회원탈퇴 임시 API")
-  public ResponseEntity<?> deleteUser(@RequestParam("name") String name) {
-    smsService.deleteUser(name);
+  @ApiOperation(value = "회원탈퇴 임시", notes = "회원탈퇴 API")
+  public ResponseEntity<?> deleteUser(@RequestParam("id") Long id) {
+    smsService.deleteUser(id);
     return ResponseEntity.status(HttpStatus.OK).body(true);
   }
 

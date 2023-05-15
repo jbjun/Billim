@@ -16,8 +16,8 @@ export function useUserInfo(): IUserInfoResponse | undefined {
 }
 
 function initlizeDefaultUserInfo(data: IUserInfoResponse) {
-  if (!data.fullPath) {
-    data.fullPath =
+  if (!data.imageName ) {
+    data.imageName  =
       "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg";
   }
 }

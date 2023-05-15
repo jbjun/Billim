@@ -11,6 +11,7 @@ import InputField from "@components/InputField";
 import { My_INFORMATION_SETTING_PATH } from "@routes/myPage";
 import ProfileImageEdit from "@components/login/ProfileImage";
 import AddressInputFieldContainer from "@container/login/input/AddressInputFieldContainer";
+import { BASE_API_PATH } from "@lib/api";
 
 function UpdateUserContainer() {
   const navigate = useNavigate();
@@ -31,8 +32,6 @@ function UpdateUserContainer() {
   const onUpdate = () => {
     // 이미지 업로드
     if (imageFile !== null) {
-      const formData = new FormData();
-      formData.append("file", imageFile);
       uploadImage({ data: imageFile });
     }
 
@@ -57,9 +56,7 @@ function UpdateUserContainer() {
         >
           <Grid item xs={12}>
             <ProfileImageEdit
-              src={
-                "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg"
-              }
+              src={userForm.profile.value}
               onFileChange={handleFileInput}
             />
           </Grid>

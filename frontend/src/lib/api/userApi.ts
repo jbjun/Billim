@@ -1,12 +1,13 @@
-import { BASE_API_PATH, BASE_URL, getId } from ".";
+import { BASE_URL, getId } from ".";
 import axios from "axios";
-import { getCookie } from "./cookie";
+import { getCookie, removeCookie } from "./cookie";
 import { useMutation, useQueryClient } from "react-query";
 export const fetchCheckNickName = async (
   nickname: string
 ): Promise<boolean> => {
   const result = await axios.get(
-    `${BASE_API_PATH}/user/chkUser?nickName=${nickname}`
+    `${BASE_URL}/user/chkUser?nickName=${nickname}`,
+    { withCredentials: true }
   );
   return result.data;
 };
@@ -16,7 +17,8 @@ export const fetchCheckSMS = async (
 ): Promise<boolean> => {
   const id = getId();
   const result = await axios.get(
-    `${BASE_API_PATH}/user/smsChk?content=${code}&id=${id}&to=${phoneNumber}`
+    `${BASE_URL}/user/smsChk?content=${code}&id=${id}&to=${phoneNumber}`,
+    { withCredentials: true }
   );
 
   return result.data;
@@ -28,7 +30,8 @@ export const sendVerificationCodeBySMS = async (
   const id = getId();
   // return true;
   const result = await axios.get(
-    `${BASE_API_PATH}/user/sms?id=${id}&to=${phoneNumber}`
+    `${BASE_URL}/user/sms?id=${id}&to=${phoneNumber}`,
+    { withCredentials: true }
   );
   if (result.data?.statusName === "success") {
     return true;
@@ -66,7 +69,9 @@ export interface IUserInfoResponse {
 export const fetchUserInfo = async (): Promise<IUserInfoResponse> => {
   console.log("fetchUserInfo called");
   const id = getId();
-  const result = await axios.get(`${BASE_API_PATH}/user/selectUser?id=${id}`);
+  const result = await axios.get(`${BASE_URL}/user/selectUser?id=${id}`, {
+    withCredentials: true,
+  });
 
   return result.data;
 };
@@ -88,7 +93,8 @@ export const updateUserInfo = async ({
 }: IUpdateUserProps) => {
   const id = getId();
   const result = await axios.get(
-    `${BASE_API_PATH}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}`
+    `${BASE_URL}/user/updateUser?id=${id}&number=${phoneNumber}&nickName=${nickname}&juso=${address}&name=${username}`,
+    { withCredentials: true }
   );
 
   if (result) {
@@ -98,15 +104,14 @@ export const updateUserInfo = async ({
   throw new Error("회원가입에 실패하였습니다.");
 };
 
-interface IDeleteUserProps {
-  name: string;
-}
-export const deleteUser = async ({ name }: IDeleteUserProps) => {
-  const result = await axios.get(
-    `${BASE_API_PATH}/user/deleteUser?name=${name}`
-  );
+export const deleteUser = async () => {
+  const id = getId();
+  const result = await axios.get(`${BASE_URL}/user/deleteUser?id=${id}`, {
+    withCredentials: true,
+  });
 
   if (result) {
+    removeCookie("userId");
     return true;
   }
 
@@ -119,15 +124,15 @@ interface IUploadImageProps {
 }
 export const uploadImage = async ({ data }: IUploadImageProps) => {
   try {
-    const formData = new FormData();
-    formData.append("files", data);
     const id = getId();
-    const result = await axios({
-      method: "post",
-      url: `${BASE_API_PATH}/user/images?id=${id}`,
-      headers: { "Content-Type": "multipart/form-data" },
-      data: formData,
-    });
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("file", data);
+    const result = await axios.post(
+      `${BASE_URL}/user/images?id=${id}`,
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
   } catch (error) {
     console.error(error);
   }
@@ -137,7 +142,9 @@ export const getImageSrc = async (
   imageName: string
 ): Promise<string | undefined> => {
   try {
-    const result = await axios.get(`${BASE_API_PATH}/user/image/${imageName}`);
+    const result = await axios.get(`${BASE_URL}/user/image/${imageName}`, {
+      withCredentials: true,
+    });
     return result.data;
   } catch (error) {
     console.error(error);

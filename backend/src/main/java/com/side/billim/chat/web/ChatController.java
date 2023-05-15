@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping
+//@CrossOrigin(origins="*", allowedHeaders = "*")
 public class ChatController {
 
 	private final ChatService chatService;

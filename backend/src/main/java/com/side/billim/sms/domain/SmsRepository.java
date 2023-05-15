@@ -18,8 +18,19 @@ public interface SmsRepository extends JpaRepository<User, Long> {
   String selectContent(@Param("id") Long id);
 
   @Modifying(clearAutomatically = true)
-  @Query("update User u set u.number = :number, u.nickName = :nickName, u.juso = :juso WHERE u.id = :id")
-  void updateUser(@Param("id") Long id, @Param("number") String number, @Param("nickName") String nickName, @Param("juso") String juso);
+  @Query("update User u set u.number = :number, u.nickName = :nickName, u.juso = :juso, u.name = :name WHERE u.id = :id")
+  void updateUser(@Param("id") Long id, @Param("number") String number, @Param("nickName") String nickName, @Param("juso") String juso, @Param("name") String name);
 
-  Long deleteByName(String name);
+  @Modifying
+  @Query("delete from ChatMessage c where c.id= :id")
+  void deleteChatMessage(@Param("id") Long id);
+
+  @Modifying
+  @Query("delete from ChatRoom c where c.id= :id")
+  void deleteChatRoom(@Param("id") Long id);
+
+  @Modifying
+  @Query("delete from Product p where p.id= :id")
+  void deleteProductImg(@Param("id") Long id);
+
 }

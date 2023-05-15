@@ -9,6 +9,8 @@ import { useUserInfo, useUserInfoMutationByUpdate } from "./query/loginQuery";
 import { produce } from "immer";
 
 interface IRegisterForm {
+  // profile value는 image src
+  profile: { verified: true; value: string };
   username: { verified: boolean; value: string };
   email: { verified: boolean; value: string };
   phoneNumber: { verified: boolean; value: string };
@@ -29,6 +31,7 @@ function useUpdateUser({ isRegister }: IUseUpdateUserProps) {
   const userInfo = useUserInfo();
   const userInfoMutation = useUserInfoMutationByUpdate();
   const [userForm, setUserForm] = useState<IRegisterForm>({
+    profile: { verified: true, value: "" },
     username: { verified: false, value: "" },
     email: { verified: true, value: "" },
     phoneNumber: { verified: false, value: "" },
@@ -69,6 +72,7 @@ function useUpdateUser({ isRegister }: IUseUpdateUserProps) {
     if (userInfo) {
       if (isRegister) {
         setUserForm({
+          profile: { verified: true, value: "" },
           username: { verified: true, value: userInfo.name },
           email: { verified: true, value: userInfo.email },
           phoneNumber: { verified: false, value: "" },
@@ -77,6 +81,7 @@ function useUpdateUser({ isRegister }: IUseUpdateUserProps) {
         });
       } else {
         setUserForm({
+          profile: { verified: true, value: userInfo.imageName },
           username: { verified: true, value: userInfo.name },
           email: { verified: true, value: userInfo.email },
           phoneNumber: { verified: true, value: userInfo.number },

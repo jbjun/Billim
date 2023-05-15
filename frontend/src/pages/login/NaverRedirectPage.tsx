@@ -15,14 +15,14 @@ function NaverRedirectPage({ needRegister }: INaverRedirectPageProps) {
 
   useEffect(() => {
     // sessionKey 저장
-    setHeaderAuthorization(id);
-    setCookie("sessionKey", id);
+    // setHeaderAuthorization(id);
+    // setCookie("sessionKey", id);
     setCookie("userId", id);
 
     if (needRegister) {
       navigate(`/${NAVER_CONNECTION_PATH}`);
     } else {
-      navigate(`/${HOME_PATH}`);
+      navigate(`${HOME_PATH}`);
     }
   });
   return <div>NaverRedirectPage</div>;

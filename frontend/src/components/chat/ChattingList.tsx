@@ -41,6 +41,8 @@ export interface IChatInfo {
   lastMessageDate: string; //"yyyy-MM-dd HH:mm:ss";
   productName: string;
   traderName: string;
+  // 이미지 경로
+  imageName: string;
 }
 
 interface IChattingListProps {
@@ -78,7 +80,14 @@ export default function ChattingList({
     <>
       <SlidableList>
         {chattingLists.map(
-          ({ id, traderName, lastMessage, productName, lastMessageDate }) => {
+          ({
+            id,
+            traderName,
+            lastMessage,
+            productName,
+            lastMessageDate,
+            imageName,
+          }) => {
             return (
               <SwipeableListItem
                 key={id}
@@ -91,10 +100,7 @@ export default function ChattingList({
                   onClick={() => onMoveChat(id)}
                 >
                   <ListItemAvatar>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                    />
+                    <Avatar alt="Remy Sharp" src={imageName} />
                   </ListItemAvatar>
                   <ListItemText
                     primary={

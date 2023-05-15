@@ -21,6 +21,7 @@ import CategoryHomePage from "@pages/CategoryHomePage";
 import TermsPage from "@pages/TermsPage";
 import GuidePage from "@pages/GuidePage";
 import IntroPage from "@pages/IntroPage";
+import AuthorizedPage from "@pages/AuthorizedPage";
 
 export const ROOT_PATH = "/";
 
@@ -72,7 +73,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: HOME_PATH,
-        element: <HomePage />,
+        element: (
+          <AuthorizedPage>
+            <HomePage />
+          </AuthorizedPage>
+        ),
       },
       {
         path: BRROW_AND_LEND_PATH,
@@ -80,30 +85,61 @@ export const router = createBrowserRouter([
       },
       {
         path: CHAT_LIST_PATH,
-        element: <ChatListPage />,
+        element: (
+          <AuthorizedPage>
+            <ChatListPage />
+          </AuthorizedPage>
+        ),
       },
       {
         path: MY_PATH,
-        element: <MyPage />,
+        element: (
+          <AuthorizedPage>
+            <MyPage />
+          </AuthorizedPage>
+        ),
       },
     ],
   },
   {
     path: TERMS_PATH,
-    element: <TermsPage />,
+    element: (
+      <AuthorizedPage>
+        <TermsPage />
+      </AuthorizedPage>
+    ),
   },
   {
     path: CATEGORY_PATH,
-    element: <CategoryPage />,
+    element: (
+      <AuthorizedPage>
+        <CategoryPage />
+      </AuthorizedPage>
+    ),
   },
-  { path: CATEGORY_HOEM_PATH, element: <CategoryHomePage /> },
+  {
+    path: CATEGORY_HOEM_PATH,
+    element: (
+      <AuthorizedPage>
+        <CategoryHomePage />
+      </AuthorizedPage>
+    ),
+  },
   {
     path: "product/register",
-    element: <ProductRegisterPage />,
+    element: (
+      <AuthorizedPage>
+        <ProductRegisterPage />
+      </AuthorizedPage>
+    ),
   },
   {
     path: "product/:id",
-    element: <ProductDetailPage />,
+    element: (
+      <AuthorizedPage>
+        <ProductDetailPage />
+      </AuthorizedPage>
+    ),
   },
   /*
     login
@@ -115,7 +151,11 @@ export const router = createBrowserRouter([
   */
   {
     path: CHAT_PATH + CHAT_DYNAMIC_PATH,
-    element: <ChatPage />,
+    element: (
+      <AuthorizedPage>
+        <ChatPage />
+      </AuthorizedPage>
+    ),
   },
 
   /**

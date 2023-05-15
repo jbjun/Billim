@@ -45,14 +45,6 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      "/api": {
-        target: "http://localhost:8080",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-
-        // secure: false,
-        // ws: true,
-      },
       "/socket.io": {
         target: "ws://localhost:8080",
         rewrite: (path) => path.replace(/^\/socket.io/, ""),
