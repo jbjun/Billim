@@ -28,22 +28,22 @@ export type ErrorType = {
 };
 
 export const useRegistrationProduct = () => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const navigator = useNavigate();
 
   return useMutation((data: FormData) => fetchRegistrationProduct(data), {
     onMutate: () => {
-      dispath(showSpinner());
+      dispatch(showSpinner());
     },
     onSuccess: () => {
-      dispath(
+      dispatch(
         showSnackbar({
           message: "등록이 완료되었습니다.",
         })
       );
     },
     onError: () => {
-      dispath(
+      dispatch(
         showSnackbar({
           message: "등록에 실패했습니다.",
           severity: "error",
@@ -51,7 +51,7 @@ export const useRegistrationProduct = () => {
       );
     },
     onSettled: () => {
-      dispath(hideSpinner());
+      dispatch(hideSpinner());
       navigator("/home");
     },
   });

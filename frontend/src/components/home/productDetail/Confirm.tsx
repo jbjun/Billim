@@ -11,22 +11,26 @@ import {
 
 // 내부모듈
 import {
-  ICustomer,
+  IBorrower,
   IReservationDate,
 } from "@container/home/productDetail/ReservationDialogContainer";
 import { differenceInDays, format } from "date-fns";
 
 interface IConfirmProps {
-  customer: ICustomer;
+  borrower: IBorrower;
   reservationDate: IReservationDate;
   totalPrice: number;
+  price: number;
   handlePrev: () => void;
+  handleReservation: () => void;
 }
 
 const Confirm = ({
-  customer,
+  borrower,
   reservationDate,
+  handleReservation,
   totalPrice,
+  price,
   handlePrev,
 }: IConfirmProps) => {
   const { startDate, endDate } = reservationDate;
@@ -69,7 +73,7 @@ const Confirm = ({
           alignContent="center"
         >
           <Typography variant="h6">대여자</Typography>
-          <Typography variant="b5">{customer.name}</Typography>
+          <Typography variant="b5">{borrower.name}</Typography>
         </Box>
         <Box
           display="flex"
@@ -85,7 +89,7 @@ const Confirm = ({
           alignContent="center"
         >
           <Typography variant="h6">대여금액</Typography>
-          <Typography variant="b5">{`${totalPrice.toLocaleString()} (2000/일 * ${reservationTerm}일)`}</Typography>
+          <Typography variant="b5">{`${totalPrice.toLocaleString()} (${price}/일 * ${reservationTerm}일)`}</Typography>
         </Box>
         <Divider />
         <Box>
@@ -130,7 +134,12 @@ const Confirm = ({
           </Button>
         </Grid>
         <Grid item xs={8}>
-          <Button variant="contained" fullWidth sx={{ m: "16px 0" }}>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ m: "16px 0" }}
+            onClick={handleReservation}
+          >
             <Typography variant="h6">대여예약</Typography>
           </Button>
         </Grid>

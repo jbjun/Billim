@@ -64,9 +64,7 @@ export const fetchGetProduct = async (
 export const fetchUpdateViewCount = async (
   id: string
 ): Promise<{ result: boolean }> => {
-  const response = await axios.get(`${BASE_URL}/updateViewCount`, {
-    params: { id },
-  });
+  const response = await axios.patch(`${BASE_URL}/updateViewCount`, { id });
 
   return response.data.product;
 };

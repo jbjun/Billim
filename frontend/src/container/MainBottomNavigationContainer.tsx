@@ -19,7 +19,7 @@ import { ReactComponent as OProfileIcon } from "@assets/icons/Profile_outlined.s
 import { ReactComponent as FProfileIcon } from "@assets/icons/Profile_filled.svg";
 import {
   CHAT_LIST_PATH,
-  RENTAL_HISTORY_PATH,
+  BRROW_AND_LEND_PATH,
   HOME_PATH,
   MY_PATH,
 } from "routes";
@@ -54,9 +54,9 @@ const LabelBottomNavigation = () => {
         />
         <BottomNavigationAction
           label="대여 내역"
-          value={RENTAL_HISTORY_PATH}
+          value={BRROW_AND_LEND_PATH}
           icon={
-            pathname === RENTAL_HISTORY_PATH ? (
+            pathname === BRROW_AND_LEND_PATH ? (
               <SvgIcon component={FListIcon} />
             ) : (
               <SvgIcon component={OListIcon} />

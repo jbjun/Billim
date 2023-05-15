@@ -3,11 +3,13 @@
 import { Typography, Box, styled, useTheme, Grid, Button } from "@mui/material";
 import { DateRange } from "react-date-range";
 import ko from "date-fns/locale/ko";
-import { addDays, addMonths, differenceInDays } from "date-fns";
+import { addMonths, differenceInDays } from "date-fns";
 
 // 내부모듈
 import ExpectPrice from "@components/home/productDetail/ExpectPrice";
 import { IReservationDate } from "@container/home/productDetail/ReservationDialogContainer";
+import { IFirestoreTimestamp } from "@type/firebase";
+import { firestoreTimestampToDate } from "@lib/utils/time";
 
 const CalendarStyle = styled(Box)(({ theme }) => ({
   overflow: "scroll",
@@ -54,17 +56,16 @@ const CalendarStyle = styled(Box)(({ theme }) => ({
 
 interface IReservationDateProps {
   reservationDate: IReservationDate;
+  borrowedDays: IFirestoreTimestamp[];
   totalPrice: number;
   handleNext: () => void;
   handlePrev: () => void;
-  handleReservationDate: (
-    reservationDate: IReservationDate,
-    price: number
-  ) => void;
+  handleReservationDate: (reservationDate: IReservationDate) => void;
 }
 
 const ReservationDate = ({
   reservationDate,
+  borrowedDays,
   handleNext,
   handlePrev,
   handleReservationDate,
@@ -72,7 +73,7 @@ const ReservationDate = ({
 }: IReservationDateProps) => {
   const theme = useTheme();
   const { startDate, endDate } = reservationDate;
-  const notSelected = differenceInDays(endDate, startDate) < 0;
+  const isSelected = startDate instanceof Date && endDate instanceof Date;
 
   // 컨테이너로 이동
   const maxDate = addMonths(new Date(), 3);
@@ -91,13 +92,15 @@ const ReservationDate = ({
           locale={ko}
           minDate={new Date()}
           // @ts-ignore
-          onChange={(item) => handleReservationDate(item.selection, 2000)}
+          onChange={(item) => handleReservationDate(item.selection)}
           editableDateInputs={true}
           moveRangeOnFirstSelection={false}
           ranges={[reservationDate]}
           maxDate={maxDate}
           showDateDisplay={false}
-          disabledDates={[addDays(new Date(), 4)]}
+          disabledDates={borrowedDays.map((time) =>
+            firestoreTimestampToDate(time)
+          )}
           rangeColors={[theme.palette.green.main]}
           preventSnapRefocus={true}
           showPreview={false}
@@ -117,7 +120,7 @@ const ReservationDate = ({
         </Grid>
         <Grid item xs={8}>
           <Button
-            disabled={notSelected}
+            disabled={!isSelected}
             onClick={handleNext}
             variant="contained"
             fullWidth

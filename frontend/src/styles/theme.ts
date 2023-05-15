@@ -202,7 +202,7 @@ export const theme = createTheme(
             height: "32px",
           },
           sizeMedium: {
-            height: "48px",
+            height: "40px",
           },
           sizeLarge: {
             height: "48px",

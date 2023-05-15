@@ -39,17 +39,7 @@ const GlobalSnackbar = () => {
           textOverflow: "ellipsis",
         },
       }}
-    >
-      {severity && (
-        <Alert
-          onClose={handleClose}
-          severity={snackbar.severity}
-          sx={{ width: "auto", minWidth: "fit-content" }}
-        >
-          {message}
-        </Alert>
-      )}
-    </Snackbar>
+    ></Snackbar>
   );
 };
 

@@ -3,7 +3,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 
 // 내부모듈
 import ChatItem from "@components/home/productDetail/ChatItem";
-import { ICustomer } from "@container/home/productDetail/ReservationDialogContainer";
+import { IBorrower } from "@container/home/productDetail/ReservationDialogContainer";
 
 const CHAT_LIST = [
   {
@@ -25,13 +25,13 @@ const CHAT_LIST = [
 ];
 
 interface IChatList {
-  customer: ICustomer;
+  borrower: IBorrower;
   handleNext: () => void;
-  handleCustomer: (customer: ICustomer) => void;
+  handleBorrower: (borrower: IBorrower) => void;
 }
 
-const ChatList = ({ customer, handleCustomer, handleNext }: IChatList) => {
-  const notSelected = !customer.name || customer.name === "";
+const ChatList = ({ borrower, handleBorrower, handleNext }: IChatList) => {
+  const notSelected = !borrower.name || borrower.name === "";
   return (
     <Stack pt="20px">
       <Typography component="p" variant="t4" p="0px 4px">
@@ -52,10 +52,10 @@ const ChatList = ({ customer, handleCustomer, handleNext }: IChatList) => {
         {CHAT_LIST.map((chat) => (
           <Box height="84px" key={chat.name} padding="0 16px">
             <div
-              onClick={() => handleCustomer({ name: chat.name })}
+              onClick={() => handleBorrower({ name: chat.name, id: "3" })} // TODO 실제 채팅내역 가져오기
               style={{
                 margin: "0 -16px",
-                backgroundColor: chat.name === customer.name ? "#E5E5E5" : "",
+                backgroundColor: chat.name === borrower.name ? "#E5E5E5" : "",
               }}
             >
               <ChatItem {...chat} />

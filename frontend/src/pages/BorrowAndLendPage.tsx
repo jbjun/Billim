@@ -1,12 +1,12 @@
 // 내부모듈
 import Header from "@components/layout/Header";
-import RentalHistoryContainer from "@container/rentalHistory/RentalHistoryContainer";
+import BorrowAndLendContainer from "@container/rentalHistory/BorrowAndLendContainer";
 
 const RentalListPage = () => {
   return (
     <>
       <Header title="대여내역" />
-      <RentalHistoryContainer />
+      <BorrowAndLendContainer />
     </>
   );
 };

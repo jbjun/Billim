@@ -10,32 +10,35 @@ import {
   useTheme,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
+import React, { Suspense, useState } from "react";
 
 // 내부모듈
 import RentalStatusTag from "@components/common/RentStatusTag";
 import { ReactComponent as ViewIcon } from "@assets/icons/View_icon.svg";
-import { useGetProduct, useUpdateViewCount } from "@lib/hooks/query/product";
+import { useGetProduct } from "@lib/hooks/query/product";
 import Carousel from "@components/home/productDetail/Carousel";
-import { useEffect } from "react";
 import DetailSkeletonUI from "@components/home/productDetail/DetailSkeletonUI";
+import GlobalSpinner from "@container/common/GlobalSpinner";
+import useIncrementViewCount from "@lib/hooks/useIncrementViewCount";
 
-type ProductDetailContainer = {
-  onClick?: () => void;
-};
+const ReservationDialogContainer = React.lazy(
+  () => import("@container/home/productDetail/ReservationDialogContainer")
+);
 
-const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
+const ProductDetailContainer = () => {
   const theme = useTheme();
   const { id } = useParams();
 
-  console.log("??", id);
-
   if (!id) return null;
-  const { mutate: updateViewCount } = useUpdateViewCount(id);
 
-  useEffect(() => {
-    if (id) updateViewCount();
-  }, []);
+  // dialog
+  const [isOpenReservation, setIsOpenReservation] = useState(false);
+  const handleClose = () => setIsOpenReservation(false);
 
+  // 페이지 뷰카운트 증가
+  useIncrementViewCount(id);
+
+  // product get
   const { data, isLoading } = useGetProduct(id);
 
   if (isLoading || !data) return <DetailSkeletonUI />;
@@ -50,7 +53,16 @@ const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
     status,
     nickName,
     location,
+    publisherId,
+    borrowedDays,
   } = data;
+  const isMyProduct = publisherId === "1"; // TODO 추후 수정
+
+  const handleReservation = () => setIsOpenReservation(true);
+  const handleChatting = () => null;
+
+  const handleClick = () =>
+    isMyProduct ? handleReservation() : handleChatting();
 
   return (
     <>
@@ -126,11 +138,26 @@ const ProductDetailContainer = ({ onClick }: ProductDetailContainer) => {
           m="0 -16px"
           bgcolor="white"
         >
-          <Button sx={{ width: "100%" }} variant="contained" onClick={onClick}>
-            <Typography variant="h6">대여예약</Typography>
+          <Button
+            sx={{ width: "100%" }}
+            variant="contained"
+            onClick={handleClick}
+          >
+            <Typography variant="h6">
+              {isMyProduct ? "대여예약" : "채팅하기"}
+            </Typography>
           </Button>
         </Box>
       </Container>
+      <Suspense fallback={<GlobalSpinner />}>
+        <ReservationDialogContainer
+          lenderId={publisherId}
+          borrowedDays={borrowedDays}
+          open={isOpenReservation}
+          price={price}
+          onClose={handleClose}
+        />
+      </Suspense>
     </>
   );
 };

@@ -7,7 +7,7 @@ import { Outlet } from "react-router";
 // 내부모듈
 import App from "../App";
 import HomePage from "@pages/HomePage";
-import RentalListPage from "@pages/RentalHistoryPage";
+import BorrowAndLendPage from "@pages/BorrowAndLendPage";
 import ChatListPage from "@pages/chat/ChatListPage";
 import MyPage from "@pages/mypage";
 import LabelBottomNavigation from "@container/MainBottomNavigationContainer";
@@ -40,7 +40,7 @@ export const CATEGORY_PATH = "/category";
 export const CATEGORY_HOEM_PATH = "/:category/home";
 
 // rental history
-export const RENTAL_HISTORY_PATH = "/rentalHistory";
+export const BRROW_AND_LEND_PATH = "/borrowAndLend";
 
 // my
 export const MY_PATH = "/my";
@@ -75,8 +75,8 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: RENTAL_HISTORY_PATH,
-        element: <RentalListPage />,
+        path: BRROW_AND_LEND_PATH,
+        element: <BorrowAndLendPage />,
       },
       {
         path: CHAT_LIST_PATH,
