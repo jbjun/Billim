@@ -31,7 +31,7 @@ export const INTRO_PATH = "intro";
 export const GUIDE_PATH = "guide";
 
 // chat
-export const CHAT_LIST_PATH = "chat-list";
+export const CHAT_LIST_PATH = "/chat-list";
 export const CHAT_PATH = "chat";
 export const CHAT_DYNAMIC_PATH = "/:chatId";
 
@@ -73,11 +73,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: HOME_PATH,
-        element: (
-          <AuthorizedPage>
-            <HomePage />
-          </AuthorizedPage>
-        ),
+        element: <HomePage />,
       },
       {
         path: BRROW_AND_LEND_PATH,
@@ -111,35 +107,19 @@ export const router = createBrowserRouter([
   },
   {
     path: CATEGORY_PATH,
-    element: (
-      <AuthorizedPage>
-        <CategoryPage />
-      </AuthorizedPage>
-    ),
+    element: <CategoryPage />,
   },
   {
     path: CATEGORY_HOEM_PATH,
-    element: (
-      <AuthorizedPage>
-        <CategoryHomePage />
-      </AuthorizedPage>
-    ),
+    element: <CategoryHomePage />,
   },
   {
     path: "product/register",
-    element: (
-      <AuthorizedPage>
-        <ProductRegisterPage />
-      </AuthorizedPage>
-    ),
+    element: <ProductRegisterPage />,
   },
   {
     path: "product/:id",
-    element: (
-      <AuthorizedPage>
-        <ProductDetailPage />
-      </AuthorizedPage>
-    ),
+    element: <ProductDetailPage />,
   },
   /*
     login
