@@ -10,17 +10,17 @@ function ChatRoomContainer({ chatId }: IChatRoomContainerProps) {
   const { messages, onSendMessage } = useChat({
     roomId: chatId as string,
     initMessages: [
-      {
-        owner: "another",
-        message: "안녕하세요 빌리진님 해머드릴 키드에 관심이....",
-        timestamp: "2023-04-07 18:26:04",
-      },
-      {
-        owner: "self",
-        message:
-          "안녕하세요 빌리진님 해머드릴 키드에 관심이.... asdfljsdflkjasldfj sdfjasldfjlasdfjlsdjflasdkj",
-        timestamp: "2023-04-08 18:26:04",
-      },
+      // {
+      //   owner: "another",
+      //   message: "안녕하세요 빌리진님 해머드릴 키드에 관심이....",
+      //   timestamp: "2023-04-07 18:26:04",
+      // },
+      // {
+      //   owner: "self",
+      //   message:
+      //     "안녕하세요 빌리진님 해머드릴 키드에 관심이.... asdfljsdflkjasldfj sdfjasldfjlasdfjlsdjflasdkj",
+      //   timestamp: "2023-04-08 18:26:04",
+      // },
     ],
   });
 

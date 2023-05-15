@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ChattingList, { IChatInfo } from "@components/chat/ChattingList";
 import { Dialog as MUIDialog, Grid, Typography, Button } from "@mui/material";
 import ChattingEmptyBillimCharacter from "@assets/images/chatting/Chatting_empty_billim_character.png";
@@ -9,14 +9,26 @@ import {
   useChatList,
   useChatListMutationByRemove,
 } from "@lib/hooks/query/chatQuery";
+import { IChatListResponse } from "@lib/api/chatApi";
 function ChattingListContainer() {
   const navigate = useNavigate();
   const chattingLists = useChatList();
-  const chatListMutation = useChatListMutationByRemove();
+  const chatListMutationByRemove = useChatListMutationByRemove();
+
+  const sortedChattingListInDescendingOrder = useMemo(() => {
+    return chattingLists
+      .slice()
+      .sort((a: IChatListResponse, b: IChatListResponse) => {
+        return (
+          new Date(b.lastMessageDate).getTime() -
+          new Date(a.lastMessageDate).getTime()
+        );
+      });
+  }, [chattingLists]);
   const onRemove = (chatId: string) => {
     const newChattingLists = chattingLists.filter((chat) => chat.id !== chatId);
     // mutation 처리
-    chatListMutation.mutate(chatId);
+    chatListMutationByRemove.mutate(chatId);
   };
 
   const onMoveChat = (chatId: string) => {
@@ -29,7 +41,7 @@ function ChattingListContainer() {
         <ChattingList
           onMoveChat={onMoveChat}
           onRemove={onRemove}
-          chattingLists={chattingLists}
+          chattingLists={sortedChattingListInDescendingOrder}
         />
       ) : (
         <EmptyChatting />

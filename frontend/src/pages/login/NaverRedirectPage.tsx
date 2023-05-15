@@ -22,7 +22,7 @@ function NaverRedirectPage({ needRegister }: INaverRedirectPageProps) {
     if (needRegister) {
       navigate(`/${NAVER_CONNECTION_PATH}`);
     } else {
-      navigate(`/${HOME_PATH}`);
+      navigate(`${HOME_PATH}`);
     }
   });
   return <div>NaverRedirectPage</div>;

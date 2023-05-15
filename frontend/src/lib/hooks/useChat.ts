@@ -1,4 +1,4 @@
-import { BASE_SOKET_IO_PATH } from "@lib/api";
+import { BASE_SOKET_IO_PATH, BASE_URL, getId } from "@lib/api";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const { SockJS, Stomp } = window as any;
@@ -7,14 +7,14 @@ interface IUseChatProps {
   initMessages: any;
 }
 function useChat({ initMessages, roomId }: IUseChatProps) {
+  const stomp = useRef<null | any>(null);
   const [messages, setMessages] = useState<any>(initMessages);
-  const userId = 16;
+  const userId = getId();
 
-  const stomp = useRef<any>(() => {
-    const sockJs = new SockJS(`${BASE_SOKET_IO_PATH}/stomp/chat`);
-    const stomp = Stomp.over(sockJs);
-    return stomp;
-  });
+  if (stomp.current === null) {
+    const sockJs = new SockJS(`${BASE_URL}/stomp/chat`);
+    stomp.current = Stomp.over(sockJs);
+  }
 
   const onSendMessage = useCallback(
     (value: string) => {
@@ -28,10 +28,6 @@ function useChat({ initMessages, roomId }: IUseChatProps) {
   );
 
   useEffect(() => {
-    // const sockJs = new SockJS("/stomp/chat");
-    //1. SockJS를 내부에 들고있는 stomp를 내어줌
-    // const stomp = Stomp.over(sockJs);
-
     //2. connection이 맺어지면 실행
     stomp.current.connect({}, function () {
       console.log("STOMP Connection");
@@ -43,12 +39,7 @@ function useChat({ initMessages, roomId }: IUseChatProps) {
           createdDate,
           userId: senderUserId,
         } = JSON.parse(chat.body);
-        // console.log(content);
-
-        // const sender = content.userId;
-        // const nickName = content.nickName;
-        // const message = content.message;
-        const owner = senderUserId === userId ? "self" : "another";
+        const owner = String(senderUserId) === userId ? "self" : "another";
 
         setMessages((messages: any) =>
           messages.concat({ owner, message, timestamp: createdDate })

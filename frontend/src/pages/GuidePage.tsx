@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
-import { Box, Button, Grid, IconButton, styled } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  styled,
+  Typography,
+} from "@mui/material";
 import Carousel from "@components/home/productDetail/Carousel";
 import Header from "@components/layout/Header";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -9,6 +16,9 @@ import { useNavigate } from "react-router";
 import CloseIcon from "@mui/icons-material/Close";
 import { LOGIN_PATH } from "@routes/login";
 import { HOME_PATH } from "@routes/index";
+import Guide1 from "@assets/images/guide/Guide_1.png";
+import Guide2 from "@assets/images/guide/Guide_2.png";
+import Guide3 from "@assets/images/guide/Guide_3.png";
 const WrapperStyle = styled("div")(() => ({
   width: "100%",
   height: "100%",
@@ -25,21 +35,14 @@ const WrapperStyle = styled("div")(() => ({
   },
 }));
 
-const images = [
-  "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg",
-  "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg",
-];
+const images = [Guide1, Guide2, Guide3];
 function GuidePage() {
   const navigate = useNavigate();
-  const [showNavigator, setShowNavigator] = useState(false);
-  const lastImageIndex = images.length - 1;
 
   const onMoveLogin = () => {
-    navigate(`/${HOME_PATH}`);
+    navigate(`${HOME_PATH}`);
   };
-  const onActiveCarouselIndex = (index: number) => {
-    setShowNavigator(lastImageIndex === index);
-  };
+
   return (
     <>
       <Grid container direction={"column"} sx={{ height: "100%" }}>
@@ -62,7 +65,6 @@ function GuidePage() {
             <Box sx={{ width: "100vw", height: "100%", overflow: "hidden" }}>
               <WrapperStyle>
                 <Carousel
-                  onActiveIndex={onActiveCarouselIndex}
                   customPagination={{
                     clickable: true,
                     renderBullet: function (index, className) {
@@ -70,45 +72,12 @@ function GuidePage() {
                     },
                   }}
                 >
-                  {[
-                    "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg",
-                    "https://image.shutterstock.com/image-photo/osaka-japan-jun e-24-2017-600w-669537982.jpg",
-                  ].map((url, i) => {
-                    return (
-                      <img
-                        key={i}
-                        style={{
-                          display: "block",
-                          width: "100%",
-                          height: "100%",
-                        }}
-                        src={url}
-                      />
-                    );
-                  })}
+                  <GuideOne />
+                  <GuideTwo />
+                  <GuideThree />
                 </Carousel>
               </WrapperStyle>
             </Box>
-          </Grid>
-        </Grid>
-        <Grid item xs={2}>
-          <Grid
-            container
-            justifyContent={"center"}
-            alignItems={"center"}
-            sx={{ width: "100%", height: "100%" }}
-          >
-            <Grid item>
-              {showNavigator && (
-                <Button
-                  variant="contained"
-                  sx={{ color: "white", backgroundColor: "black" }}
-                  onClick={onMoveLogin}
-                >
-                  빌림 시작하기
-                </Button>
-              )}
-            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -117,3 +86,87 @@ function GuidePage() {
 }
 
 export default GuidePage;
+
+function GuideOne() {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="h5" sx={{ p: 2 }}>
+          내 주변에서 빌릴 수 있는 상품을
+          <br /> 간편하게 확인해 보세요!
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <img
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+          }}
+          src={Guide1}
+        />
+      </Grid>
+      <Grid item xs={12}></Grid>
+    </Grid>
+  );
+}
+function GuideTwo() {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="h5" sx={{ p: 2 }}>
+          원하는 물품 대여 예약을
+          <br /> 채팅을 통해 쉽고 간편하게 해보세요!
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <img
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+          }}
+          src={Guide2}
+        />
+      </Grid>
+      <Grid item xs={12}></Grid>
+    </Grid>
+  );
+}
+function GuideThree() {
+  const navigate = useNavigate();
+
+  const onMoveLogin = () => {
+    navigate(`${HOME_PATH}`);
+  };
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="h5" sx={{ p: 2 }}>
+          원하는 물품을 빌림을 통해
+          <br /> 간편하게 빌려보세요
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <img
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+          }}
+          src={Guide3}
+        />
+      </Grid>
+      <Grid item xs={12} sx={{ m: 2 }}>
+        {" "}
+        <Button
+          variant="contained"
+          sx={{ color: "white", backgroundColor: "black", width: "100%" }}
+          onClick={onMoveLogin}
+        >
+          빌림 시작하기
+        </Button>
+      </Grid>
+    </Grid>
+  );
+}

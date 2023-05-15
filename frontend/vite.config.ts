@@ -45,14 +45,6 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      "/api": {
-        target: "http://44.203.121.190:8080",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-
-        // secure: false,
-        // ws: true,
-      },
       "/socket.io": {
         target: "ws://44.203.121.190:8080",
         rewrite: (path) => path.replace(/^\/socket.io/, ""),
