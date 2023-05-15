@@ -3,6 +3,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import NaverLogo from "@assets/images/login/Naver_btn.png";
 import LoginBillimCharacter from "@assets/images/login/Login_billim_character.png";
 import BillimImage from "@components/common/BillimImage";
+import { BASE_URL } from "@lib/api";
 function LoginPage() {
   return (
     <>
