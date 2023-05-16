@@ -45,7 +45,11 @@ const MyPage = () => {
               sx={{ width: "100px", height: "100px" }}
             />
             <Box ml="16px">
-              <Typography variant="h4" color="#fff">
+              <Typography
+                variant="h5"
+                color="#fff"
+                sx={{ wordBreak: "keep-all" }}
+              >
                 빌리진 님, 안녕하세요👋
               </Typography>
               <Box

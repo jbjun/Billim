@@ -1,5 +1,4 @@
 // 외부모듈
-import Odometer from "@components/common/Odometer";
 import { Box, Typography } from "@mui/material";
 
 interface IExpectPriceProps {
@@ -17,9 +16,7 @@ const ExpectPrice = ({ totalPrice }: IExpectPriceProps) => {
         height="48px"
       >
         <Typography variant="h7">예상금액</Typography>
-        <Typography variant="h7">
-          <Odometer digits={totalPrice} />
-        </Typography>
+        <Typography variant="h7">{totalPrice}</Typography>
       </Box>
     </Box>
   );

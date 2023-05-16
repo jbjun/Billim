@@ -58,7 +58,6 @@ type TAction =
       payload: { reservationDate: IReservationDate; price: number };
     };
 
-// TODO borrower, lender 닉네임 채워넣기
 const initialState: ReservationState = {
   borrower: { name: "", id: "" },
   lender: { name: "", id: "" },
@@ -118,7 +117,7 @@ const ReservationDialogContainer = ({
     ...initialState,
     productId: productId as string,
     totalPrice: 0,
-    lender: { id: lenderId, name: "이빌리" }, // TODO 네임 가져오기
+    lender: { id: lenderId, name: "이빌리" }, // // TODO borrower, lender 닉네임 채워넣기
   });
   const { borrower, reservationDate, totalPrice, index } = state;
 
@@ -134,6 +133,11 @@ const ReservationDialogContainer = ({
 
   const handleReservation = () => {
     reservation(state);
+    handleClose();
+  };
+
+  const handleClose = () => {
+    dispatch({ type: "INIT" });
     onClose();
   };
 
@@ -167,7 +171,7 @@ const ReservationDialogContainer = ({
       <Dialog
         title="대여예약"
         open={open}
-        onClose={onClose}
+        onClose={handleClose}
         disableAdornment
         PaperProps={{
           style: {

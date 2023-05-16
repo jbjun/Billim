@@ -1,4 +1,5 @@
 // 외부모듈
+import React from "react";
 import { ButtonBase, SvgIcon, Typography } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useState } from "react";
@@ -76,4 +77,4 @@ const ProductFilterContainer = ({
   );
 };
 
-export default ProductFilterContainer;
+export default React.memo(ProductFilterContainer);

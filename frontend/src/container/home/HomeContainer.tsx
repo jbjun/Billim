@@ -1,6 +1,7 @@
 // 외부모듈
 import { Box, Container, Grid, useTheme, Skeleton } from "@mui/material";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useState } from "react";
+import { useInView } from "@react-spring/web";
 import { useNavigate } from "react-router";
 
 // 내부모듈
@@ -12,8 +13,6 @@ import HeaderLocationTitle from "@components/home/HeaderLocationTitle";
 import HeaderHomeMenu from "@components/home/HeaderHomeMenu";
 import { useInfiniteProducts } from "@lib/hooks/query/product";
 import Empty from "@components/common/Empty";
-import { useInView } from "@react-spring/web";
-import BillimServiceDescription from "@components/common/BillimServiceDescription";
 import useScrollToTop from "@lib/hooks/useScrollToTop";
 
 export type OrderbyType = "recent" | "priceAsc" | "priceDesc";
@@ -59,9 +58,9 @@ const HomePageContainer = ({ category }: IHomePageContainerProps) => {
     navigate(`/product/${id}`);
   };
 
-  const handleOrderby = (orderby: IOrderby) => {
+  const handleOrderby = useCallback((orderby: IOrderby) => {
     setOrderby(orderby);
-  };
+  }, []);
 
   const isEmpty =
     !isLoading &&
@@ -84,8 +83,6 @@ const HomePageContainer = ({ category }: IHomePageContainerProps) => {
       <Container
         sx={{
           zIndex: 1,
-          // pb: notCategoryHomePage ? "56px" : "0",
-          // overflow: "hidden",
           msOverflowStyle: "none",
           scrollbarWidth: "none",
           transform: notCategoryHomePage ? "translateY(-25px)" : null,
@@ -99,8 +96,6 @@ const HomePageContainer = ({ category }: IHomePageContainerProps) => {
           <>
             <Grid container justifyContent="space-between">
               <Grid
-                // position="sticky"
-                // top="65px"
                 item
                 xs={12}
                 display="flex"

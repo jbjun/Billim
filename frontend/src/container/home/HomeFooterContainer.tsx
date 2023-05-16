@@ -8,7 +8,8 @@ const HomeTerms = () => {
       <Box
         lineHeight="normal"
         bgcolor="#F2F2F2"
-        p="38px"
+        py="38px"
+        px="20px"
         color="#666666"
         sx={{
           a: {

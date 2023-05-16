@@ -2,6 +2,17 @@ import { createTheme } from "@mui/material";
 import { CustomTypographyOptions } from "../types/mui/theme";
 import { koKR } from "@mui/x-date-pickers/locales";
 
+// 폰트
+// import PretendardBlack from "../../public/font/Pretendard-Black.woff2";
+// import PretendardBold from "../../public/font/Pretendard-Bold.woff2";
+// import PretendardExtraBold from "../../public/font/Pretendard-ExtraBold.woff2";
+// import PretendardExtraLight from "../../public/font/Pretendard-ExtraLight.woff2";
+// import PretendardLight from "../../public/font/Pretendard-Light.woff2";
+// import PretendardMedium from "../../public/font/Pretendard-Medium.woff2";
+// import PretendardRegular from "../../public/font/Pretendard-Regular.woff2";
+// import PretendardSemiBold from "../../public/font/Pretendard-SemiBold.woff2";
+// import PretendardThin from "../../public/font/Pretendard-Thin.woff2";
+
 export const primaryPalette = {
   main: "#7360FF",
   50: "#EEEBFF",
@@ -177,7 +188,7 @@ export const theme = createTheme(
       divider: "#E5E5E5",
     },
     typography: {
-      fontFamily: ["Roboto", "Arial"].join(" "), // 추후 폰트 추가
+      fontFamily: ["Pretendard", "Roboto", "Arial"].join(" "), // 추후 폰트 추가
       ...customTypography,
     },
     components: {
@@ -193,19 +204,21 @@ export const theme = createTheme(
             },
             height: "100vh",
           },
-          "@global": {},
         },
       },
       MuiButton: {
         styleOverrides: {
           sizeSmall: {
             height: "32px",
+            boxShadow: "none",
           },
           sizeMedium: {
             height: "40px",
+            boxShadow: "none",
           },
           sizeLarge: {
             height: "48px",
+            boxShadow: "none",
           },
         },
       },

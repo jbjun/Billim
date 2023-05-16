@@ -11,7 +11,7 @@ import {
 import { useForm } from "react-hook-form";
 
 // 내부모듈
-import PotoRegister from "@components/productRegister/PotoRegister";
+import PotoRegisterContainer from "@container/home/register/PotoRegisterContainer";
 import TitleInput from "@container/home/register/TitleInputContainer";
 import PriceInput from "@container/home/register/PriceInputContainer";
 import TextInput from "@container/home/register/TextInputContainer";
@@ -82,13 +82,7 @@ const ProductRegisterContainer = () => {
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <FormControl fullWidth>
           <Stack spacing={2.5} mt="16px">
-            <PotoRegister
-              register={register("files")}
-              selectedFiles={files}
-              setValue={setValue}
-              setError={setError}
-              clearErrors={clearErrors}
-            />
+            <PotoRegisterContainer selectedFiles={files} setValue={setValue} />
             <Divider />
             <TitleInput
               register={register("title", {

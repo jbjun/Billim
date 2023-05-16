@@ -8,6 +8,7 @@ import {
 
 // 내부모듈
 import { IProductRegisterState } from "@container/home/register";
+import React from "react";
 
 interface ITitleInputContainer {
   trigger: UseFormTrigger<IProductRegisterState>;
@@ -38,4 +39,4 @@ const TitleInputContainer = ({
   );
 };
 
-export default TitleInputContainer;
+export default React.memo(TitleInputContainer);

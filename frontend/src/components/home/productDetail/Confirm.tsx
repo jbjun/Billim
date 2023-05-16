@@ -37,6 +37,7 @@ const Confirm = ({
   const reservationTerm = differenceInDays(endDate, startDate) + 1;
   const formattedStartDate = format(startDate, "yyyy.MM.dd");
   const formattedEndDate = format(endDate, "yyyy.MM.dd");
+
   return (
     <Box width="calc(100vw - 32px)">
       <Typography
