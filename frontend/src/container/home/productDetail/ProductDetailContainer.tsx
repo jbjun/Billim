@@ -20,6 +20,8 @@ import Carousel from "@components/home/productDetail/Carousel";
 import DetailSkeletonUI from "@components/home/productDetail/DetailSkeletonUI";
 import GlobalSpinner from "@container/common/GlobalSpinner";
 import useIncrementViewCount from "@lib/hooks/useIncrementViewCount";
+import Header from "@components/layout/Header";
+import DetailMenuContainer from "@container/home/productDetail/DetailMenuContainer";
 
 const ReservationDialogContainer = React.lazy(
   () => import("@container/home/productDetail/ReservationDialogContainer")
@@ -66,6 +68,16 @@ const ProductDetailContainer = () => {
 
   return (
     <>
+      <Header
+        title="상품정보"
+        needBackHistory
+        adornment={
+          <Box display="flex" justifyContent="space-around">
+            {/* <ShareContainer /> */}
+            <DetailMenuContainer />
+          </Box>
+        }
+      />
       <Box sx={{ width: "100vw", height: "375px", overflow: "hidden" }}>
         <Carousel>
           {images.map((url, i) => (

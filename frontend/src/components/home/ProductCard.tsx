@@ -8,32 +8,33 @@ import {
   Card,
   Skeleton,
 } from "@mui/material";
+import React, { useCallback, useState } from "react";
 
 // 내부모듈
 import RentalStatusTag from "@components/common/RentStatusTag";
 import { IProductApiReturn } from "@type/product/";
-import { useState } from "react";
 
 interface IProductCardProps extends IProductApiReturn {}
 
-export default function ProductCard({
+const ProductCard = ({
   location,
   title,
   price,
   images,
   status,
-}: IProductCardProps) {
+}: IProductCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const handleImageLoad = () => {
+  const handleImageLoad = useCallback(() => {
     setImageLoaded(true);
-  };
+  }, []);
+
   return (
     <Card
       sx={{
         width: "44vw",
         border: "none",
-        borderRadius: "10px",
+        borderRadius: "5px",
       }}
       variant="outlined"
     >
@@ -44,6 +45,7 @@ export default function ProductCard({
           width: "44vw",
           height: 166,
           display: imageLoaded ? "block" : "none",
+          borderRadius: "5px",
         }}
         image={images[0]}
         title="test image"
@@ -56,7 +58,7 @@ export default function ProductCard({
           height="166px"
         />
       )}
-      <CardContent sx={{ m: 0, p: 0 }}>
+      <CardContent sx={{ mt: "16px", p: 0, lineHeight: "normal" }}>
         <Typography variant="caption" color="text.secondary">
           {location}
         </Typography>
@@ -82,4 +84,6 @@ export default function ProductCard({
       </CardContent>
     </Card>
   );
-}
+};
+
+export default React.memo(ProductCard);

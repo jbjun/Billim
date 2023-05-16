@@ -32,6 +32,7 @@ interface IChatList {
 
 const ChatList = ({ borrower, handleBorrower, handleNext }: IChatList) => {
   const notSelected = !borrower.name || borrower.name === "";
+
   return (
     <Stack pt="20px">
       <Typography component="p" variant="t4" p="0px 4px">

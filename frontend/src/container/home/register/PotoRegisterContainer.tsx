@@ -2,14 +2,9 @@
 import { Box, Fab, Typography, styled, useTheme } from "@mui/material";
 import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import React from "react";
-import {
-  UseFormRegisterReturn,
-  UseFormSetValue,
-  UseFormSetError,
-  UseFormClearErrors,
-} from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 
 // 내부모듈
 import { IProductRegisterState } from "@container/home/register";
@@ -20,20 +15,15 @@ const Image = styled("img")`
   object-fit: cover;
 `;
 
-interface IPotoRegisterProps {
-  setError: UseFormSetError<IProductRegisterState>;
-  clearErrors: UseFormClearErrors<IProductRegisterState>;
-  register: UseFormRegisterReturn<"files">;
+interface IPotoRegisterContainerProps {
   selectedFiles: File[];
   setValue: UseFormSetValue<IProductRegisterState>;
 }
 
-const PotoRegister = ({
+const PotoRegisterContainer = ({
   setValue,
   selectedFiles,
-  setError,
-  clearErrors,
-}: IPotoRegisterProps) => {
+}: IPotoRegisterContainerProps) => {
   const theme = useTheme();
   const inputRef = useRef<null | HTMLInputElement>(null);
 
@@ -140,4 +130,4 @@ const PotoRegister = ({
   );
 };
 
-export default React.memo(PotoRegister);
+export default React.memo(PotoRegisterContainer);
