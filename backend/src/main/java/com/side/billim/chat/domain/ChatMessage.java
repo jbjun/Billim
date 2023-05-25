@@ -32,6 +32,9 @@ public class ChatMessage extends BaseTimeEntity{
 	@Column(name = "message")
 	private String message;
 
+	@Column(name = "sender_id",insertable = false, updatable = false)
+	private int senderId;
+
 
 	@Builder
 	public ChatMessage(ChatRoom chatRoom , User user, String message){

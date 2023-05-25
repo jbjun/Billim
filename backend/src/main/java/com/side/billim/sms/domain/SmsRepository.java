@@ -22,15 +22,15 @@ public interface SmsRepository extends JpaRepository<User, Long> {
   void updateUser(@Param("id") Long id, @Param("number") String number, @Param("nickName") String nickName, @Param("juso") String juso, @Param("name") String name);
 
   @Modifying
-  @Query("delete from ChatMessage c where c.id= :id")
-  void deleteChatMessage(@Param("id") Long id);
+  @Query("delete from ChatMessage c where c.senderId= :id")
+  void deleteChatMessage(@Param("id") int id);
 
   @Modifying
-  @Query("delete from ChatRoom c where c.id= :id")
-  void deleteChatRoom(@Param("id") Long id);
+  @Query("delete from ChatRoom c where c.buyerId= :id")
+  void deleteChatRoom(@Param("id") int id);
 
   @Modifying
-  @Query("delete from Product p where p.id= :id")
-  void deleteProductImg(@Param("id") Long id);
+  @Query("delete from Product p where p.writerId= :id")
+  void deleteProductImg(@Param("id") int id);
 
 }

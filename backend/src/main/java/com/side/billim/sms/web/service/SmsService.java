@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.Math.toIntExact;
+
 @Service
 @Transactional
 public class SmsService {
@@ -128,9 +130,11 @@ public class SmsService {
 
   public void deleteUser(Long id) {
 
-    smsRepository.deleteChatMessage(id);
-    smsRepository.deleteChatRoom(id);
-    smsRepository.deleteProductImg(id);
+    int id2 = toIntExact(id);
+
+    smsRepository.deleteChatMessage(id2);
+    smsRepository.deleteChatRoom(id2);
+    smsRepository.deleteProductImg(id2);
 
     smsRepository.deleteById(id);
   }

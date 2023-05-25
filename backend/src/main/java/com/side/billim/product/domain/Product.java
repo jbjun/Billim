@@ -25,6 +25,9 @@ public class Product extends BaseTimeEntity {
 	@JoinColumn(name = "writer_id")
 	private User user;
 
+	@Column(name = "writer_id",insertable = false, updatable = false)
+	private int writerId;
+
 	@Builder
 	public Product(Long id) {
 		this.id = id;
